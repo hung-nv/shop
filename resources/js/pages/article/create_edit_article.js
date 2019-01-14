@@ -20,6 +20,9 @@ if ($(ui.pageId).length) {
             postName: function (newValue, oldValue) {
                 this.postSlug = slugify(newValue);
             }
+        },
+        methods: {
+
         }
     });
 
