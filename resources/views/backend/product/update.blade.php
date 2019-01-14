@@ -85,48 +85,32 @@
 @endsection
 
 @section('style')
-    <link href="{{ asset('/admin/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet"
+    <link href="{{ asset('/libs/select2/css/select2.min.css') }}" rel="stylesheet"
           type="text/css" xmlns="http://www.w3.org/1999/html"/>
-    <link href="{{ asset('/admin/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{ asset('/admin/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{ asset('/admin/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}"
-          rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/admin/assets/global/plugins/typeahead/typeahead.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/admin/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css') }}"
-          rel="stylesheet" type="text/css"/>
-
-    <link href="{{ asset('/admin/assets/css/fileinput.min.css') }}"
-          rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/libs/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/libs/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/libs/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/libs/typeahead/typeahead.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/libs/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/admin/css/fileinput.min.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @push('script')
-    <script src="{{ asset('/admin/assets/global/plugins/select2/js/select2.full.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/typeahead/handlebars.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/typeahead/typeahead.bundle.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}"
-            type="text/javascript"></script>
+    <script src="{{ asset('/libs/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/typeahead/handlebars.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/typeahead/typeahead.bundle.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 
-    <script src="{{ asset('/admin/assets/global/plugins/fileinput.min.js') }}"
+    <script src="{{ asset('/libs/piexif.min.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/sortable.min.js"
             type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/piexif.min.js') }}"
-            type="text/javascript"></script>
-
-    <script src="{{ asset('/admin/assets/global/plugins/jquery-ui/jquery-ui.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/scripts/components-select2.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/scripts/components-bootstrap-select.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/scripts/ui-modals.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/fileinput.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/custom/components-select2.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/custom/components-bootstrap-select.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/custom/ui-modals.min.js') }}" type="text/javascript"></script>
 @endpush

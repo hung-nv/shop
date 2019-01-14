@@ -8,8 +8,8 @@
         type="text/javascript"></script>
 <script src="{{ asset('/libs/jquery.blockui.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/libs/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        type="text/javascript"></script>
+{{--<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"--}}
+        {{--type="text/javascript"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.all.min.js"
         type="text/javascript"></script>
 <!-- END CORE PLUGINS -->

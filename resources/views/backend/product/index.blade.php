@@ -45,8 +45,3 @@
         </div>
     </div>
 @endsection
-
-
-@push('script')
-    <script src="{{ asset('/admin/assets/scripts/products.js') }}" type="text/javascript"></script>
-@endpush
