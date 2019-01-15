@@ -2,52 +2,37 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Services\ArticleServices;
 use App\Http\Controllers\Controller;
-use Jenssegers\Agent\Agent;
+use App\Services\ProductServices;
 
 class HomepageController extends Controller
 {
-    protected $articleServices;
-    protected $agent;
+    protected $productServices;
 
-    public function __construct(ArticleServices $articleServices, Agent $agent)
+    public function __construct(ProductServices $productServices)
     {
         parent::__construct();
 
-        $this->articleServices = $articleServices;
-        $this->agent = $agent;
+        $this->productServices = $productServices;
     }
 
     public function index()
     {
-        $widgetCategory = [];
+        $widgetCatalogs = [];
 
-        $newArticles = $this->articleServices->getNewArticles(5);
+        $selectedCatalogs = [];
 
-        $idsExcept = $newArticles->pluck('id')->all();
-
-        $this->setIdsExcept($idsExcept);
-
-        if (!empty($this->option['mainCategory'])) {
-            $widgetCategory = $this->articleServices->getWidgetCategoryWithArticles(
-                $this->option['mainCategory'],
-                6,
-                $idsExcept
-            );
+        if (!empty($this->option['mainCatalog'])) {
+            $widgetCatalogs = $this->productServices->getWidgetCatalogsWithProducts($this->option['mainCatalog'], 8);
         }
 
-        $hotArticles = $this->articleServices->getArticlesByGroupId(1, 5);
-
-        $layouts = 'homepage.index';
-        if ($this->agent->isMobile()) {
-            $layouts = 'mobile.homepage.index';
+        if (!empty($this->option['selectedCatalog'])) {
+            $selectedCatalogs = $this->productServices->getWidgetCatalogsWithProducts($this->option['selectedCatalog'], 6);
         }
 
-        return view($layouts, [
-            'widgetCategory' => $widgetCategory,
-            'mostArticles' => $hotArticles,
-            'newArticles' => $newArticles
+        return view('homepage.index', [
+            'widgetCatalogs' => $widgetCatalogs,
+            'selectedCatalogs' => $selectedCatalogs
         ]);
     }
 }

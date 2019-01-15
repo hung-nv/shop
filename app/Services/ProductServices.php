@@ -465,26 +465,26 @@ class ProductServices
 
     public function getRelatedProducts($product, $limit)
     {
-        $idCategory = [];
-        foreach ($product->catalogs as $catalog) {
-            $idCategory[] = $catalog->id;
-        }
-
-        $products = $this->getProductsByIdsCategory($idCategory)->limit($limit)->get();
-
-        return $products;
+//        $idCategory = [];
+//        foreach ($product->catalogs as $catalog) {
+//            $idCategory[] = $catalog->id;
+//        }
+//
+//        $products = $this->getProductsByIdsCategory($idCategory)->limit($limit)->get();
+//
+//        return $products;
     }
 
     public function getAllProductsByCategory($category_id, $columns = [], $post_type = 1)
     {
-        $ids_category = [];
-
-        $allCategory = DB::table('category')->get();
-
-        $this->getIdsCategoryByParent($allCategory, null, $ids_category);
-
-        $products = $this->getProductsByIdsCategory($ids_category);
-
-        return $products;
+//        $ids_category = [];
+//
+//        $allCategory = DB::table('category')->get();
+//
+//        $this->getIdsCategoryByParent($allCategory, null, $ids_category);
+//
+//        $products = $this->getProductsByIdsCategory($ids_category);
+//
+//        return $products;
     }
 }
