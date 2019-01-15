@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from www.themesground.com/flipmart-demo/V4/home.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Mar 2017 14:06:48 GMT -->
 <head>
     <!-- Meta -->
     <meta charset="utf-8">
@@ -10,7 +9,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
-    <title>Flipmart premium HTML5 & CSS3 Template</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
