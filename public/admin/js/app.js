@@ -23292,15 +23292,27 @@ function initInputMultiImage(oldImage, newInputImage, urlDelete) {
 
 /***/ }),
 
+/***/ "./resources/sass/app.sass":
+/*!*********************************!*\
+  !*** ./resources/sass/app.sass ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!***************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/admin.sass ***!
-  \***************************************************************/
+/*!*****************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/admin.sass ./resources/sass/app.sass ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! D:\www\shop\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\www\shop\resources\sass\admin.sass */"./resources/sass/admin.sass");
+__webpack_require__(/*! D:\www\shop\resources\sass\admin.sass */"./resources/sass/admin.sass");
+module.exports = __webpack_require__(/*! D:\www\shop\resources\sass\app.sass */"./resources/sass/app.sass");
 
 
 /***/ })

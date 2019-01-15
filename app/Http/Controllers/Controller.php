@@ -100,17 +100,23 @@ class Controller extends BaseController
      */
     public function getMenu()
     {
+        // get main menu.
         if (!empty($this->option['main_menu_id'])) {
             $mainMenu = $this->setMultiMenu(Menu::getMenuByGroup($this->option['main_menu_id'])->toArray());
 
             View::share('mainMenu', $mainMenu);
         }
 
+        // get footer menu.
         if (!empty($this->option['footer_menu_id'])) {
             $footerMenu = $this->setMultiMenu(Menu::getMenuByGroup($this->option['footer_menu_id'])->toArray());
 
             View::share('footerMenu', $footerMenu);
         }
+
+        // get all catalog.
+        $catalogs = $this->setMultiMenu(Category::getCategoryByType(Category::CATALOG_TYPE)->toArray());
+        View::share('catalogs', $catalogs);
     }
 
     /**
@@ -120,6 +126,9 @@ class Controller extends BaseController
      */
     private function setMultiMenu($data)
     {
+        if (empty($data)) {
+            return null;
+        }
         $return = [];
         foreach ($data as $item) {
             // set url.
@@ -173,7 +182,7 @@ class Controller extends BaseController
      */
     private function setUrlForMenu($option)
     {
-        if ($option['direct']) {
+        if (!empty($option['direct'])) {
             $url = $option['direct'];
         } else {
             if ($option['type']) {

@@ -64,18 +64,22 @@
                         <form>
                             <div class="control-group">
                                 <ul class="categories-filter animate-dropdown">
-                                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
-                                                            href="category.html">Categories <b class="caret"></b></a>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">Categories
+                                            <b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li class="menu-header">Computer</li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                       href="category.html">- Clothing</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                       href="category.html">- Electronics</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                       href="category.html">- Shoes</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                       href="category.html">- Watches</a></li>
+                                            @if(!empty($catalogs))
+                                                @foreach($catalogs as $itemCatalog)
+                                                    <li class="menu-header"><a href="#">{{ $itemCatalog['name'] }}</a></li>
+                                                    @if(!empty($itemCatalog['child']))
+                                                        @foreach($itemCatalog['child'] as $childCatalog)
+                                                            <li role="presentation">
+                                                                <a role="menuitem" tabindex="-1" href="{{ $childCatalog['url'] }}">- {{ $childCatalog['name'] }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            @endif
                                         </ul>
                                     </li>
                                 </ul>

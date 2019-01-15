@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('/css/rateit.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="{{ asset('/css/font-awesome.css') }}">
