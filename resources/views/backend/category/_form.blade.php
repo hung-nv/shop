@@ -34,7 +34,20 @@
     </div>
 </div>
 
-<input type="hidden" name="type" value="category">
+@php($type = isset($category) ? $category['type'] : old('type'))
+<div class="form-group">
+    <label class="control-label col-md-3">Type</label>
+    <div class="col-md-9">
+        <select class="form-control" name="type">
+            <option value="{{ \App\Models\Category::CATEGORY_TYPE }}"
+                    @if($type == \App\Models\Category::CATEGORY_TYPE) selected @endif>Post Category
+            </option>
+            <option value="{{ \App\Models\Category::CATALOG_TYPE }}"
+                    @if($type == \App\Models\Category::CATALOG_TYPE) selected @endif>Product Category
+            </option>
+        </select>
+    </div>
+</div>
 
 <div class="form-group">
     <label class="control-label col-md-3">Meta title</label>

@@ -1,4 +1,5 @@
 import {confirmBeforeDelete, doException} from "../../helpers/helpers";
+let toastr = require("toastr/build/toastr.min");
 
 let ui = {
     pageId: '#post'
@@ -6,7 +7,7 @@ let ui = {
 
 (function ($, Vue) {
     if ($(ui.pageId).length) {
-        const vmIndexArticle = new Vue({
+        let vmIndexArticle = new Vue({
             el: ui.pageId,
             methods: {
                 addGroup: function (element) {

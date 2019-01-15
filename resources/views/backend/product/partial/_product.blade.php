@@ -3,7 +3,7 @@
     <tr>
         <th> ID</th>
         <th style="width: 30%;"> Information</th>
-        <th> Attributes</th>
+        <th class="hidden"> Attributes</th>
         <th> Created time</th>
         <th> Copy Product</th>
         <th> Status</th>
@@ -51,7 +51,7 @@
                         </div>
                     @endif
                 </td>
-                <td>
+                <td class="hidden">
                     <p class="backend-attribute">Size:
                         @foreach($i->product_attributes_sizes as $size)
                             <i class="btn btn-xs blue">{{ $size->attr_value }}</i>

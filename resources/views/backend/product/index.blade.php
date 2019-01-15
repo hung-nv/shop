@@ -2,7 +2,7 @@
 
 @section('title', 'Manage Products')
 
-@section('pageId', 'product')
+@section('pageId', 'index-product')
 
 @section('breadcrumbs')
     <a href="{{ route('product.index') }}">Products</a>

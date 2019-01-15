@@ -4,6 +4,7 @@
         <th> ID</th>
         <th> Name</th>
         <th> Slug</th>
+        <th> Type</th>
         <th> Status</th>
         <th> Actions</th>
     </tr>

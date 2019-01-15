@@ -3,6 +3,15 @@
     <td>{{ $character . ' ' . $item->name }}</td>
     <td>{{ $item->slug }}</td>
     <td>
+        @if($item->type == \App\Models\Category::CATALOG_TYPE)
+            <span class="badge badge-success badge-roundless"> Product Catalog</span>
+        @endif
+
+        @if($item->type == \App\Models\Category::CATEGORY_TYPE)
+            <span class="badge badge-primary badge-roundless"> Post Category</span>
+        @endif
+    </td>
+    <td>
         @if($item->status == 1)
             <span class="badge badge-info badge-roundless"> Approved </span>
         @else

@@ -1,7 +1,8 @@
 import {confirmBeforeDelete} from "../../helpers/helpers";
 
 let ui = {
-    pageId: '#user'
+    pageId: '#user',
+    tablePages: '#datatable-users'
 };
 
 if ($(ui.pageId).length) {
@@ -11,6 +12,17 @@ if ($(ui.pageId).length) {
             confirmBeforeDelete: function (event) {
                 confirmBeforeDelete(event.target, 'Do you want to delete this?');
             }
+        }
+    });
+
+    $(function () {
+        if ($(ui.tablePages).length) {
+            $(ui.tablePages).dataTable({
+                ordering: false,
+                order: [[0, 'desc']],
+                bLengthChange: true,
+                bFilter: true
+            });
         }
     });
 }

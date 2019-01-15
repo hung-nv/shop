@@ -3,7 +3,7 @@
         <div class="col-md-12">
             @if(!empty($productImages))
                 <input type="hidden" name="old_product_image" id="old_product_image" data-id="{{ $product->id }}"
-                       value="{{ $productImages or '' }}">
+                       value="{{ $productImages }}">
             @endif
             <input id="product_image" name="product_image[]" type="file" multiple>
         </div>

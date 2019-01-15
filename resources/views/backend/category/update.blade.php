@@ -3,7 +3,7 @@
     'oldSlug' => $category->slug
 ]])
 
-@section('title', 'Update Category')
+@section('title', 'Update Category #'.$category->id.' ('.$category->name.')')
 
 @section('pageId', 'create-edit-category')
 

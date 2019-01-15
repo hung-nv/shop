@@ -3,9 +3,9 @@
     'oldSlug' => $slug
 ]])
 
-@section('title', 'Create Product')
+@section('title', 'Update Product #'.$product['id'].' ('.$product['name'].')')
 
-@section('pageId', 'product')
+@section('pageId', 'create-update-product')
 
 @section('breadcrumbs')
     <a href="{{ route('product.index') }}">Products</a>
@@ -29,7 +29,7 @@
                 <div class="portlet">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i>Product
+                            <i class="fa fa-shopping-cart"></i>Update Product #{{ $product['id'] }}
                         </div>
                         <div class="actions btn-set">
                             <button type="button" name="back" class="btn btn-secondary-outline">

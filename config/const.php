@@ -1,6 +1,6 @@
 <?php
 return [
-    // Set prefix in route for all type.
+    // Set prefix in route for all type. [type => prefix]
     'prefix' => [
         'article' => '',
         'page' => 'page',

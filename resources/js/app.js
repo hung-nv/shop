@@ -11,6 +11,7 @@ require('./pages/user/index_user');
 require('./pages/advertising/index_advertising');
 require('./pages/advertising/create_update_advertising');
 require('./pages/product/create_update_product');
+require('./pages/product/index_product');
 
 /**
  * The following block of code may be used to automatically register your
