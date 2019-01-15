@@ -1,0 +1,75 @@
+@charset "UTF-8";
+.single-banner a {
+  display: block;
+  float: left;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.single-banner a:before {
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+  content: "";
+  display: block;
+  height: 100%;
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  -webkit-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+  width: 0;
+}
+
+.single-banner a:hover:before {
+  left: 0;
+  opacity: 1;
+  width: 100%;
+}
+
+.single-banner a:after {
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  background: rgba(255, 255, 255, 0.3) none repeat scroll 0 0;
+  border-radius: 100%;
+  bottom: 0;
+  -webkit-box-shadow: 0 0 0 8px rgba(246, 249, 250, 0.42);
+          box-shadow: 0 0 0 8px rgba(246, 249, 250, 0.42);
+  color: #fff;
+  content: "\F0C1";
+  display: block;
+  font-family: FontAwesome;
+  font-size: 30px;
+  height: 60px;
+  left: 0;
+  line-height: 60px;
+  margin: auto;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  -webkit-transform: scale(3);
+          transform: scale(3);
+  -webkit-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+  visibility: hidden;
+  width: 60px;
+  z-index: 2;
+}
+
+.single-banner a:hover:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  visibility: visible;
+}
+
+.banner-top-4 {
+  margin-top: 20px;
+}
