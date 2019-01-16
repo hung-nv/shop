@@ -12,7 +12,7 @@
                             <div class="products">
                                 <div class="hot-deal-wrapper">
                                     <div class="image">
-                                        <img src="assets/images/hot-deals/p25.jpg" alt="">
+                                        <img src="{{ asset('images/hot-deals/p25.jpg') }}" alt="">
                                     </div>
                                     <div class="sale-offer-tag"><span>49%<br>off</span></div>
                                     <div class="timing-wrapper">
@@ -101,7 +101,7 @@
                             <div class="products">
                                 <div class="hot-deal-wrapper">
                                     <div class="image">
-                                        <img src="assets/images/hot-deals/p5.jpg" alt="">
+                                        <img src="{{ asset('images/hot-deals/p5.jpg') }}" alt="">
                                     </div>
                                     <div class="sale-offer-tag"><span>35%<br>off</span></div>
                                     <div class="timing-wrapper">
@@ -190,7 +190,7 @@
                             <div class="products">
                                 <div class="hot-deal-wrapper">
                                     <div class="image">
-                                        <img src="assets/images/hot-deals/p10.jpg" alt="">
+                                        <img src="{{ asset('images/hot-deals/p10.jpg') }}" alt="">
                                     </div>
                                     <div class="sale-offer-tag"><span>35%<br>off</span></div>
                                     <div class="timing-wrapper">

@@ -32,6 +32,10 @@
     <link href='{{ asset('fonts.googleapis.com/cssd767.css?family=Roboto:300,400,500,700') }}' rel='stylesheet' type='text/css'>
     <link href='{{ asset('fonts.googleapis.com/csse262.css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800') }}' rel='stylesheet' type='text/css'>
     <link href='{{ asset('fonts.googleapis.com/csse3e5.css?family=Montserrat:400,700') }}' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript">
+        const catalogs = {!! json_encode(array_pluck($catalogs, 'name', 'id')) !!};
+    </script>
 </head>
 <body class="cnt-home mainComponent">
     @include('layouts.header')
@@ -52,5 +56,6 @@
     <script src="{{ asset('/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('/js/wow.min.js') }}"></script>
     <script src="{{ asset('/js/scripts.js') }}"></script>
+    <script src="{{ asset('/js/themes.js') }}"></script>
 </body>
 </html>

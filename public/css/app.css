@@ -1,3 +1,9 @@
+.main-header {
+  padding-top: 0;
+}
+.main-header .top-search-holder .search-area .search-button {
+  cursor: pointer;
+}
 .main-header .top-search-holder .search-area .categories-filter .dropdown-menu li {
   margin-bottom: 4px;
 }
@@ -9,4 +15,19 @@
 }
 .main-header .top-search-holder .search-area .categories-filter .dropdown-menu li a {
   padding: 3px 0;
+  cursor: pointer;
+}
+
+.social a {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.copyright-bar {
+  padding: 15px 0;
+}
+.copyright-bar .copyright-text {
+  line-height: 30px;
+  color: #999;
 }

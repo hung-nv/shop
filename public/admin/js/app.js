@@ -22080,40 +22080,40 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
+/***/ "./resources/js/admin/app.js":
+/*!***********************************!*\
+  !*** ./resources/js/admin/app.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-__webpack_require__(/*! ./pages/theme */ "./resources/js/pages/theme.js");
+__webpack_require__(/*! ./pages/theme */ "./resources/js/admin/pages/theme.js");
 
-__webpack_require__(/*! ./pages/article/create_edit_article */ "./resources/js/pages/article/create_edit_article.js");
+__webpack_require__(/*! ./pages/article/create_edit_article */ "./resources/js/admin/pages/article/create_edit_article.js");
 
-__webpack_require__(/*! ./pages/article/create_edit_page */ "./resources/js/pages/article/create_edit_page.js");
+__webpack_require__(/*! ./pages/article/create_edit_page */ "./resources/js/admin/pages/article/create_edit_page.js");
 
-__webpack_require__(/*! ./pages/article/index_article */ "./resources/js/pages/article/index_article.js");
+__webpack_require__(/*! ./pages/article/index_article */ "./resources/js/admin/pages/article/index_article.js");
 
-__webpack_require__(/*! ./pages/category/create_edit_category */ "./resources/js/pages/category/create_edit_category.js");
+__webpack_require__(/*! ./pages/category/create_edit_category */ "./resources/js/admin/pages/category/create_edit_category.js");
 
-__webpack_require__(/*! ./pages/category/index_category */ "./resources/js/pages/category/index_category.js");
+__webpack_require__(/*! ./pages/category/index_category */ "./resources/js/admin/pages/category/index_category.js");
 
-__webpack_require__(/*! ./pages/setting/menu */ "./resources/js/pages/setting/menu.js");
+__webpack_require__(/*! ./pages/setting/menu */ "./resources/js/admin/pages/setting/menu.js");
 
-__webpack_require__(/*! ./pages/setting/setting_site */ "./resources/js/pages/setting/setting_site.js");
+__webpack_require__(/*! ./pages/setting/setting_site */ "./resources/js/admin/pages/setting/setting_site.js");
 
-__webpack_require__(/*! ./pages/user/index_user */ "./resources/js/pages/user/index_user.js");
+__webpack_require__(/*! ./pages/user/index_user */ "./resources/js/admin/pages/user/index_user.js");
 
-__webpack_require__(/*! ./pages/advertising/index_advertising */ "./resources/js/pages/advertising/index_advertising.js");
+__webpack_require__(/*! ./pages/advertising/index_advertising */ "./resources/js/admin/pages/advertising/index_advertising.js");
 
-__webpack_require__(/*! ./pages/advertising/create_update_advertising */ "./resources/js/pages/advertising/create_update_advertising.js");
+__webpack_require__(/*! ./pages/advertising/create_update_advertising */ "./resources/js/admin/pages/advertising/create_update_advertising.js");
 
-__webpack_require__(/*! ./pages/product/create_update_product */ "./resources/js/pages/product/create_update_product.js");
+__webpack_require__(/*! ./pages/product/create_update_product */ "./resources/js/admin/pages/product/create_update_product.js");
 
-__webpack_require__(/*! ./pages/product/index_product */ "./resources/js/pages/product/index_product.js");
+__webpack_require__(/*! ./pages/product/index_product */ "./resources/js/admin/pages/product/index_product.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22127,10 +22127,10 @@ __webpack_require__(/*! ./pages/product/index_product */ "./resources/js/pages/p
 
 /***/ }),
 
-/***/ "./resources/js/helpers/helpers.js":
-/*!*****************************************!*\
-  !*** ./resources/js/helpers/helpers.js ***!
-  \*****************************************/
+/***/ "./resources/js/admin/helpers/helpers.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/helpers/helpers.js ***!
+  \***********************************************/
 /*! exports provided: confirmBeforeDelete, slugify, getParameterByName, doException */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22226,16 +22226,16 @@ function doException(xhr) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/advertising/create_update_advertising.js":
-/*!*********************************************************************!*\
-  !*** ./resources/js/pages/advertising/create_update_advertising.js ***!
-  \*********************************************************************/
+/***/ "./resources/js/admin/pages/advertising/create_update_advertising.js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/admin/pages/advertising/create_update_advertising.js ***!
+  \***************************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/utilities/images/image.js");
+/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/admin/utilities/images/image.js");
 
 var ui = {
   pageId: '#create-update-advertising',
@@ -22277,16 +22277,16 @@ if ($(ui.pageId).length) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/advertising/index_advertising.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/advertising/index_advertising.js ***!
-  \*************************************************************/
+/***/ "./resources/js/admin/pages/advertising/index_advertising.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/admin/pages/advertising/index_advertising.js ***!
+  \*******************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
 var ui = {
   pageId: '#index-advertising',
@@ -22316,17 +22316,17 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/js/pages/article/create_edit_article.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/pages/article/create_edit_article.js ***!
-  \***********************************************************/
+/***/ "./resources/js/admin/pages/article/create_edit_article.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/admin/pages/article/create_edit_article.js ***!
+  \*****************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
-/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/utilities/images/image.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/admin/utilities/images/image.js");
 
 
 var ui = {
@@ -22375,17 +22375,17 @@ if ($(ui.pageId).length) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/article/create_edit_page.js":
-/*!********************************************************!*\
-  !*** ./resources/js/pages/article/create_edit_page.js ***!
-  \********************************************************/
+/***/ "./resources/js/admin/pages/article/create_edit_page.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/admin/pages/article/create_edit_page.js ***!
+  \**************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
-/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/utilities/images/image.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/admin/utilities/images/image.js");
 
 
 var ui = {
@@ -22444,16 +22444,16 @@ if ($(ui.pageId).length) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/article/index_article.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/pages/article/index_article.js ***!
-  \*****************************************************/
+/***/ "./resources/js/admin/pages/article/index_article.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/admin/pages/article/index_article.js ***!
+  \***********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
 
 var toastr = __webpack_require__(/*! toastr/build/toastr.min */ "./node_modules/toastr/build/toastr.min.js");
@@ -22560,17 +22560,17 @@ var ui = {
 
 /***/ }),
 
-/***/ "./resources/js/pages/category/create_edit_category.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/category/create_edit_category.js ***!
-  \*************************************************************/
+/***/ "./resources/js/admin/pages/category/create_edit_category.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/admin/pages/category/create_edit_category.js ***!
+  \*******************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
-/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/utilities/images/image.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/admin/utilities/images/image.js");
 
 
 var ui = {
@@ -22618,16 +22618,16 @@ if ($(ui.pageId).length) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/category/index_category.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/pages/category/index_category.js ***!
-  \*******************************************************/
+/***/ "./resources/js/admin/pages/category/index_category.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/admin/pages/category/index_category.js ***!
+  \*************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
 var ui = {
   pageId: '#category',
@@ -22651,17 +22651,17 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/js/pages/product/create_update_product.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/pages/product/create_update_product.js ***!
-  \*************************************************************/
+/***/ "./resources/js/admin/pages/product/create_update_product.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/admin/pages/product/create_update_product.js ***!
+  \*******************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/utilities/images/image.js");
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
+/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/admin/utilities/images/image.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
 
 var ui = {
@@ -22703,16 +22703,16 @@ if ($(ui.pageId).length) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/product/index_product.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/pages/product/index_product.js ***!
-  \*****************************************************/
+/***/ "./resources/js/admin/pages/product/index_product.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/admin/pages/product/index_product.js ***!
+  \***********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
 
 var toastr = __webpack_require__(/*! toastr/build/toastr.min */ "./node_modules/toastr/build/toastr.min.js");
@@ -22770,16 +22770,16 @@ if ($(ui.pageId).length) {
 
 /***/ }),
 
-/***/ "./resources/js/pages/setting/menu.js":
-/*!********************************************!*\
-  !*** ./resources/js/pages/setting/menu.js ***!
-  \********************************************/
+/***/ "./resources/js/admin/pages/setting/menu.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/pages/setting/menu.js ***!
+  \**************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
 "use strict";
 
@@ -22978,16 +22978,16 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/js/pages/setting/setting_site.js":
-/*!****************************************************!*\
-  !*** ./resources/js/pages/setting/setting_site.js ***!
-  \****************************************************/
+/***/ "./resources/js/admin/pages/setting/setting_site.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/admin/pages/setting/setting_site.js ***!
+  \**********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/utilities/images/image.js");
+/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/admin/utilities/images/image.js");
 
 var ui = {
   inputFavico: '#favico',
@@ -23027,10 +23027,10 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/js/pages/theme.js":
-/*!*************************************!*\
-  !*** ./resources/js/pages/theme.js ***!
-  \*************************************/
+/***/ "./resources/js/admin/pages/theme.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/pages/theme.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -23047,16 +23047,16 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/js/pages/user/index_user.js":
-/*!***********************************************!*\
-  !*** ./resources/js/pages/user/index_user.js ***!
-  \***********************************************/
+/***/ "./resources/js/admin/pages/user/index_user.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/pages/user/index_user.js ***!
+  \*****************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/helpers/helpers.js");
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
 var ui = {
   pageId: '#user',
@@ -23086,10 +23086,10 @@ if ($(ui.pageId).length) {
 
 /***/ }),
 
-/***/ "./resources/js/utilities/images/image.js":
-/*!************************************************!*\
-  !*** ./resources/js/utilities/images/image.js ***!
-  \************************************************/
+/***/ "./resources/js/admin/utilities/images/image.js":
+/*!******************************************************!*\
+  !*** ./resources/js/admin/utilities/images/image.js ***!
+  \******************************************************/
 /*! exports provided: initInputImage, initInputMultiImage, newInputImage, newInputMultiImage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23304,13 +23304,13 @@ function initInputMultiImage(oldImage, newInputImage, urlDelete) {
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/admin.sass ./resources/sass/app.sass ***!
-  \*****************************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** multi ./resources/js/admin/app.js ./resources/sass/admin.sass ./resources/sass/app.sass ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\www\shop\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\www\shop\resources\js\admin\app.js */"./resources/js/admin/app.js");
 __webpack_require__(/*! D:\www\shop\resources\sass\admin.sass */"./resources/sass/admin.sass");
 module.exports = __webpack_require__(/*! D:\www\shop\resources\sass\app.sass */"./resources/sass/app.sass");
 

@@ -1,40 +1,13 @@
-<header class="header-style-1">
+<header class="header-style-1" id="header">
 
     <div class="top-bar animate-dropdown">
         <div class="container">
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                        <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-                        <li><a href="#"><i class="icon fa fa-lock"></i>Login</a></li>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
                     </ul>
-                </div>
-
-                <div class="cnt-block">
-                    <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small"><a href="#" class="dropdown-toggle" data-hover="dropdown"
-                                                               data-toggle="dropdown"><span class="value">USD </span><b
-                                        class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown dropdown-small"><a href="#" class="dropdown-toggle" data-hover="dropdown"
-                                                               data-toggle="dropdown"><span
-                                        class="value">English </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">German</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- /.list-unstyled -->
                 </div>
                 <!-- /.cnt-cart -->
                 <div class="clearfix"></div>
@@ -61,31 +34,37 @@
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
-                        <form>
-                            <div class="control-group">
-                                <ul class="categories-filter animate-dropdown">
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">Categories
-                                            <b class="caret"></b></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            @if(!empty($catalogs))
-                                                @foreach($catalogs as $itemCatalog)
-                                                    <li class="menu-header"><a href="#">{{ $itemCatalog['name'] }}</a></li>
-                                                    @if(!empty($itemCatalog['child']))
-                                                        @foreach($itemCatalog['child'] as $childCatalog)
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="{{ $childCatalog['url'] }}">- {{ $childCatalog['name'] }}</a>
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <input class="search-field" placeholder="Search here..."/>
-                                <a class="search-button" href="#"></a></div>
-                        </form>
+                        <div class="control-group">
+                            <ul class="categories-filter animate-dropdown">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">
+                                        @{{ nameCatalog }}
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="menu-header">
+                                            <a data-id="-1" data-name="All" v-on:click="onClickSelectCatalog">All Categories</a>
+                                        </li>
+                                        @if(!empty($menuCatalogs))
+                                            @foreach($menuCatalogs as $itemCatalog)
+                                                <li class="menu-header">
+                                                    <a data-id="{{ $itemCatalog['id'] }}" data-name="{{ $itemCatalog['name'] }}" v-on:click="onClickSelectCatalog">{{ $itemCatalog['name'] }}</a>
+                                                </li>
+                                                @if(!empty($itemCatalog['child']))
+                                                    @foreach($itemCatalog['child'] as $childCatalog)
+                                                        <li role="presentation">
+                                                            <a role="menuitem" tabindex="-1" v-on:click="onClickSelectCatalog"
+                                                               data-id="{{ $childCatalog['id'] }}" data-name="{{ $childCatalog['name'] }}">- {{ $childCatalog['name'] }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </ul>
+                                </li>
+                            </ul>
+                            <input class="search-field" placeholder="Tìm kiếm..." v-model="textSearch"/>
+                            <a class="search-button" v-on:click="submitSearchForm"></a></div>
                     </div>
                     <!-- /.search-area -->
                     <!-- ============================================================= SEARCH AREA : END ============================================================= -->

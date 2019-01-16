@@ -115,7 +115,11 @@ class Controller extends BaseController
         }
 
         // get all catalog.
-        $catalogs = $this->setMultiMenu(Category::getCategoryByType(Category::CATALOG_TYPE)->toArray());
+        $catalogs = Category::getCategoryByType(Category::CATALOG_TYPE)->toArray();
+        $menuCatalogs = $this->setMultiMenu($catalogs);
+
+        View::share('menuCatalogs', $menuCatalogs);
+
         View::share('catalogs', $catalogs);
     }
 
