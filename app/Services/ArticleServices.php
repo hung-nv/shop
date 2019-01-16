@@ -36,7 +36,7 @@ class ArticleServices
 
         $posts = Article::getPostsByName($name, 20, $postType);
 
-        $groups = Group::all();
+        $groups = Group::getGroupByIds(config('const.groups.article'));
 
         return ['name' => $name, 'posts' => $posts, 'groups' => $groups];
     }

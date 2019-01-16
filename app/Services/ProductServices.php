@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Category;
+use App\Models\Group;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Services\Common\ImageServices;
@@ -101,6 +102,15 @@ class ProductServices
     public function getProducts()
     {
         return Product::getProductsWithCondition();
+    }
+
+    /**
+     * Get groups product.
+     * @return Group[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getGroupsProduct()
+    {
+        return Group::getGroupByIds(config('const.groups.product'));
     }
 
     /**

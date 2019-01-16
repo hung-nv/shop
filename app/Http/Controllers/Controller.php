@@ -22,7 +22,9 @@ class Controller extends BaseController
      * @var
      */
     protected $articleType = Article::POST_TYPE;
+
     protected $categoryType = Category::CATEGORY_TYPE;
+
     protected $pageType = Article::PAGE_TYPE;
 
     protected $idsExcept = [];
@@ -48,8 +50,23 @@ class Controller extends BaseController
         $this->getGeneralArticle();
 
         $this->getAdvertising();
+
+        $this->getPartners();
     }
 
+    /**
+     * Get partners.
+     */
+    public function getPartners()
+    {
+        $partners = Advertising::getAdvertisingByGroup(config('const.advertising_group.partner'));
+
+        View::share('partners', $partners);
+    }
+
+    /**
+     * Get advertising.
+     */
     public function getAdvertising()
     {
         $advertising = Advertising::all()->pluck('content', 'id');

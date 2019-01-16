@@ -33,6 +33,8 @@ class AdvertisingServices
 
         if ($request->type == 1) {
             $data['content'] = $request->script;
+
+            $data['group'] = null;
         } elseif ($request->type == 2) {
             if ($request->hasFile('image')) {
                 // upload image to folder.

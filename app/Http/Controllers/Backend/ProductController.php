@@ -57,8 +57,11 @@ class ProductController extends Controller
     {
         $products = $this->productServices->getProducts();
 
+        $groups = $this->productServices->getGroupsProduct();
+
         return view('backend.product.index', [
-            'products' => $products
+            'products' => $products,
+            'groups' => $groups
         ]);
     }
 

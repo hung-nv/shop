@@ -38,4 +38,13 @@
             <input id="image" name="image" type="file" data-show-upload="false">
         </div>
     </div>
+
+    <div class="form-group" v-show="adType == '2'">
+        <label class="control-label col-md-3">Group</label>
+        <div class="col-md-4">
+            <select class="form-control" name="group">
+                <option value="{{ config('const.advertising_group.partner') }}">Partners</option>
+            </select>
+        </div>
+    </div>
 </div>

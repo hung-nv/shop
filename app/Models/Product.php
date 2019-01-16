@@ -63,13 +63,13 @@ class Product extends \Eloquent
 
     /**
      * Get products by collection of category.
-     * @param array $idsCategory: collection of category [id1, id2, id3...]
+     * @param array $idsCategory : collection of category [id1, id2, id3...]
      * @param array $idsCategory
      * @param int $limit
      * @param array $columns
      * @return \Illuminate\Support\Collection
      */
-    public static function getProductsByIdsCategory(array $idsCategory,int $limit, $columns = [])
+    public static function getProductsByIdsCategory(array $idsCategory, int $limit, $columns = [])
     {
         if (empty($columns)) {
             $columns = [
@@ -100,5 +100,19 @@ class Product extends \Eloquent
             ->limit($limit);
 
         return $products->get();
+    }
+
+    /**
+     * Get most view products.
+     * @param $limit
+     * @return Product[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function getMostViewProduct($limit)
+    {
+        return self::where('status', 1)
+            ->orderByDesc('view')
+            ->orderByDesc('created_at')
+            ->limit($limit)
+            ->get();
     }
 }
