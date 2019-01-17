@@ -22,7 +22,7 @@ class Product extends \Eloquent
 
     public function catalogs()
     {
-        return $this->belongsToMany('App\Models\Category', 'product_category');
+        return $this->belongsToMany('App\Models\Category', 'product_category')->withTimestamps();
     }
 
     public function tags()
@@ -47,7 +47,12 @@ class Product extends \Eloquent
 
     public function orders()
     {
-        return $this->belongsToMany('App\Models\Order', 'order_details');
+        return $this->belongsToMany('App\Models\Order', 'order_products');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany('App\Models\Group', 'product_group')->withTimestamps();
     }
 
     /**
@@ -112,6 +117,24 @@ class Product extends \Eloquent
         return self::where('status', 1)
             ->orderByDesc('view')
             ->orderByDesc('created_at')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * @param $idsGroup
+     * @param $limit
+     * @return Product[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function getProductByIdsGroup($idsGroup, $limit)
+    {
+        return self::select('product.*')
+            ->join('product_group', function ($join) {
+                $join->on('product.id', '=', 'product_group.product_id');
+            })
+            ->whereIn('product_group.group_id', $idsGroup)
+            ->where('product.status', 1)
+            ->orderByDesc('product.created_at')
             ->limit($limit)
             ->get();
     }

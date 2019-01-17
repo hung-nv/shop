@@ -69,7 +69,7 @@
                 <td class="data-middle">
                     @foreach($groups as $j)
                         <p class="margin-bottom-10">
-                            @if(in_array($j->id, config('const.groups.product')))
+                            @if(in_array($j->id, array_pluck($i->groups, 'id')))
                                 <a href="javascript:;" class="btn btn-xs blue">
                                     <i class="fa fa-check"></i>
                                     {{ $j->value }}

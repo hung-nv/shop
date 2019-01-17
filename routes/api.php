@@ -56,4 +56,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('product/delete-image', 'ApiProductController@deleteImage');
     // set product cover image.
     Route::post('set-cover-product', 'ApiProductController@setCoverImage');
+    // add product to group.
+    Route::post('product/add-group', 'ApiProductController@addGroup');
+    // remove product from group.
+    Route::post('product/remove-group', 'ApiProductController@removeGroup');
 });

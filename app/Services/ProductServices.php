@@ -400,6 +400,52 @@ class ProductServices
     }
 
     /**
+     * Add product to group.
+     * @param int $idProduct
+     * @param int $idGroup
+     * @param string $nameGroup
+     * @return string
+     * @throws \Exception
+     */
+    public function addProductToGroup($idProduct, $idGroup, $nameGroup)
+    {
+        $product = Product::find($idProduct);
+
+        $product->groups()->attach([$idGroup]);
+
+        if ($product->groups->contains($idGroup)) {
+            $message = 'This product has been add to "' . $nameGroup . '"';
+
+            return $message;
+        } else {
+            throw new \Exception('Fail to add product to group.');
+        }
+    }
+
+    /**
+     * Remove product to group.
+     * @param int $idProduct
+     * @param int $idGroup
+     * @param string $nameGroup
+     * @return string
+     * @throws \Exception
+     */
+    public function removeProductFromGroup($idProduct, $idGroup, $nameGroup)
+    {
+        $product = Product::findOrFail($idProduct);
+
+        $product->groups()->detach([$idGroup]);
+
+        if ($product->groups->contains($idGroup)) {
+            throw new \Exception('Fail to remove product to group.');
+        } else {
+            $message = 'This product has been remove from "' . $nameGroup . '"';
+
+            return $message;
+        }
+    }
+
+    /**
      * Copy product
      * @param $product_id
      * @return \Illuminate\Database\Eloquent\Model

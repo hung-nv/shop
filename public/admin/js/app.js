@@ -22718,11 +22718,13 @@ __webpack_require__.r(__webpack_exports__);
 var toastr = __webpack_require__(/*! toastr/build/toastr.min */ "./node_modules/toastr/build/toastr.min.js");
 
 var ui = {
-  pageId: '#index-product'
+  pageId: '#index-product',
+  urlAddGroup: '/api/product/add-group',
+  urlRemoveGroup: '/api/product/remove-group'
 };
 
 if ($(ui.pageId).length) {
-  new Vue({
+  var vmIndexProduct = new Vue({
     el: ui.pageId,
     methods: {
       changeCoverImage: function changeCoverImage(event) {
@@ -22761,10 +22763,93 @@ if ($(ui.pageId).length) {
           Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["doException"])(xhr);
         });
       },
+      addGroup: function addGroup(element) {
+        var _this = this;
+
+        var groupId, groupName, productId;
+        groupId = $(element).data('group-id');
+        groupName = $(element).data('group-name');
+        productId = $(element).data('post-id');
+
+        if (groupId === undefined || groupName === undefined || productId === undefined) {
+          return;
+        }
+
+        $.ajax({
+          type: "post",
+          dataType: 'json',
+          url: ui.urlAddGroup,
+          data: {
+            product_id: productId,
+            group_id: groupId,
+            group_name: groupName
+          }
+        }).done(function (respon) {
+          toastr.info(respon.message);
+
+          _this.createContainerChecked($(element));
+        }).fail(function (xhr) {
+          Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["doException"])(xhr);
+        });
+      },
+      removeGroup: function removeGroup(element) {
+        var _this2 = this;
+
+        var groupId, groupName, productId;
+        groupId = $(element).data('group-id');
+        groupName = $(element).data('group-name');
+        productId = $(element).data('post-id');
+
+        if (groupId === undefined || groupName === undefined || productId === undefined) {
+          return;
+        }
+
+        $.ajax({
+          type: "post",
+          dataType: 'json',
+          url: ui.urlRemoveGroup,
+          data: {
+            product_id: productId,
+            group_id: groupId,
+            group_name: groupName
+          }
+        }).done(function (respon) {
+          toastr.warning(respon.message);
+
+          _this2.createContainerSet($(element));
+        }).fail(function (xhr) {
+          Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["doException"])(xhr);
+        });
+      },
+      createContainerChecked: function createContainerChecked(container) {
+        var iconCheck, buttonCheck, buttonRemove, iconRemove, wrapContainer;
+        iconCheck = $('<i>').addClass('fa fa-check');
+        buttonCheck = $('<a>').addClass('btn btn-xs blue');
+        buttonRemove = $('<a>').addClass('btn btn-xs red').attr('data-group-id', container.data('group-id')).attr('data-group-name', container.data('group-name')).attr('data-post-id', container.data('post-id')).attr('id', 'btnRemoveGroup');
+        iconRemove = $('<i>').addClass('fa fa-times');
+        buttonCheck.append(iconCheck).append(' ' + container.data('group-name'));
+        buttonRemove.append(iconRemove);
+        wrapContainer = container.parent();
+        wrapContainer.html('');
+        wrapContainer.append(buttonCheck).append(buttonRemove);
+      },
+      createContainerSet: function createContainerSet(container) {
+        var wrapContainer, buttonSetGroup;
+        wrapContainer = container.parent();
+        buttonSetGroup = $('<button>').addClass('btn btn-xs grey-cascade').attr('data-group-id', container.data('group-id')).attr('data-group-name', container.data('group-name')).attr('data-post-id', container.data('post-id')).attr('id', 'btnAddGroup').text('Set to "' + container.data('group-name') + '"');
+        wrapContainer.html('');
+        wrapContainer.append(buttonSetGroup);
+      },
       confirmBeforeDelete: function confirmBeforeDelete(event) {
         Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["confirmBeforeDelete"])(event.target, 'Do you want to delete this?');
       }
     }
+  });
+  $(ui.pageId).on('click', '#btnAddGroup', function () {
+    vmIndexProduct.addGroup(this);
+  });
+  $(ui.pageId).on('click', '#btnRemoveGroup', function () {
+    vmIndexProduct.removeGroup(this);
   });
 }
 

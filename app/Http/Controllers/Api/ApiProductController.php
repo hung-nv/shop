@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\AddProductGroup;
 use App\Services\ProductServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,6 +50,41 @@ class ApiProductController extends Controller
             );
 
             return response()->json($response,200);
+        } catch (\Exception $exception) {
+            return response()->json('Internal Server Error', 500);
+        }
+    }
+
+    /**
+     * Add Product to group.
+     * @param AddProductGroup $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addGroup(AddProductGroup $request)
+    {
+        try {
+            $response = $this->productServices->addProductToGroup(
+                $request->product_id,
+                $request->group_id,
+                $request->group_name
+            );
+
+            return response()->json(['message' => $response],200);
+        } catch (\Exception $exception) {
+            return response()->json('Internal Server Error', 500);
+        }
+    }
+
+    public function removeGroup(AddProductGroup $request)
+    {
+        try {
+            $response = $this->productServices->removeProductFromGroup(
+                $request->product_id,
+                $request->group_id,
+                $request->group_name
+            );
+
+            return response()->json(['message' => $response],200);
         } catch (\Exception $exception) {
             return response()->json('Internal Server Error', 500);
         }
