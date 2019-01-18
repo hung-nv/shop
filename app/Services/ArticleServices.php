@@ -719,39 +719,4 @@ class ArticleServices
 
         return null;
     }
-
-    /**
-     * Get all children id category by id parent.
-     * @param $dataCategory : all category.
-     * @param null $idParent
-     * @param array $result
-     */
-    public function getIdsCategoryByParent($dataCategory, &$result, $idParent = null)
-    {
-        $children = [];
-
-        if (count($dataCategory) > 0) {
-
-            foreach ($dataCategory as $key => $item) {
-
-                if ($item->parent_id == $idParent) {
-
-                    $children[] = $item;
-
-                    unset($dataCategory[$key]);
-                }
-            }
-        }
-
-        // get children and execute.
-        if (isset($children) && $children) {
-
-            foreach ($children as $item) {
-
-                $result[] = $item->id;
-
-                $this->getIdsCategoryByParent($dataCategory, $result, $item->id);
-            }
-        }
-    }
 }

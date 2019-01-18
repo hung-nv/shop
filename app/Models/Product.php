@@ -138,4 +138,37 @@ class Product extends \Eloquent
             ->limit($limit)
             ->get();
     }
+
+    /**
+     * Paginate products by ids category.
+     * @param array $idsCategory
+     * @param int $pageSize
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function paginateProductsByIdsCategory($idsCategory, $pageSize)
+    {
+        $model = self::select([
+                'products.id',
+                'products.name',
+                'products.slug',
+                'products.cover_image',
+                'products.price',
+                'products.new_price',
+                'products.created_at'
+            ])
+            ->join('product_category', function ($join) {
+                $join->on('products.id', '=', 'product_category.product_id');
+            })
+            ->where(function ($query) use ($idsCategory) {
+                foreach ($idsCategory as $id) {
+                    $query->orWhere('product_category.category_id', '=', $id);
+                }
+            })
+            ->where('products.status', 1)
+            ->orderByDesc('products.updated_at')
+            ->groupBy('products.id')
+            ->paginate($pageSize);
+
+        return $model;
+    }
 }

@@ -28820,6 +28820,72 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/_filter_product.js":
+/*!*****************************************!*\
+  !*** ./resources/js/_filter_product.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var ui = {
+  elementId: '#list-products'
+};
+
+if ($(ui.elementId).length) {
+  var vmFilter = new Vue({
+    el: ui.elementId,
+    data: {
+      pageSize: 10,
+      sortBy: 1,
+      labelSortBy: ''
+    },
+    watch: {
+      sortBy: function sortBy(val) {
+        this.labelSortBy = this.setLabelSortBy(val);
+      }
+    },
+    created: function created() {
+      this.labelSortBy = this.setLabelSortBy(this.sortBy);
+    },
+    methods: {
+      setPageSize: function setPageSize(numeric, event) {
+        this.pageSize = numeric;
+      },
+      setLabelSortBy: function setLabelSortBy(sortBy) {
+        var label = '';
+
+        switch (sortBy) {
+          case 1:
+            label = 'Mới nhất';
+            break;
+
+          case 2:
+            label = 'Giá: thấp - cao';
+            break;
+
+          case 3:
+            label = 'Giá: cao - thấp';
+            break;
+
+          case 4:
+            label = 'Tên sản phẩm: A - Z';
+            break;
+
+          default:
+            label = '';
+        }
+
+        return label;
+      },
+      setSortBy: function setSortBy(type) {
+        this.sortBy = type;
+      }
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/_header.js":
 /*!*********************************!*\
   !*** ./resources/js/_header.js ***!
@@ -28980,6 +29046,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 __webpack_require__(/*! ./_header */ "./resources/js/_header.js");
+
+__webpack_require__(/*! ./_filter_product */ "./resources/js/_filter_product.js");
 
 /***/ }),
 

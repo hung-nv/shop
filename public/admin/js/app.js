@@ -22866,6 +22866,9 @@ if ($(ui.pageId).length) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
 
+
+var toastr = __webpack_require__(/*! toastr/build/toastr.min */ "./node_modules/toastr/build/toastr.min.js");
+
 "use strict";
 
 var ui = {

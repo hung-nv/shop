@@ -2,7 +2,7 @@
 
 namespace App\Services\Common;
 
-use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelServices
 {

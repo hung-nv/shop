@@ -2,13 +2,13 @@
 function getAllParentsCategory($data, $category_id, &$result)
 {
     foreach ($data as $k => $v) {
-        if ($v->id == $category_id) {
-            $result[] = $v->id;
+        if ($v['id'] == $category_id) {
+            $result[] = $v['id'];
             unset($data[$k]);
-            if ($v->parent_id == 0) {
-                break;
-            }
-            getAllParentsCategory($data, $v->parent_id, $result);
+//            if ($v['parent_id'] == null) {
+//                break;
+//            }
+            getAllParentsCategory($data, $v['parent_id'], $result);
         } else {
             continue;
         }

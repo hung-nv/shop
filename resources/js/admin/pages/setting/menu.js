@@ -1,5 +1,7 @@
 import {doException} from "../../helpers/helpers";
 
+let toastr = require("toastr/build/toastr.min");
+
 "use strict";
 
 const ui = {

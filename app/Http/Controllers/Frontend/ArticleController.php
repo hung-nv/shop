@@ -75,12 +75,7 @@ class ArticleController extends Controller
 
         $articles = $this->articleServices->getAllPostsByParentCategory($category->id, $this->articleType);
 
-        $layout = 'news.category';
-        if ($this->agent->isMobile()) {
-            $layout = 'mobile.news.category';
-        }
-
-        return view($layout, [
+        return view('news.category', [
             'category' => $category,
             'articles' => $articles
         ]);

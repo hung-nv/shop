@@ -6,15 +6,19 @@ use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Category;
 use App\Models\Group;
+use App\Models\Menu;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Services\Common\ImageServices;
+use App\Utilities\MultiLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductServices
 {
+    use MultiLevel;
+
     protected $imageService;
 
     public function __construct(ImageServices $imageService)
@@ -41,7 +45,7 @@ class ProductServices
                 $idsResult = [];
 
                 // get all children id catalog.
-                $this->getIdsCategoryByParent($dataCategory, $idCatalog, $idsResult);
+                $this->getIdsCategoryByParent($dataCategory, $idsResult, $idCatalog);
 
                 array_push($idsResult, $idCatalog);
 
@@ -58,41 +62,6 @@ class ProductServices
         }
 
         return null;
-    }
-
-    /**
-     * Get all children id category by id parent.
-     * @param $dataCategory : all category.
-     * @param null $idParent
-     * @param $result
-     */
-    public function getIdsCategoryByParent($dataCategory, $idParent = null, &$result)
-    {
-        $children = [];
-
-        if (count($dataCategory) > 0) {
-
-            foreach ($dataCategory as $key => $item) {
-
-                if ($item->parent_id == $idParent) {
-
-                    $children[] = $item;
-
-                    unset($dataCategory[$key]);
-                }
-            }
-        }
-
-        // get children and execute.
-        if (isset($children) && $children) {
-
-            foreach ($children as $item) {
-
-                $result[] = $item->id;
-
-                $this->getIdsCategoryByParent($dataCategory, $item->id, $result);
-            }
-        }
     }
 
     /**
@@ -507,6 +476,47 @@ class ProductServices
         }
 
         return $newProduct;
+    }
+
+    public function getAllProductsByParentCatalog($idCatalog)
+    {
+        $idsCategory = [];
+
+        $allCategory = Category::all();
+
+        $this->getIdsCategoryByParent($allCategory, $idsCategory, $idCatalog);
+
+        $products = Product::paginateProductsByIdsCategory($idsCategory, 1);
+
+        return $products;
+    }
+
+    /**
+     * Find catalog by slug.
+     * @param $slugCatalog
+     * @return Category|\Illuminate\Database\Eloquent\Model|null|object
+     */
+    public function findCatalogBySlug($slugCatalog)
+    {
+        return Category::getCategoryBySlug($slugCatalog);
+    }
+
+    /**
+     * Get menu active
+     * @param string $slugCatalog
+     * @return array: all id parent
+     */
+    public function getMenuActive($slugCatalog)
+    {
+        $result = [];
+
+        $idMenu = Menu::findMenuBySlug($slugCatalog)->id;
+
+        $allMenu = Menu::all()->toArray();
+
+        getAllParentsCategory($allMenu, $idMenu, $result);
+
+        return $result;
     }
 
     public function getMostViewProducts($limit)

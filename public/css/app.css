@@ -1,3 +1,7 @@
+a {
+  color: #666;
+}
+
 .main-header {
   padding-top: 0;
 }
@@ -30,4 +34,14 @@
 .copyright-bar .copyright-text {
   line-height: 30px;
   color: #999;
+}
+
+.sidebar-menu .accordion .accordion-group .accordion-heading a {
+  line-height: 28px;
+}
+.sidebar-menu .accordion .accordion-group .accordion-body .accordion-inner {
+  margin-bottom: 0 !important;
+}
+.sidebar-menu a.active {
+  color: #0f6cb2 !important;
 }

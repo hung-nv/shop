@@ -33,4 +33,9 @@ class Menu extends \Eloquent
     {
         return self::where('menu_group_id', $idGroup)->orderBy('sort')->get();
     }
+
+    public static function findMenuBySlug($slug)
+    {
+        return self::where('slug', $slug)->first();
+    }
 }

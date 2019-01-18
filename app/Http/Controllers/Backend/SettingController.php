@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\SettingRequest;
+use App\Models\Category;
 use App\Services\Common\ImageServices;
 use App\Services\MenuServices;
 use App\Services\OptionServices;
@@ -71,7 +72,7 @@ class SettingController extends Controller
             explode(',', $dataSetting['options']['mainCategory']) : $request->old('mainCategory');
 
         $templateCategory = $this->postServices->getCheckboxCategory(
-            $this->categoryType,
+            Category::CATALOG_TYPE,
             $checkedCategory,
             'mainCategory'
         );
