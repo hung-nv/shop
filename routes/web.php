@@ -24,6 +24,11 @@ Route::group(['namespace' => 'Frontend'], function () {
         'as' => 'article.page',
         'uses' => 'ArticleController@page'
     ]);
+    // route list product.
+    Route::get(config('const.prefix.catalog') . '/{slug}', [
+        'as' => 'product.list',
+        'uses' => 'ProductController@list'
+    ]);
 });
 
 Route::group(['prefix' => 'administrator', 'namespace' => 'Backend'], function () {

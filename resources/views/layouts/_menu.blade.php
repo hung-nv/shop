@@ -4,7 +4,7 @@
         @foreach($mainMenu as $itemMainMenu)
             @if(isset($itemMainMenu['child']) && $itemMainMenu['child'])
                 <li class="dropdown">
-                    <a href="@if($itemMainMenu['prefix'])/{{ $itemMainMenu['prefix'] }}@endif/{{ $itemMainMenu['slug'] }}" class="dropdown-toggle" data-hover="dropdown"
+                    <a href="{{ $itemMainMenu['url'] }}" class="dropdown-toggle" data-hover="dropdown"
                        data-toggle="dropdown">{{ $itemMainMenu['name'] }}</a>
                     <ul class="dropdown-menu pages">
                         <li>
@@ -14,7 +14,7 @@
                                         <ul class="links">
                                             @foreach($itemMainMenu['child'] as $itemMenuChild)
                                                 <li>
-                                                    <a href="@if($itemMenuChild['prefix'])/{{ $itemMenuChild['prefix'] }}@endif/{{ $itemMenuChild['slug'] }}">
+                                                    <a href="{{ $itemMenuChild['url'] }}">
                                                         {{ $itemMenuChild['name'] }}
                                                     </a>
                                                 </li>
@@ -28,7 +28,7 @@
                 </li>
             @else
                 <li class="dropdown">
-                    <a href="@if($itemMainMenu['prefix'])/{{ $itemMainMenu['prefix'] }}@endif/{{ $itemMainMenu['slug'] }}">{{ $itemMainMenu['name'] }}</a>
+                    <a href="{{ $itemMainMenu['url'] }}">{{ $itemMainMenu['name'] }}</a>
                 </li>
             @endif
         @endforeach
