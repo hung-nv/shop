@@ -12,6 +12,8 @@ require('./pages/advertising/index_advertising');
 require('./pages/advertising/create_update_advertising');
 require('./pages/product/create_update_product');
 require('./pages/product/index_product');
+require('./pages/comment/index_comment');
+require('./pages/comment/create_edit_comment');
 
 /**
  * The following block of code may be used to automatically register your

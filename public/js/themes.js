@@ -28824,62 +28824,171 @@ module.exports = function(module) {
 /*!*****************************************!*\
   !*** ./resources/js/_filter_product.js ***!
   \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+/* harmony import */ var _admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/utilities/format */ "./resources/js/admin/utilities/format.js");
+
 
 var ui = {
-  elementId: '#list-products'
+  elementId: '#list-products',
+  inputRange: '.price-slider'
 };
 
 if ($(ui.elementId).length) {
   var vmFilter = new Vue({
     el: ui.elementId,
-    data: {
-      pageSize: 10,
-      sortBy: 1,
-      labelSortBy: ''
+    data: function data() {
+      return {
+        pageSize: this.getDefaultPageSize(),
+        sortType: this.getDefaultSortType(),
+        labelSortType: null,
+        minPrice: this.getMinRangePrice(),
+        maxPrice: this.getMaxRangePrice()
+      };
     },
     watch: {
-      sortBy: function sortBy(val) {
-        this.labelSortBy = this.setLabelSortBy(val);
+      sortType: function sortType(newValue, oldValue) {
+        this.labelSortType = this.setLabelSortType(newValue); // check if change value.
+
+        if (newValue !== oldValue) {
+          this.initSearch();
+        }
+      },
+      pageSize: function pageSize(newValue, oldValue) {
+        // check if change value.
+        if (newValue !== oldValue) {
+          this.initSearch();
+        }
       }
     },
     created: function created() {
-      this.labelSortBy = this.setLabelSortBy(this.sortBy);
+      this.labelSortType = this.setLabelSortType(this.sortType);
     },
     methods: {
+      initSearch: function initSearch() {
+        var isSearchPrice = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        var params = {};
+        var page = 1;
+
+        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('page')) {
+          page = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('page');
+        } // set param page.
+
+
+        params['page'] = page;
+        params['sort'] = this.sortType;
+        params['pageSize'] = this.pageSize;
+
+        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min')) {
+          params['min'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min');
+        }
+
+        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max')) {
+          params['max'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max');
+        }
+
+        if (isSearchPrice) {
+          var rangePrice = $(ui.inputRange).slider('getValue');
+          params['min'] = rangePrice[0];
+          params['max'] = rangePrice[1];
+        }
+
+        var currentURL = location.protocol + '//' + location.host + location.pathname;
+        window.location = currentURL + '?' + $.param(params);
+      },
+      getMinRangePrice: function getMinRangePrice() {
+        var minPrice = 200000;
+
+        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min')) {
+          minPrice = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min');
+        }
+
+        return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(minPrice);
+      },
+      getMaxRangePrice: function getMaxRangePrice() {
+        var maxPrice = 500000;
+
+        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max')) {
+          maxPrice = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max');
+        }
+
+        return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(maxPrice);
+      },
+      getDefaultSortType: function getDefaultSortType() {
+        var sortType = 1;
+        var defaultType = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('sort');
+
+        if (defaultType) {
+          sortType = defaultType;
+        }
+
+        return sortType;
+      },
+      getDefaultPageSize: function getDefaultPageSize() {
+        var pageSize = 12;
+        var defaultPageSize = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('pageSize');
+
+        if (defaultPageSize && !isNaN(pageSize)) {
+          pageSize = defaultPageSize;
+        }
+
+        return pageSize;
+      },
       setPageSize: function setPageSize(numeric, event) {
         this.pageSize = numeric;
       },
-      setLabelSortBy: function setLabelSortBy(sortBy) {
+      setLabelSortType: function setLabelSortType(sortType) {
         var label = '';
 
-        switch (sortBy) {
-          case 1:
+        switch (sortType) {
+          case '1':
             label = 'Mới nhất';
             break;
 
-          case 2:
+          case '2':
             label = 'Giá: thấp - cao';
             break;
 
-          case 3:
+          case '3':
             label = 'Giá: cao - thấp';
             break;
 
-          case 4:
+          case '4':
             label = 'Tên sản phẩm: A - Z';
             break;
 
           default:
-            label = '';
+            label = 'Mới nhất';
         }
 
         return label;
       },
-      setSortBy: function setSortBy(type) {
-        this.sortBy = type;
+      setSortType: function setSortType(type) {
+        this.sortType = type;
+      },
+      onClickSearchWithPrice: function onClickSearchWithPrice(event) {
+        this.initSearch(true);
       }
+    }
+  });
+  $(function () {
+    // Price Slider
+    if ($(ui.inputRange).length > 0) {
+      $(ui.inputRange).slider({
+        range: false,
+        min: 100000,
+        max: 600000,
+        step: 50000,
+        value: [Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["toNumber"])(vmFilter.minPrice), Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["toNumber"])(vmFilter.maxPrice)],
+        handle: "square"
+      }).on('slide', function (event) {
+        $('.price-range-holder .min-max .pull-left').text(Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(event.value[0]));
+        $('.price-range-holder .min-max .pull-right').text(Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(event.value[1]));
+      });
     }
   });
 }
@@ -28940,13 +29049,14 @@ var vmHeader = new Vue({
 /*!***********************************************!*\
   !*** ./resources/js/admin/helpers/helpers.js ***!
   \***********************************************/
-/*! exports provided: confirmBeforeDelete, slugify, getParameterByName, doException */
+/*! exports provided: confirmBeforeDelete, slugify, toNumber, getParameterByName, doException */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmBeforeDelete", function() { return confirmBeforeDelete; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "slugify", function() { return slugify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNumber", function() { return toNumber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParameterByName", function() { return getParameterByName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doException", function() { return doException; });
 /**
@@ -28986,6 +29096,19 @@ function slugify(string) {
 
   string = '@' + string + '@';
   string = string.replace(/\@\-|\-\@|\@/gi, '');
+  return string;
+}
+/**
+ * Convert to number.
+ * @param string
+ * @returns {*}
+ */
+
+function toNumber(string) {
+  if (_.includes(string, ',')) {
+    return Number(string.replace(/,/g, ''));
+  }
+
   return string;
 }
 /**
@@ -29031,6 +29154,93 @@ function doException(xhr) {
       text: "Internal Server Error"
     });
   }
+}
+
+/***/ }),
+
+/***/ "./resources/js/admin/utilities/format.js":
+/*!************************************************!*\
+  !*** ./resources/js/admin/utilities/format.js ***!
+  \************************************************/
+/*! exports provided: number_format, is_number_format */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "number_format", function() { return number_format; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "is_number_format", function() { return is_number_format; });
+function number_format(number, digit) {
+  var dec_point = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ',';
+  digit = typeof digit === 'undefined' ? 0 : digit;
+
+  if (typeof number === "undefined" || number === '') {
+    return '';
+  }
+
+  number = number.toString().replace(/,/g, '');
+
+  if (!is_number_format(number)) {
+    return '';
+  }
+
+  var numFloat = parseFloat(number),
+      numInt = parseInt(number);
+
+  if (digit == 0 && Math.abs(numFloat) - Math.abs(numInt) >= 0.5) {
+    number = numFloat > 0 ? (numFloat + 1).toString() : (numFloat - 1).toString();
+  }
+
+  var numStringArray = number.split('.');
+  var numAfter = parseFloat(typeof numStringArray[1] !== "undefined" ? '0.' + numStringArray[1] : '0').toFixed(digit);
+
+  var _val_arr = digit > 0 ? parseFloat(number).toFixed(digit).split('.') : parseInt(number).toString().split('.'),
+      result = '',
+      _before = _val_arr[0],
+      _negative = _before[0] === '-' ? '-' : '',
+      _count = _before.length,
+      new_number = '',
+      first = true,
+      i = _negative === '-' ? 1 : 0;
+
+  for (i; i < _count; i++) {
+    if (_before[i] === '0' && first) {
+      continue;
+    }
+
+    new_number += _before[i];
+    first = false;
+  }
+
+  _count = new_number.length;
+  i = _count - 1;
+  var k = 1;
+
+  for (i; i >= 0; i--) {
+    result = new_number[i] + result;
+
+    if (k % 3 == 0 && k != _count) {
+      result = dec_point + result;
+    }
+
+    k++;
+  }
+
+  var _after = numAfter.toString().substring(1);
+
+  result = result == '' ? '0' : result;
+  var returnNumber = result + _after;
+  returnNumber = returnNumber !== '0' ? _negative + returnNumber : returnNumber;
+  return returnNumber;
+}
+/**
+ * Check is Number
+ */
+
+function is_number_format(string) {
+  var first = string.substring(0, 1);
+  string = first == '-' ? string.substring(1) : string;
+  var pattern = /^\d{1,3}((,){1}(\d){3})*(.?\d)*$/;
+  return pattern.test(string);
 }
 
 /***/ }),

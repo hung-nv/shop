@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Services\Common\ImageServices;
 use App\Utilities\MultiLevel;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -478,7 +479,31 @@ class ProductServices
         return $newProduct;
     }
 
-    public function getAllProductsByParentCatalog($idCatalog)
+    /**
+     * Verify data filters.
+     * @param $filters
+     * @return bool
+     */
+    public function verifyFilters($filters)
+    {
+        $checkSort = !empty($filters['sort']) && !in_array((string)$filters['sort'], ['1', '2', '3', '4']);
+
+        $checkPageSize = !empty($filters['pageSize']) && !in_array((string)$filters['pageSize'], ['12', '24', '36', '48']);
+
+        $checkMinPrice = !empty($filters['min']) && !is_numeric($filters['min']);
+
+        $checkMaxPrice = !empty($filters['max']) && !is_numeric($filters['max']);
+
+        return ($checkSort || $checkPageSize || $checkMinPrice || $checkMaxPrice);
+    }
+
+    /**
+     * Get all products by parent catalog.
+     * @param $idCatalog
+     * @param $filters
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getAllProductsByParentCatalog($idCatalog, $filters)
     {
         $idsCategory = [];
 
@@ -486,7 +511,14 @@ class ProductServices
 
         $this->getIdsCategoryByParent($allCategory, $idsCategory, $idCatalog);
 
-        $products = Product::paginateProductsByIdsCategory($idsCategory, 1);
+        // set default pageSize.
+        $pageSize = 12;
+
+        if (!empty($filters['pageSize'])) {
+            $pageSize = $filters['pageSize'];
+        }
+
+        $products = Product::paginateProductsByIdsCategory($idsCategory, $pageSize, $filters);
 
         return $products;
     }
@@ -517,6 +549,21 @@ class ProductServices
         getAllParentsCategory($allMenu, $idMenu, $result);
 
         return $result;
+    }
+
+    /**
+     * Find product by slug.
+     * @param $slugProduct
+     * @return Product|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function findProductBySlug($slugProduct)
+    {
+        return Product::findProductBySlug($slugProduct);
+    }
+
+    public function getNewProduct($limit)
+    {
+        return Product::getNewProducts($limit);
     }
 
     public function getMostViewProducts($limit)

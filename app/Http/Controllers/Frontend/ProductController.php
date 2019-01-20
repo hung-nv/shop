@@ -19,12 +19,27 @@ class ProductController extends Controller
 
     public function list(Request $request, $slug)
     {
+        $verifyFilter = $this->productServices->verifyFilters($request->all());
+
+        if ($verifyFilter) {
+            return redirect('/');
+        }
+
         $catalog = $this->productServices->findCatalogBySlug($slug);
 
         $menuActive = $this->productServices->getMenuActive($slug);
 
-        $products = $this->productServices->getAllProductsByParentCatalog($catalog->id);
+        $products = $this->productServices->getAllProductsByParentCatalog($catalog->id, $request->all());
 
-        return view('product.list', compact('menuActive', 'products'));
+        return view('product.list', compact('menuActive', 'products', 'catalog'));
+    }
+
+    public function details($slug)
+    {
+        $product = $this->productServices->findProductBySlug($slug);
+
+        $newProducts = $this->productServices->getNewProduct(10);
+
+        return view('product.show', compact('product', 'newProducts'));
     }
 }

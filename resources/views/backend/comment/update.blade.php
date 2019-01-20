@@ -1,20 +1,17 @@
-@extends('backend.layouts.app', ['viewData' => [
-    'oldName' => '',
-    'oldSlug' => ''
-]])
+@extends('backend.layouts.app')
 
-@section('title', 'Insert Category')
+@section('title', 'Update Comment')
 
-@section('pageId', 'create-edit-category')
+@section('pageId', 'create-update-comment')
 
 @section('breadcrumbs')
-    <a href="{{ route('category.index') }}">Category</a>
+    <a href="{{ route('comment.index') }}">Comment</a>
     <i class="fa fa-circle"></i>
 @endsection
 
 @section('content')
-    <h3 class="page-title"> Category
-        <small>Insert</small>
+    <h3 class="page-title"> Managed Comment
+        <small>Update</small>
     </h3>
 
     <div class="row">
@@ -29,17 +26,18 @@
 
                     @include('backend.blocks.message')
 
-                    <form action="{{ route('category.store') }}" class="form-horizontal form-row-seperated" role="form"
+                    <form action="{{ route('comment.update', ['user' => $data['id']]) }}" role="form"
+                          class="form-horizontal form-row-seperated"
                           method="post" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
 
                         @include('backend.blocks.errors')
 
-                        @include('backend.category._form')
+                        @include('backend.comment.partial._form')
 
                         @include('backend.common.actionForm')
-
                     </form>
                 </div>
             </div>

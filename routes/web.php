@@ -29,6 +29,11 @@ Route::group(['namespace' => 'Frontend'], function () {
         'as' => 'product.list',
         'uses' => 'ProductController@list'
     ]);
+    // route details product.
+    Route::get(config('const.prefix.product') . '/{slug}', [
+        'as' => 'product.show',
+        'uses' => 'ProductController@details'
+    ]);
 });
 
 Route::group(['prefix' => 'administrator', 'namespace' => 'Backend'], function () {
@@ -65,6 +70,9 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
         // route for product.
         Route::resource('product', 'ProductController', ['except' => ['show']]);
 
+        // route for comment.
+        Route::resource('comment', 'CommentController', ['except' => ['show']]);
+
         // route copy product.
         Route::get('product/copy/{id}', ['as' => 'product.copy', 'uses' => 'ProductController@copy']);
 
@@ -93,7 +101,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
 Route::get('img/{size}/{src}', function ($size, $src) {
     $imgPath = public_path() . '/' . $src;
     $sizes = explode('_', $size);
-    if(count($sizes) > 1) {
+    if (count($sizes) > 1) {
         $w = $sizes[0];
         $h = $sizes[1];
         $img = Image::cache(function ($image) use ($w, $h, $imgPath) {

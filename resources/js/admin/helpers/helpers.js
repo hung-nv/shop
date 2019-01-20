@@ -53,6 +53,20 @@ export function slugify(string) {
 }
 
 /**
+ * Convert to number.
+ * @param string
+ * @returns {*}
+ */
+export function toNumber(string) {
+    if (_.includes(string, ',')) {
+        return Number(string.replace(/,/g, ''));
+    }
+
+    return string;
+}
+
+
+/**
  * Get param in url
  * @param name
  * @returns {string} | null

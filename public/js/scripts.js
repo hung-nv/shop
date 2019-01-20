@@ -221,7 +221,7 @@ jQuery(".brand-slider").owlCarousel({
     pagination: false,
     paginationSpeed : 400,
     navigationText: ["", ""]
-});    
+});
 jQuery("#advertisement").owlCarousel({
     items : 1,
     itemsDesktopSmall :[979,2],
@@ -231,7 +231,7 @@ jQuery("#advertisement").owlCarousel({
     pagination: true,
     paginationSpeed : 400,
     navigationText: ["", ""]
-});    
+});
 
 
 
@@ -259,22 +259,24 @@ jQuery(function(){
 /*===================================================================================*/
 /* PRICE SLIDER
 /*===================================================================================*/
-jQuery(function () {
+// jQuery(function () {
 
 // Price Slider
-if (jQuery('.price-slider').length > 0) {
-    jQuery('.price-slider').slider({
-        min: 100,
-        max: 700,
-        step: 10,
-        value: [200, 500],
-        handle: "square"
+// if (jQuery('.price-slider').length > 0) {
+//     jQuery('.price-slider').slider({
+//         range: false,
+//         min: 100000,
+//         max: 600000,
+//         step: 50000,
+//         value: [200000, 500000],
+//         handle: "square",
+//     }).on('slide', function (event) {
+//         $('.price-range-holder .min-max .pull-left').text(event.value[0]);
+//         $('.price-range-holder .min-max .pull-right').text(event.value[1]);
+//     });
+// }
 
-    });
-
-}
-
-});
+// });
 
 
 /*===================================================================================*/
@@ -311,7 +313,7 @@ jQuery(function(){
         pagination: true
     });
 
-  
+
 });
 
 
@@ -319,7 +321,7 @@ jQuery(function(){
 
 
 /*===================================================================================*/
-/*  WOW 
+/*  WOW
 /*===================================================================================*/
 
 jQuery(function () {
@@ -328,9 +330,9 @@ jQuery(function () {
 
 
 /*===================================================================================*/
-/*  TOOLTIP 
+/*  TOOLTIP
 /*===================================================================================*/
-jQuery("[data-toggle='tooltip']").tooltip(); 
+jQuery("[data-toggle='tooltip']").tooltip();
 
 
 

@@ -22114,6 +22114,10 @@ __webpack_require__(/*! ./pages/advertising/create_update_advertising */ "./reso
 __webpack_require__(/*! ./pages/product/create_update_product */ "./resources/js/admin/pages/product/create_update_product.js");
 
 __webpack_require__(/*! ./pages/product/index_product */ "./resources/js/admin/pages/product/index_product.js");
+
+__webpack_require__(/*! ./pages/comment/index_comment */ "./resources/js/admin/pages/comment/index_comment.js");
+
+__webpack_require__(/*! ./pages/comment/create_edit_comment */ "./resources/js/admin/pages/comment/create_edit_comment.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22131,13 +22135,14 @@ __webpack_require__(/*! ./pages/product/index_product */ "./resources/js/admin/p
 /*!***********************************************!*\
   !*** ./resources/js/admin/helpers/helpers.js ***!
   \***********************************************/
-/*! exports provided: confirmBeforeDelete, slugify, getParameterByName, doException */
+/*! exports provided: confirmBeforeDelete, slugify, toNumber, getParameterByName, doException */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmBeforeDelete", function() { return confirmBeforeDelete; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "slugify", function() { return slugify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNumber", function() { return toNumber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParameterByName", function() { return getParameterByName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doException", function() { return doException; });
 /**
@@ -22177,6 +22182,19 @@ function slugify(string) {
 
   string = '@' + string + '@';
   string = string.replace(/\@\-|\-\@|\@/gi, '');
+  return string;
+}
+/**
+ * Convert to number.
+ * @param string
+ * @returns {*}
+ */
+
+function toNumber(string) {
+  if (_.includes(string, ',')) {
+    return Number(string.replace(/,/g, ''));
+  }
+
   return string;
 }
 /**
@@ -22648,6 +22666,89 @@ $(function () {
     Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["confirmBeforeDelete"])(this, 'Do you want to delete this?');
   });
 });
+
+/***/ }),
+
+/***/ "./resources/js/admin/pages/comment/create_edit_comment.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/admin/pages/comment/create_edit_comment.js ***!
+  \*****************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utilities_images_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utilities/images/image */ "./resources/js/admin/utilities/images/image.js");
+
+var ui = {
+  pageId: '#create-update-comment',
+  inputImage: '#image',
+  inputOldImage: '#old-image',
+  urlDeleteImage: '/api/comment/delete-image',
+  inputRemoveInitPreview: '.kv-file-remove'
+};
+
+if ($(ui.pageId).length) {
+  $(function () {
+    setInputImage();
+    /**
+     * Set input image preview.
+     */
+
+    function setInputImage() {
+      if ($(ui.inputImage).length) {
+        if ($(ui.inputOldImage).length) {
+          Object(_utilities_images_image__WEBPACK_IMPORTED_MODULE_0__["initInputImage"])(ui.inputOldImage, ui.inputImage, ui.urlDeleteImage);
+        } else {
+          Object(_utilities_images_image__WEBPACK_IMPORTED_MODULE_0__["newInputImage"])(ui.inputImage);
+        }
+      }
+
+      $(ui.inputImage).on('fileclear', function (event) {
+        $(ui.inputRemoveInitPreview).trigger("click");
+      });
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/admin/pages/comment/index_comment.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/admin/pages/comment/index_comment.js ***!
+  \***********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+
+var ui = {
+  pageId: '#index-comment',
+  tablePages: '#datatable-comment'
+};
+
+if ($(ui.pageId).length) {
+  new Vue({
+    el: ui.pageId,
+    methods: {
+      confirmBeforeDelete: function confirmBeforeDelete(event) {
+        Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["confirmBeforeDelete"])(event.target, 'Do you want to delete this?');
+      }
+    }
+  });
+  $(function () {
+    if ($(ui.tablePages).length) {
+      $(ui.tablePages).dataTable({
+        ordering: false,
+        order: [[0, 'desc']],
+        bLengthChange: true,
+        bFilter: true
+      });
+    }
+  });
+}
 
 /***/ }),
 

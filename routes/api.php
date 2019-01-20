@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api'], function () {
+    // delete comment image.
+    Route::post('comment/delete-image', 'ApiCommentController@deleteImage');
     // delete advertising image.
     Route::post('advertising/delete-image', 'ApiAdvertisingController@deleteImage');
     // delete category image.

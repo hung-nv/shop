@@ -2,9 +2,10 @@
 
 namespace App\Services\Common;
 
+use App\Services\ConstructServices;
 use Illuminate\Support\Facades\File as File;
 
-class ImageServices
+class ImageServices extends ConstructServices
 {
     /**
      * Copy image.

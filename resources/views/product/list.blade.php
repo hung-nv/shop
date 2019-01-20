@@ -5,39 +5,20 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li class='active'>Handbags</li>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class='active'>{{ $catalog->name }}</li>
                 </ul>
             </div>
-            <!-- /.breadcrumb-inner -->
         </div>
-        <!-- /.container -->
     </div>
 
     <div class="body-content outer-top-xs" id="list-products">
         <div class='container'>
             <div class='row'>
-                @include('product.partial._sidebar')
+                @include('product.partial._sidebarCatalog')
                 <div class='col-md-9'>
 
-                    <div id="category" class="category-carousel hidden-xs">
-                        <div class="item">
-                            <div class="image">
-                                <img src="{{ asset('images/banners/cat-banner-1.jpg') }}" alt="" class="img-responsive">
-                            </div>
-                            <div class="container-fluid">
-                                <div class="caption vertical-top text-left">
-                                    <div class="big-text"> Big Sale</div>
-                                    <div class="excerpt hidden-sm hidden-md"> Save up to 49% off</div>
-                                    <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix filters-container m-t-10">
+                    <div class="clearfix filters-container">
                         <div class="row">
                             <!-- /.col -->
                             <div class="col col-sm-12 col-md-9">
@@ -46,20 +27,20 @@
                                         <div class="fld inline">
                                             <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                                                 <button data-toggle="dropdown" type="button"
-                                                        class="btn dropdown-toggle"> @{{ labelSortBy }} <span
+                                                        class="btn dropdown-toggle"> @{{ labelSortType }} <span
                                                             class="caret"></span></button>
                                                 <ul role="menu" class="dropdown-menu">
                                                     <li role="presentation">
-                                                        <a v-on:click="setSortBy('1')">Mới nhất</a>
+                                                        <a v-on:click="setSortType('1')">Mới nhất</a>
                                                     </li>
                                                     <li role="presentation">
-                                                        <a v-on:click="setSortBy('2')">Giá: thấp - cao</a>
+                                                        <a v-on:click="setSortType('2')">Giá: thấp - cao</a>
                                                     </li>
                                                     <li role="presentation">
-                                                        <a v-on:click="setSortBy('3')">Giá: cao - thấp</a>
+                                                        <a v-on:click="setSortType('3')">Giá: cao - thấp</a>
                                                     </li>
                                                     <li role="presentation">
-                                                        <a v-on:click="setSortBy('4')">Tên sản phẩm: A - Z</a>
+                                                        <a v-on:click="setSortType('4')">Tên sản phẩm: A - Z</a>
                                                     </li>
                                                 </ul>
                                             </div>

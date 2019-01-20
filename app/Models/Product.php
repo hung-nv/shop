@@ -10,10 +10,14 @@ class Product extends \Eloquent
 {
     use SoftDeletes;
 
+    CONST PRODUCT_TYPE = 'product';
+
     public $table = 'products';
 
     protected $fillable = ['name', 'sku', 'slug', 'special', 'description', 'content', 'price', 'new_price',
         'cover_image', 'user_id', 'meta_title', 'meta_description', 'meta_keywords'];
+
+    protected $appends = ['url'];
 
     public function images()
     {
@@ -53,6 +57,18 @@ class Product extends \Eloquent
     public function groups()
     {
         return $this->belongsToMany('App\Models\Group', 'product_group')->withTimestamps();
+    }
+
+    /**
+     * Set url for category.
+     * @param $value
+     * @return string
+     */
+    public function getUrlAttribute($value)
+    {
+        $prefix = config('const.prefix.' . self::PRODUCT_TYPE);
+
+        return $prefix ? '/' . $prefix . '/' . $this->slug : '/' . $this->slug;
     }
 
     /**
@@ -143,19 +159,20 @@ class Product extends \Eloquent
      * Paginate products by ids category.
      * @param array $idsCategory
      * @param int $pageSize
+     * @param array $filters
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function paginateProductsByIdsCategory($idsCategory, $pageSize)
+    public static function paginateProductsByIdsCategory($idsCategory, $pageSize, $filters)
     {
         $model = self::select([
-                'products.id',
-                'products.name',
-                'products.slug',
-                'products.cover_image',
-                'products.price',
-                'products.new_price',
-                'products.created_at'
-            ])
+            'products.id',
+            'products.name',
+            'products.slug',
+            'products.cover_image',
+            'products.price',
+            'products.new_price',
+            'products.created_at'
+        ])
             ->join('product_category', function ($join) {
                 $join->on('products.id', '=', 'product_category.product_id');
             })
@@ -165,10 +182,59 @@ class Product extends \Eloquent
                 }
             })
             ->where('products.status', 1)
-            ->orderByDesc('products.updated_at')
-            ->groupBy('products.id')
-            ->paginate($pageSize);
+            ->groupBy('products.id');
+
+        if (!empty($filters['sort'])) {
+            switch ($filters['sort']) {
+                case 1:
+                    $model->orderByDesc('products.updated_at');
+                    break;
+                case 2:
+                    $model->orderBy('products.price');
+                    break;
+                case 3:
+                    $model->orderByDesc('products.price');
+                    break;
+                case 4:
+                    $model->orderBy('products.name');
+                    break;
+                default:
+                    $model->orderByDesc('products.updated_at');
+            }
+        }
+
+        if (isset($filters['min']) and $filters['min'] !== '') {
+            $model->where('products.price', '>=', $filters['min']);
+        }
+
+        if (isset($filters['max']) and $filters['max'] !== '') {
+            $model->where('products.price', '<=', $filters['max']);
+        }
+
+        $model = $model->paginate($pageSize);
 
         return $model;
+    }
+
+    /**
+     * Find product by slug.
+     * @param string $slug
+     * @return Product|Model|object|null
+     */
+    public static function findProductBySlug($slug)
+    {
+        return self::where('slug', $slug)->first();
+    }
+
+    /**
+     * Get new products.
+     * @param $limit
+     * @return Product[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function getNewProducts($limit)
+    {
+        return self::orderByDesc('created_at')
+            ->limit($limit)
+            ->get();
     }
 }
