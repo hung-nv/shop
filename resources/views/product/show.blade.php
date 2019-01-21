@@ -1,3 +1,7 @@
+@section('title', $product->meta_title ? $product->meta_title : $product->name)
+
+@section('description', $product->meta_description ? $product->meta_description : $product->description)
+
 @extends('layouts.app')
 
 @section('content')
@@ -6,7 +10,6 @@
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="/">Trang chủ</a></li>
-                    <li><a href="#">Clothing</a></li>
                     <li class='active'>{{ $product->name }}</li>
                 </ul>
             </div>

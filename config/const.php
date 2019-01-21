@@ -8,9 +8,11 @@ return [
         'catalog' => 'catalog',
         'product' => 'product'
     ],
+    // set partner group.
     'advertising_group' => [
         'partner' => 1
     ],
+    // set group hot article, products.
     'groups' => [
         'article' => [1],
         'product' => [2]

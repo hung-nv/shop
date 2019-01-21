@@ -561,9 +561,24 @@ class ProductServices
         return Product::findProductBySlug($slugProduct);
     }
 
+    /**
+     * Get new products.
+     * @param $limit
+     * @return Product[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function getNewProduct($limit)
     {
         return Product::getNewProducts($limit);
+    }
+
+    /**
+     * Get hot products.
+     * @param $limit
+     * @return Product[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getHotProducts($limit)
+    {
+        return Product::getProductByIdsGroup(config('const.groups.product'), $limit);
     }
 
     public function getMostViewProducts($limit)

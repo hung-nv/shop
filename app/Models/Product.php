@@ -17,7 +17,7 @@ class Product extends \Eloquent
     protected $fillable = ['name', 'sku', 'slug', 'special', 'description', 'content', 'price', 'new_price',
         'cover_image', 'user_id', 'meta_title', 'meta_description', 'meta_keywords'];
 
-    protected $appends = ['url'];
+    protected $appends = ['url', 'sale_off'];
 
     public function images()
     {
@@ -69,6 +69,15 @@ class Product extends \Eloquent
         $prefix = config('const.prefix.' . self::PRODUCT_TYPE);
 
         return $prefix ? '/' . $prefix . '/' . $this->slug : '/' . $this->slug;
+    }
+
+    public function getSaleOffAttribute($value)
+    {
+        if ($this->new_price) {
+            return round(($this->price - $this->new_price) / $this->price * 100);
+        }
+
+        return null;
     }
 
     /**
@@ -144,13 +153,13 @@ class Product extends \Eloquent
      */
     public static function getProductByIdsGroup($idsGroup, $limit)
     {
-        return self::select('product.*')
+        return self::select('products.*')
             ->join('product_group', function ($join) {
-                $join->on('product.id', '=', 'product_group.product_id');
+                $join->on('products.id', '=', 'product_group.product_id');
             })
             ->whereIn('product_group.group_id', $idsGroup)
-            ->where('product.status', 1)
-            ->orderByDesc('product.created_at')
+            ->where('products.status', 1)
+            ->orderByDesc('products.created_at')
             ->limit($limit)
             ->get();
     }
