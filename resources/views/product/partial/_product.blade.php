@@ -92,7 +92,9 @@
                 {!! $product->content !!}
             </div>
         </div>
-    </div><!-- /.product-tabs -->
+    </div>
+
+    @include('product.partial._terms')
 
     @include('product.partial._newProduct')
 </div>
