@@ -77,11 +77,21 @@ class SettingController extends Controller
             'mainCategory'
         );
 
+        $checkedSubCategory = isset($dataSetting['options']['selectedCatalog']) ?
+            explode(',', $dataSetting['options']['selectedCatalog']) : $request->old('selectedCatalog');
+
+        $templateSubCategory = $this->postServices->getCheckboxCategory(
+            Category::CATALOG_TYPE,
+            $checkedSubCategory,
+            'selectedCatalog'
+        );
+
         return view('backend.theme.setting', [
             'option' => $dataSetting['options'],
             'pages' => $dataSetting['pages'],
             'menus' => $dataSetting['menus'],
-            'templateCategory' => $templateCategory
+            'templateCategory' => $templateCategory,
+            'templateSubCategory' => $templateSubCategory
         ]);
     }
 

@@ -30,7 +30,7 @@
 
                             </div>
                             <!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
+                            <div class="cart clearfix animate-effect hidden">
                                 <div class="action">
                                     <ul class="list-unstyled">
                                         <li class="add-cart-button btn-group">

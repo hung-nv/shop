@@ -28,6 +28,38 @@ class ProductServices
     }
 
     /**
+     * Get Widget new products.
+     * @param $idsCatalog
+     * @param $limit
+     * @return array|null
+     */
+    public function getWidgetNewProducts($idsCatalog, $limit)
+    {
+        $allProducts = [];
+
+        $widgetCatalogs = $this->getWidgetCatalogsWithProducts($idsCatalog, $limit);
+
+        $columnProducts = array_column($widgetCatalogs, 'products');
+
+        foreach ($columnProducts as $columnProduct) {
+            $allProducts = array_merge($allProducts, $columnProduct);
+        }
+
+        $newCatalog = new \stdClass();
+        $newCatalog->slug = 'all';
+        $newCatalog->name = 'All';
+
+        $newWidget = [
+            'catalog' => $newCatalog,
+            'products' => $allProducts
+        ];
+
+        array_unshift($widgetCatalogs, $newWidget);
+
+        return $widgetCatalogs;
+    }
+
+    /**
      * Get catalog with products.
      * @param $idsCatalog
      * @return array|null
@@ -50,11 +82,11 @@ class ProductServices
 
                 array_push($idsResult, $idCatalog);
 
-                $products = Product::getProductsByIdsCategory($idsResult, $limit);
+                $products = Product::getProductsByIdsCategory($idsResult, $limit)->toArray();
 
                 $catalog = $dataCategory->where('id', $idCatalog)->first();
 
-                if (count($products) > 0) {
+                if ($products) {
                     $return[] = ['catalog' => $catalog, 'products' => $products];
                 }
             }

@@ -22,17 +22,20 @@ class HomepageController extends Controller
 
         $selectedCatalogs = [];
 
-        if (!empty($this->option['mainCatalog'])) {
-            $widgetCatalogs = $this->productServices->getWidgetCatalogsWithProducts($this->option['mainCatalog'], 8);
+        if (!empty($this->option['mainCategory'])) {
+            $widgetCatalogs = $this->productServices->getWidgetCatalogsWithProducts($this->option['mainCategory'], 8);
         }
 
         if (!empty($this->option['selectedCatalog'])) {
-            $selectedCatalogs = $this->productServices->getWidgetCatalogsWithProducts($this->option['selectedCatalog'], 6);
+            $selectedCatalogs = $this->productServices->getWidgetNewProducts($this->option['selectedCatalog'], 6);
         }
+
+        $hotProducts = $this->productServices->getHotProducts(5);
 
         return view('homepage.index', [
             'widgetCatalogs' => $widgetCatalogs,
-            'selectedCatalogs' => $selectedCatalogs
+            'selectedCatalogs' => $selectedCatalogs,
+            'hotProducts' => $hotProducts
         ]);
     }
 }

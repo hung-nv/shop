@@ -86,10 +86,8 @@
                             </div>
                             <!-- /.row -->
                         </div>
-                        <!-- /.info-boxes-inner -->
 
                     </div>
-                    <!-- /.info-boxes -->
 
                     @include('homepage.partial._bannerCatalog')
 
@@ -125,12 +123,8 @@
                     @endif
 
                 </div>
-                <!-- /.homebanner-holder -->
-                <!-- ============================================== CONTENT : END ============================================== -->
             </div>
-            <!-- /.row -->
             @include('partials._partners')
         </div>
-        <!-- /.container -->
     </div>
 @endsection

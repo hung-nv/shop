@@ -94,10 +94,9 @@ class Product extends \Eloquent
     /**
      * Get products by collection of category.
      * @param array $idsCategory : collection of category [id1, id2, id3...]
-     * @param array $idsCategory
      * @param int $limit
      * @param array $columns
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
     public static function getProductsByIdsCategory(array $idsCategory, int $limit, $columns = [])
     {
