@@ -35,7 +35,7 @@
         const catalogs = {!! json_encode(array_pluck($catalogs, 'name', 'id')) !!};
     </script>
 </head>
-<body class="cnt-home mainComponent">
+<body class="cnt-home" id="mainApp">
     @include('layouts.header')
 
     @yield('content')

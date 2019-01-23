@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="col-sm-7">
-                                <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> Mua hàng</a>
+                                <a v-on:click="addToCard('{{ $product->id }}')" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> Mua hàng</a>
                             </div>
                         </div>
                     </div>
