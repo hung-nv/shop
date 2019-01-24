@@ -46,10 +46,10 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <template v-for="product in productsInCart">
+                                    <template v-for="(product, index) in productsInCart">
                                         <tr>
                                             <td class="romove-item">
-                                                <a href="#" title="cancel" class="icon">
+                                                <a v-on:click="removeFromCart(product.id, $event)" title="cancel" class="icon">
                                                     <i class="fa fa-trash-o"></i></a>
                                             </td>
                                             <td class="cart-image">
@@ -72,7 +72,7 @@
                                                             <span class="ir"><i class="icon fa fa-sort-desc"></i></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" value="1">
+                                                    <input type="text" v-model="productsInCart[index].quantity">
                                                 </div>
                                             </td>
                                             <td class="cart-product-sub-total">

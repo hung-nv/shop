@@ -456,9 +456,11 @@ class ProductServices
         foreach ($products as $product) {
             $result[] = [
                 'id' => $product->id,
+                'quantity' => 1,
                 'name' => $product->name,
+                'url' => $product->url,
                 'price' => $product->current_price,
-                'thumb' => '/img/46_46' . $product->cover_image
+                'thumb' => $product->cover_image
             ];
         }
 

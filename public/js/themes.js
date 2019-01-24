@@ -28835,7 +28835,8 @@ __webpack_require__.r(__webpack_exports__);
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 var ui = {
-  urlGetProducts: '/api/get-products'
+  urlGetProducts: '/api/get-products',
+  timeExpire: 1000 * 60 * 5
 };
 var vmCard = new Vue({
   el: '#mainApp',
@@ -28884,7 +28885,7 @@ var vmCard = new Vue({
               idsProduct: _.map(cacheInformation.data, 'id')
             }
           }).done(function (response) {
-            _this.setLocalStorageCache(key, response, 1000 * 60 * 5);
+            _this.setLocalStorageCache(key, response, ui.timeExpire);
 
             _this.productsInCart = response;
           }).fail(function (xhr) {});
@@ -28903,7 +28904,9 @@ var vmCard = new Vue({
       return [];
     },
     getTotalMoney: function getTotalMoney() {
-      var prices = _.map(this.productsInCart, 'price');
+      var prices = _.map(this.productsInCart, function (item) {
+        return item.quantity * item.price;
+      });
 
       if (prices.length) {
         return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(_.sum(prices), ',');
@@ -28926,7 +28929,7 @@ var vmCard = new Vue({
         // add to products in cart.
         this.productsInCart.push(newProduct); // save to cache data cart.
 
-        this.setLocalStorageCache('cart', this.productsInCart, 1000 * 60 * 5);
+        this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
       } else {
         // get current products in cart.
         storeProduct = storeProduct.data; // get id products in cart.
@@ -28938,8 +28941,19 @@ var vmCard = new Vue({
           // add to cart.
           this.productsInCart.push(newProduct); // save to cache data cart.
 
-          this.setLocalStorageCache('cart', this.productsInCart, 1000 * 60 * 5);
+          this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
         }
+      }
+    },
+    removeFromCart: function removeFromCart(productId, event) {
+      var idsProduct = _.map(this.productsInCart, 'id');
+
+      if (_.includes(idsProduct, productId)) {
+        this.productsInCart = _.remove(this.productsInCart, function (item) {
+          return item.id === productId;
+        }); // save to cache data cart.
+
+        this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
       }
     },
     submitSearchForm: function submitSearchForm(event) {

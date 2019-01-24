@@ -96,12 +96,12 @@ class ApiProductController extends Controller
 
     public function getProductsInCart(Request $request)
     {
-//        try {
+        try {
             $response = $this->productServices->getProductsInCart($request->idsProduct);
 
             return response()->json($response,200);
-//        } catch (\Exception $exception) {
-//            return response()->json('Internal Server Error', 500);
-//        }
+        } catch (\Exception $exception) {
+            return response()->json('Internal Server Error', 500);
+        }
     }
 }

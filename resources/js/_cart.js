@@ -4,7 +4,8 @@ import {number_format} from "./admin/utilities/format";
 window._ = require('lodash');
 
 let ui = {
-    urlGetProducts: '/api/get-products'
+    urlGetProducts: '/api/get-products',
+    timeExpire: 1000 * 60 * 5
 };
 
 let vmCard = new Vue({
@@ -16,7 +17,7 @@ let vmCard = new Vue({
         idCatalog: -1,
         nameCatalog: ''
     },
-    created: function() {
+    created: function () {
         // set name catalog.
         this.nameCatalog = this.setNameCatalog();
 
@@ -30,7 +31,7 @@ let vmCard = new Vue({
         }
     },
     methods: {
-        setLocalStorageCache: function(key, value, time) {
+        setLocalStorageCache: function (key, value, time) {
             localStorage.removeItem(key);
 
             localStorage.setItem(key, JSON.stringify({
@@ -38,7 +39,7 @@ let vmCard = new Vue({
                 expire: Date.now() + time
             }));
         },
-        getLocalStorageCache: function(key) {
+        getLocalStorageCache: function (key) {
             let cacheInformation = localStorage.getItem(key);
 
             if (cacheInformation) {
@@ -55,7 +56,7 @@ let vmCard = new Vue({
                             idsProduct: _.map(cacheInformation.data, 'id')
                         }
                     }).done(response => {
-                        this.setLocalStorageCache(key, response, 1000 * 60 * 5);
+                        this.setLocalStorageCache(key, response, ui.timeExpire);
 
                         this.productsInCart = response;
                     }).fail(xhr => {
@@ -66,7 +67,7 @@ let vmCard = new Vue({
                 return null;
             }
         },
-        getDefaultCart: function() {
+        getDefaultCart: function () {
             let storeProduct = this.getLocalStorageCache('cart');
 
             if (storeProduct) {
@@ -75,8 +76,10 @@ let vmCard = new Vue({
 
             return [];
         },
-        getTotalMoney: function() {
-            let prices = _.map(this.productsInCart, 'price');
+        getTotalMoney: function () {
+            let prices = _.map(this.productsInCart, function (item) {
+                return item.quantity * item.price;
+            });
 
             if (prices.length) {
                 return number_format(_.sum(prices), ',');
@@ -84,7 +87,7 @@ let vmCard = new Vue({
 
             return 0;
         },
-        addToCard: function(productId, event) {
+        addToCard: function (productId, event) {
             let storeProduct = this.getLocalStorageCache('cart');
 
             let newProduct = {
@@ -101,7 +104,7 @@ let vmCard = new Vue({
                 this.productsInCart.push(newProduct);
 
                 // save to cache data cart.
-                this.setLocalStorageCache('cart', this.productsInCart, 1000 * 60 * 5);
+                this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
             } else {
                 // get current products in cart.
                 storeProduct = storeProduct.data;
@@ -115,8 +118,20 @@ let vmCard = new Vue({
                     this.productsInCart.push(newProduct);
 
                     // save to cache data cart.
-                    this.setLocalStorageCache('cart', this.productsInCart, 1000 * 60 * 5);
+                    this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
                 }
+            }
+        },
+        removeFromCart: function (productId, event) {
+            let idsProduct = _.map(this.productsInCart, 'id');
+
+            if (_.includes(idsProduct, productId)) {
+                this.productsInCart = _.remove(this.productsInCart, function (item) {
+                    return item.id === productId;
+                });
+
+                // save to cache data cart.
+                this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
             }
         },
         submitSearchForm: function (event) {
