@@ -129,6 +129,8 @@
                         @include('homepage.partial._widgetCatalog')
                     @endif
 
+                    @include('homepage.partial._hotArticle')
+
                 </div>
             </div>
             @include('partials._partners')

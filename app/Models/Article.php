@@ -292,4 +292,27 @@ class Article extends \Eloquent
             ->limit($limit)
             ->get();
     }
+
+    /**
+     * Get articles by ids group.
+     * @param $idsGroup
+     * @param $limit
+     * @return Article[]|Collection
+     */
+    public static function getArticlesByIdsGroup($idsGroup, $limit)
+    {
+        return self::from('articles as a')
+            ->select([
+                'a.*'
+            ])
+            ->join('article_group as b', function ($join) {
+                $join->on('b.article_id', '=', 'a.id');
+            })
+            ->whereIn('b.group_id', $idsGroup)
+            ->where('a.status', 1)
+            ->where('a.type', self::POST_TYPE)
+            ->orderByDesc('a.created_at')
+            ->limit($limit)
+            ->get();
+    }
 }

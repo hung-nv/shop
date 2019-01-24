@@ -608,6 +608,15 @@ class ArticleServices
     }
 
     /**
+     * @param $limit
+     * @return Article[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getHotArticles($limit)
+    {
+        return Article::getArticlesByIdsGroup(config('const.groups.article'), $limit);
+    }
+
+    /**
      * Get top articles in week
      * @param $limit
      * @return mixed

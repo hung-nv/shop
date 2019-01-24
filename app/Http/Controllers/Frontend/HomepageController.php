@@ -3,17 +3,22 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Services\ArticleServices;
 use App\Services\ProductServices;
 
 class HomepageController extends Controller
 {
     protected $productServices;
 
-    public function __construct(ProductServices $productServices)
+    protected $articleServices;
+
+    public function __construct(ProductServices $productServices, ArticleServices $articleServices)
     {
         parent::__construct();
 
         $this->productServices = $productServices;
+
+        $this->articleServices = $articleServices;
     }
 
     public function index()
@@ -32,10 +37,13 @@ class HomepageController extends Controller
 
         $hotProducts = $this->productServices->getHotProducts(5);
 
+        $hotArticle = $this->articleServices->getHotArticles(5);
+
         return view('homepage.index', [
             'widgetCatalogs' => $widgetCatalogs,
             'selectedCatalogs' => $selectedCatalogs,
-            'hotProducts' => $hotProducts
+            'hotProducts' => $hotProducts,
+            'hotArticle' => $hotArticle
         ]);
     }
 }
