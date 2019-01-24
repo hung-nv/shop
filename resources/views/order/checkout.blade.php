@@ -157,10 +157,10 @@
                                 <tr>
                                     <th>
                                         <div class="cart-sub-total">
-                                            Tiền trước KM<span class="inner-left-md">@{{ totalMoney }} VNĐ</span>
+                                            Tiền trước KM<span class="inner-left-md">@{{ getTotalMoney(productsInCart) }} VNĐ</span>
                                         </div>
                                         <div class="cart-grand-total">
-                                            Tiền phải trả<span class="inner-left-md">@{{ totalMoney }} VNĐ</span>
+                                            Tiền phải trả<span class="inner-left-md">@{{ getTotalMoney(productsInCart) }} VNĐ</span>
                                         </div>
                                     </th>
                                 </tr>

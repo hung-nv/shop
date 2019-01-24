@@ -114,7 +114,7 @@
                                 <div class="clearfix cart-total">
                                     <div class="pull-right">
                                         <span class="text">Tổng tiền :</span>
-                                        <span class='price'>@{{ totalMoney }}</span>
+                                        <span class='price'>@{{ getTotalMoney(productsInCart) }}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                     <a href="{{ route('checkout') }}"

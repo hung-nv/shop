@@ -28838,7 +28838,7 @@ var ui = {
   urlGetProducts: '/api/get-products',
   timeExpire: 1000 * 60 * 5
 };
-var vmCard = new Vue({
+window.vmCard = new Vue({
   el: '#mainApp',
   data: {
     totalMoney: 0,
@@ -28851,7 +28851,7 @@ var vmCard = new Vue({
     // set name catalog.
     this.nameCatalog = this.setNameCatalog();
     this.productsInCart = this.getDefaultCart();
-    this.totalMoney = this.getTotalMoney();
+    this.totalMoney = this.getTotalMoney(this.productsInCart);
   },
   watch: {
     productsInCart: function productsInCart(newValue) {
@@ -28903,9 +28903,9 @@ var vmCard = new Vue({
 
       return [];
     },
-    getTotalMoney: function getTotalMoney() {
-      var prices = _.map(this.productsInCart, function (item) {
-        return item.quantity * item.price;
+    getTotalMoney: function getTotalMoney(products) {
+      var prices = _.map(products, function (item) {
+        return Number(item.quantity) * item.price;
       });
 
       if (prices.length) {

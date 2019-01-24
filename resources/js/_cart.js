@@ -8,7 +8,7 @@ let ui = {
     timeExpire: 1000 * 60 * 5
 };
 
-let vmCard = new Vue({
+window.vmCard = new Vue({
     el: '#mainApp',
     data: {
         totalMoney: 0,
@@ -23,7 +23,7 @@ let vmCard = new Vue({
 
         this.productsInCart = this.getDefaultCart();
 
-        this.totalMoney = this.getTotalMoney();
+        this.totalMoney = this.getTotalMoney(this.productsInCart);
     },
     watch: {
         productsInCart: function (newValue) {
@@ -76,9 +76,9 @@ let vmCard = new Vue({
 
             return [];
         },
-        getTotalMoney: function () {
-            let prices = _.map(this.productsInCart, function (item) {
-                return item.quantity * item.price;
+        getTotalMoney: function (products) {
+            let prices = _.map(products, function (item) {
+                return Number(item.quantity) * item.price;
             });
 
             if (prices.length) {
