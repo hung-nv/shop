@@ -96,8 +96,6 @@
 
                     </div>
 
-{{--                    @include('homepage.partial._bannerCatalog')--}}
-
                     <div class="row">
                         @include('homepage.partial._hotIdeal')
 

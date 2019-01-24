@@ -48,12 +48,7 @@ class ArticleController extends Controller
             $article->id
         );
 
-        $layout = 'news.view';
-        if ($this->agent->isMobile()) {
-            $layout = 'mobile.news.view';
-        }
-
-        return view($layout, [
+        return view('article.view', [
             'article' => $article,
             'relatedArticles' => $relatedArticles
         ]);
