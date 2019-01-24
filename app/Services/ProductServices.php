@@ -447,6 +447,24 @@ class ProductServices
         }
     }
 
+    public function getProductsInCart($idsProducts)
+    {
+        $result = [];
+
+        $products = Product::getProductByIds($idsProducts);
+
+        foreach ($products as $product) {
+            $result[] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->current_price,
+                'thumb' => '/img/46_46' . $product->cover_image
+            ];
+        }
+
+        return $result;
+    }
+
     /**
      * Copy product
      * @param $product_id

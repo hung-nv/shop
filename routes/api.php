@@ -62,4 +62,6 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('product/add-group', 'ApiProductController@addGroup');
     // remove product from group.
     Route::post('product/remove-group', 'ApiProductController@removeGroup');
+    // get products to cart.
+    Route::get('get-products', 'ApiProductController@getProductsInCart');
 });

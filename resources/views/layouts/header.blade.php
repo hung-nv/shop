@@ -43,18 +43,23 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li class="menu-header">
-                                            <a data-id="-1" data-name="All" v-on:click="onClickSelectCatalog">All Categories</a>
+                                            <a data-id="-1" data-name="All" v-on:click="onClickSelectCatalog">All
+                                                Categories</a>
                                         </li>
                                         @if(!empty($menuCatalogs))
                                             @foreach($menuCatalogs as $itemCatalog)
                                                 <li class="menu-header">
-                                                    <a data-id="{{ $itemCatalog['id'] }}" data-name="{{ $itemCatalog['name'] }}" v-on:click="onClickSelectCatalog">{{ $itemCatalog['name'] }}</a>
+                                                    <a data-id="{{ $itemCatalog['id'] }}"
+                                                       data-name="{{ $itemCatalog['name'] }}"
+                                                       v-on:click="onClickSelectCatalog">{{ $itemCatalog['name'] }}</a>
                                                 </li>
                                                 @if(!empty($itemCatalog['child']))
                                                     @foreach($itemCatalog['child'] as $childCatalog)
                                                         <li role="presentation">
-                                                            <a role="menuitem" tabindex="-1" v-on:click="onClickSelectCatalog"
-                                                               data-id="{{ $childCatalog['id'] }}" data-name="{{ $childCatalog['name'] }}">- {{ $childCatalog['name'] }}</a>
+                                                            <a role="menuitem" tabindex="-1"
+                                                               v-on:click="onClickSelectCatalog"
+                                                               data-id="{{ $childCatalog['id'] }}"
+                                                               data-name="{{ $childCatalog['name'] }}">- {{ $childCatalog['name'] }}</a>
                                                         </li>
                                                     @endforeach
                                                 @endif
@@ -69,46 +74,49 @@
                     <!-- /.search-area -->
                     <!-- ============================================================= SEARCH AREA : END ============================================================= -->
                 </div>
-                <!-- /.top-search-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
-                    <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
                     <div class="dropdown dropdown-cart"><a href="#" class="dropdown-toggle lnk-cart"
                                                            data-toggle="dropdown">
                             <div class="items-cart-inner">
                                 <div class="basket"><i class="glyphicon glyphicon-shopping-cart"></i></div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
-                                <div class="total-price-basket"><span class="lbl">cart -</span> <span
-                                            class="total-price"> <span class="sign">$</span><span
-                                                class="value">600.00</span> </span></div>
+                                <div class="basket-item-count"><span class="count"><template>@{{ productsInCart.length }}</template></span>
+                                </div>
+                                <div class="total-price-basket">
+                                    <span class="lbl">Giỏ hàng</span>
+                                </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image"><a href="detail.html"><img
-                                                            src="{{ asset('images/cart.jpg') }}" alt=""></a></div>
+                                    <template v-for="(product, index) in productsInCart">
+                                        <div class="row" :class="(index > 0) ? 'm-t-10' : ''">
+                                            <div class="col-xs-4">
+                                                <div class="image">
+                                                    <img :src="product.thumb" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h3 class="name">@{{ product.name }}</h3>
+                                                <div class="price">@{{ reFormatPrice(product.price) }}</div>
+                                            </div>
                                         </div>
-                                        <div class="col-xs-7">
-                                            <h3 class="name"><a href="index8a95.html?page-detail">Simple Product</a>
-                                            </h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action"><a href="#"><i class="fa fa-trash"></i></a></div>
-                                    </div>
+                                    </template>
                                 </div>
                                 <!-- /.cart-item -->
                                 <div class="clearfix"></div>
                                 <hr>
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"><span class="text">Sub Total :</span><span class='price'>$600.00</span>
+                                    <div class="pull-right">
+                                        <span class="text">Tổng tiền :</span>
+                                        <span class='price'>@{{ totalMoney }}</span>
                                     </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html"
-                                       class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a></div>
+                                       class="btn btn-upper btn-primary btn-block m-t-20">Thanh toán</a>
+                                </div>
                                 <!-- /.cart-total-->
 
                             </li>

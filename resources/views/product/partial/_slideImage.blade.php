@@ -5,7 +5,7 @@
             @foreach($product->images as $productImage)
                 <div class="single-product-gallery-item" id="slide{{ $productImage->id }}">
                     <a data-lightbox="image-1" data-title="Gallery" href="{{ $productImage->image }}">
-                        <img class="img-responsive" alt="" src="assets/images/blank.gif"
+                        <img class="img-responsive" alt="" src="{{ asset('images/blank.gif') }}"
                              data-echo="/img/317_317{{ $productImage->image }}"/>
                     </a>
                 </div>
@@ -18,7 +18,7 @@
                     <div class="item">
                         <a class="horizontal-thumb {{ $loop->first ? "active" : "" }}" data-target="#owl-single-product" data-slide="1"
                            href="#slide{{ $productImage->id }}">
-                            <img class="img-responsive" width="85" alt="" src="assets/images/blank.gif"
+                            <img class="img-responsive" width="85" alt="" src="{{ asset('images/blank.gif') }}"
                                  data-echo="/img/68_68{{ $productImage->image }}"/>
                         </a>
                     </div>

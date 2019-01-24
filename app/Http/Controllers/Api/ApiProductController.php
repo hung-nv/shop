@@ -75,6 +75,10 @@ class ApiProductController extends Controller
         }
     }
 
+    /**
+     * @param AddProductGroup $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function removeGroup(AddProductGroup $request)
     {
         try {
@@ -88,5 +92,16 @@ class ApiProductController extends Controller
         } catch (\Exception $exception) {
             return response()->json('Internal Server Error', 500);
         }
+    }
+
+    public function getProductsInCart(Request $request)
+    {
+//        try {
+            $response = $this->productServices->getProductsInCart($request->idsProduct);
+
+            return response()->json($response,200);
+//        } catch (\Exception $exception) {
+//            return response()->json('Internal Server Error', 500);
+//        }
     }
 }

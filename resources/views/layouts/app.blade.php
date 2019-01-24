@@ -27,33 +27,38 @@
     <link rel="stylesheet" href="{{ asset('/css/font-awesome.css') }}">
 
     <!-- Fonts -->
-    <link href='{{ asset('fonts.googleapis.com/cssd767.css?family=Roboto:300,400,500,700') }}' rel='stylesheet' type='text/css'>
-    <link href='{{ asset('fonts.googleapis.com/csse262.css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800') }}' rel='stylesheet' type='text/css'>
-    <link href='{{ asset('fonts.googleapis.com/csse3e5.css?family=Montserrat:400,700') }}' rel='stylesheet' type='text/css'>
+    <link href='{{ asset('fonts.googleapis.com/cssd767.css?family=Roboto:300,400,500,700') }}' rel='stylesheet'
+          type='text/css'>
+    <link href='{{ asset('fonts.googleapis.com/csse262.css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800') }}'
+          rel='stylesheet' type='text/css'>
+    <link href='{{ asset('fonts.googleapis.com/csse3e5.css?family=Montserrat:400,700') }}' rel='stylesheet'
+          type='text/css'>
 
     <script type="text/javascript">
         const catalogs = {!! json_encode(array_pluck($catalogs, 'name', 'id')) !!};
     </script>
 </head>
-<body class="cnt-home" id="mainApp">
+<body class="cnt-home">
+<div id="mainApp">
     @include('layouts.header')
 
     @yield('content')
 
     @include('layouts.footer')
+</div>
 
-    <script src="{{ asset('/js/jquery-1.11.1.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap-hover-dropdown.min.js') }}"></script>
-    <script src="{{ asset('/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('/js/echo.min.js') }}"></script>
-    <script src="{{ asset('/js/jquery.easing-1.3.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap-slider.min.js') }}"></script>
-    <script src="{{ asset('/js/jquery.rateit.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/lightbox.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('/js/wow.min.js') }}"></script>
-    <script src="{{ asset('/js/scripts.js') }}"></script>
-    <script src="{{ asset('/js/themes.js') }}"></script>
+<script src="{{ asset('/js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/js/bootstrap-hover-dropdown.min.js') }}"></script>
+<script src="{{ asset('/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('/js/echo.min.js') }}"></script>
+<script src="{{ asset('/js/jquery.easing-1.3.min.js') }}"></script>
+<script src="{{ asset('/js/bootstrap-slider.min.js') }}"></script>
+<script src="{{ asset('/js/jquery.rateit.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/lightbox.min.js') }}"></script>
+<script src="{{ asset('/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('/js/wow.min.js') }}"></script>
+<script src="{{ asset('/js/scripts.js') }}"></script>
+<script src="{{ asset('/js/themes.js') }}"></script>
 </body>
 </html>

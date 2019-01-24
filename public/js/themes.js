@@ -28820,6 +28820,156 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/_cart.js":
+/*!*******************************!*\
+  !*** ./resources/js/_cart.js ***!
+  \*******************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+/* harmony import */ var _admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/utilities/format */ "./resources/js/admin/utilities/format.js");
+
+
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+var ui = {
+  urlGetProducts: '/api/get-products'
+};
+var vmCard = new Vue({
+  el: '#mainApp',
+  data: {
+    totalMoney: 0,
+    productsInCart: [],
+    textSearch: Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') ? Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') : '',
+    idCatalog: -1,
+    nameCatalog: ''
+  },
+  created: function created() {
+    // set name catalog.
+    this.nameCatalog = this.setNameCatalog();
+    this.productsInCart = this.getDefaultCart();
+    this.totalMoney = this.getTotalMoney();
+  },
+  watch: {
+    productsInCart: function productsInCart(newValue) {
+      this.totalMoney = this.getTotalMoney();
+    }
+  },
+  methods: {
+    setLocalStorageCache: function setLocalStorageCache(key, value, time) {
+      localStorage.removeItem(key);
+      localStorage.setItem(key, JSON.stringify({
+        data: value,
+        expire: Date.now() + time
+      }));
+    },
+    getLocalStorageCache: function getLocalStorageCache(key) {
+      var _this = this;
+
+      var cacheInformation = localStorage.getItem(key);
+
+      if (cacheInformation) {
+        cacheInformation = JSON.parse(cacheInformation);
+
+        if (cacheInformation.expire - Date.now() > 0) {
+          return cacheInformation;
+        } else {
+          $.ajax({
+            method: 'get',
+            dataType: 'json',
+            url: ui.urlGetProducts,
+            data: {
+              idsProduct: _.map(cacheInformation.data, 'id')
+            }
+          }).done(function (response) {
+            _this.setLocalStorageCache(key, response, 1000 * 60 * 5);
+
+            _this.productsInCart = response;
+          }).fail(function (xhr) {});
+        }
+      } else {
+        return null;
+      }
+    },
+    getDefaultCart: function getDefaultCart() {
+      var storeProduct = this.getLocalStorageCache('cart');
+
+      if (storeProduct) {
+        return storeProduct.data;
+      }
+
+      return [];
+    },
+    getTotalMoney: function getTotalMoney() {
+      var prices = _.map(this.productsInCart, 'price');
+
+      if (prices.length) {
+        return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(_.sum(prices), ',');
+      }
+
+      return 0;
+    },
+    addToCard: function addToCard(productId, event) {
+      var storeProduct = this.getLocalStorageCache('cart');
+      var newProduct = {
+        id: productId,
+        name: $(event.target).data('name'),
+        price: $(event.target).data('price'),
+        thumb: $(event.target).data('thumb')
+      };
+
+      if (storeProduct === null) {
+        // add to products in cart.
+        this.productsInCart.push(newProduct); // save to cache data cart.
+
+        this.setLocalStorageCache('cart', this.productsInCart, 1000 * 60 * 5);
+      } else {
+        // get current products in cart.
+        storeProduct = storeProduct.data; // get id products in cart.
+
+        var idsProduct = _.map(storeProduct, 'id'); // check exist product in cart.
+
+
+        if (!_.includes(idsProduct, productId)) {
+          // add to cart.
+          this.productsInCart.push(newProduct); // save to cache data cart.
+
+          this.setLocalStorageCache('cart', this.productsInCart, 1000 * 60 * 5);
+        }
+      }
+    },
+    submitSearchForm: function submitSearchForm(event) {
+      if (this.textSearch !== '') {
+        if (!this.idCatalog) {
+          return false;
+        }
+
+        window.location = '?search=' + this.textSearch + '&catalog=' + this.idCatalog;
+      }
+    },
+    onClickSelectCatalog: function onClickSelectCatalog(event) {
+      this.idCatalog = $(event.target).data('id');
+      this.nameCatalog = $(event.target).data('name');
+    },
+    setNameCatalog: function setNameCatalog() {
+      var idCatalog = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('catalog');
+
+      if (idCatalog) {
+        return catalogs[idCatalog];
+      } else {
+        return 'All Categories';
+      }
+    },
+    reFormatPrice: function reFormatPrice(price) {
+      return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(price);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/_filter_product.js":
 /*!*****************************************!*\
   !*** ./resources/js/_filter_product.js ***!
@@ -28992,56 +29142,6 @@ if ($(ui.elementId).length) {
     }
   });
 }
-
-/***/ }),
-
-/***/ "./resources/js/_header.js":
-/*!*********************************!*\
-  !*** ./resources/js/_header.js ***!
-  \*********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
-
-var vmHeader = new Vue({
-  el: '#header',
-  data: {
-    textSearch: Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') ? Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') : '',
-    idCatalog: -1,
-    nameCatalog: ''
-  },
-  created: function created() {
-    // set name catalog.
-    this.nameCatalog = this.setNameCatalog();
-  },
-  methods: {
-    submitSearchForm: function submitSearchForm(event) {
-      if (this.textSearch !== '') {
-        if (!this.idCatalog) {
-          return false;
-        }
-
-        window.location = '?search=' + this.textSearch + '&catalog=' + this.idCatalog;
-      }
-    },
-    onClickSelectCatalog: function onClickSelectCatalog(event) {
-      this.idCatalog = $(event.target).data('id');
-      this.nameCatalog = $(event.target).data('name');
-    },
-    setNameCatalog: function setNameCatalog() {
-      var idCatalog = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('catalog');
-
-      if (idCatalog) {
-        return catalogs[idCatalog];
-      } else {
-        return 'All Categories';
-      }
-    }
-  }
-});
 
 /***/ }),
 
@@ -29255,9 +29355,9 @@ function is_number_format(string) {
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
-__webpack_require__(/*! ./_header */ "./resources/js/_header.js");
-
 __webpack_require__(/*! ./_filter_product */ "./resources/js/_filter_product.js");
+
+__webpack_require__(/*! ./_cart */ "./resources/js/_cart.js");
 
 /***/ }),
 

@@ -17,7 +17,7 @@ class Product extends \Eloquent
     protected $fillable = ['name', 'sku', 'slug', 'special', 'description', 'content', 'price', 'new_price',
         'cover_image', 'user_id', 'meta_title', 'meta_description', 'meta_keywords'];
 
-    protected $appends = ['url', 'sale_off'];
+    protected $appends = ['url', 'sale_off', 'current_price'];
 
     public function images()
     {
@@ -78,6 +78,11 @@ class Product extends \Eloquent
         }
 
         return null;
+    }
+
+    public function getCurrentPriceAttribute($value)
+    {
+        return $this->new_price ? $this->new_price : $this->price;
     }
 
     /**
@@ -244,5 +249,10 @@ class Product extends \Eloquent
         return self::orderByDesc('created_at')
             ->limit($limit)
             ->get();
+    }
+
+    public static function getProductByIds($idsProducts)
+    {
+        return self::whereIn('id', $idsProducts)->get();
     }
 }

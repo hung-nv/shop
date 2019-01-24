@@ -58,25 +58,18 @@
 
                     <div class="quantity-container info-container">
                         <div class="row">
+                            <div class="col-sm-12">
+                                <a v-on:click="addToCard({{ $product->id }}, $event)" class="btn btn-primary"
+                                    :data-name="'{{ $product->name }}'"
+                                    :data-thumb="'/img/41_41{{ $product->cover_image }}'"
+                                    :data-price="'{{ $product->current_price }}'">
+                                    <i class="fa fa-shopping-cart inner-right-vs"></i>
+                                    Thêm vào giỏ
+                                </a>
 
-                            <div class="col-sm-2">
-                                <span class="label">Số lượng:</span>
-                            </div>
-
-                            <div class="col-sm-2">
-                                <div class="cart-quantity">
-                                    <div class="quant-input">
-                                        <div class="arrows">
-                                            <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-                                            <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-                                        </div>
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-7">
-                                <a v-on:click="addToCard('{{ $product->id }}')" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> Mua hàng</a>
+                                <a class="btn btn-primary checkout-btn">
+                                    Thanh toán
+                                </a>
                             </div>
                         </div>
                     </div>
