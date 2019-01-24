@@ -41,13 +41,16 @@
 
                             <div class="col-sm-6">
                                 <div class="favorite-button m-t-10">
-                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="#">
+                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                                       title="Wishlist" href="#">
                                         <i class="fa fa-heart"></i>
                                     </a>
-                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
+                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                                       title="Add to Compare" href="#">
                                         <i class="fa fa-signal"></i>
                                     </a>
-                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
+                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                                       title="E-mail" href="#">
                                         <i class="fa fa-envelope"></i>
                                     </a>
                                 </div>
@@ -60,9 +63,10 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <a v-on:click="addToCard({{ $product->id }}, $event)" class="btn btn-primary"
-                                    :data-name="'{{ $product->name }}'"
-                                    :data-thumb="'/img/41_41{{ $product->cover_image }}'"
-                                    :data-price="'{{ $product->current_price }}'">
+                                   :data-name="'{{ $product->name }}'"
+                                   :data-url="'{{ $product->url }}'"
+                                   :data-thumb="'{{ $product->cover_image }}'"
+                                   :data-price="'{{ $product->current_price }}'">
                                     <i class="fa fa-shopping-cart inner-right-vs"></i>
                                     Thêm vào giỏ
                                 </a>

@@ -28915,9 +28915,11 @@ var vmCard = new Vue({
       var storeProduct = this.getLocalStorageCache('cart');
       var newProduct = {
         id: productId,
+        quantity: 1,
         name: $(event.target).data('name'),
         price: $(event.target).data('price'),
-        thumb: $(event.target).data('thumb')
+        thumb: $(event.target).data('thumb'),
+        url: $(event.target).data('url')
       };
 
       if (storeProduct === null) {

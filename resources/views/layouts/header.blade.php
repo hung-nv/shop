@@ -4,10 +4,13 @@
         <div class="container">
             <div class="header-top-inner">
                 <div class="cnt-account">
-                    <ul class="list-unstyled">
-                        <li><a href="#">Giới thiệu</a></li>
-                        <li><a href="#">Điều khoản sử dụng</a></li>
-                    </ul>
+                    @if(!empty($topMenu))
+                        <ul class="list-unstyled">
+                            @foreach($topMenu as $itemTopMenu)
+                                <li><a href="{{ $itemTopMenu['url'] }}">{{ $itemTopMenu['name'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
                 <!-- /.cnt-cart -->
                 <div class="clearfix"></div>
@@ -95,7 +98,7 @@
                                         <div class="row" :class="(index > 0) ? 'm-t-10' : ''">
                                             <div class="col-xs-4">
                                                 <div class="image">
-                                                    <img :src="product.thumb" alt="">
+                                                    <img :src="'/img/46_46' + product.thumb" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-xs-8">
@@ -114,7 +117,7 @@
                                         <span class='price'>@{{ totalMoney }}</span>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html"
+                                    <a href="{{ route('checkout') }}"
                                        class="btn btn-upper btn-primary btn-block m-t-20">Thanh toán</a>
                                 </div>
                                 <!-- /.cart-total-->

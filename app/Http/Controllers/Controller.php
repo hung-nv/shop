@@ -131,6 +131,13 @@ class Controller extends BaseController
             View::share('footerMenu', $footerMenu);
         }
 
+        // get top menu.
+        if (!empty($this->option['top_menu_id'])) {
+            $topMenu = $this->setMultiMenu(Menu::getMenuByGroup($this->option['top_menu_id'])->toArray());
+
+            View::share('topMenu', $topMenu);
+        }
+
         // get all catalog.
         $catalogs = Category::getCategoryByType(Category::CATALOG_TYPE)->toArray();
         $menuCatalogs = $this->setMultiMenu($catalogs);

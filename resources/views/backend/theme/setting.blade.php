@@ -50,6 +50,9 @@
                                 <li>
                                     <a href="#tab_social" data-toggle="tab"> Social & Google Tool </a>
                                 </li>
+                                <li>
+                                    <a href="#tab_terms" data-toggle="tab"> Điều khoản mua hàng </a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_general">
@@ -63,6 +66,9 @@
                                 </div>
                                 <div class="tab-pane" id="tab_social">
                                     @include("backend.theme._tab_social", ['option' => $option])
+                                </div>
+                                <div class="tab-pane" id="tab_terms">
+                                    @include("backend.theme._tab_terms", ['option' => $option])
                                 </div>
                             </div>
                         </div>

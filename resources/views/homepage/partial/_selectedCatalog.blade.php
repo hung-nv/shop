@@ -11,7 +11,6 @@
                         </li>
                     @endforeach
                 </ul>
-                <!-- /.nav-tabs -->
             </div>
             <div class="tab-content outer-top-xs">
                 @foreach($selectedCatalogs as $selectedCatalog)
@@ -25,18 +24,17 @@
                                             <div class="product">
                                                 <div class="product-image">
                                                     <div class="image">
-                                                        <a href="#">
+                                                        <a href="/{{ config('const.prefix.product') }}/{{ $product->slug }}">
                                                             <img src="/img/258_258{{ $product->cover_image }}" alt="">
                                                         </a>
                                                     </div>
-                                                    <!-- /.image -->
 
                                                     <div class="tag new"><span>new</span></div>
                                                 </div>
 
                                                 <div class="product-info text-left">
                                                     <h3 class="name">
-                                                        <a href="#">{{ $product->name }}</a>
+                                                        <a href="/{{ config('const.prefix.product') }}/{{ $product->slug }}">{{ $product->name }}</a>
                                                     </h3>
                                                     <div class="rating rateit-small"></div>
                                                     <div class="description"></div>
@@ -50,7 +48,6 @@
                                                     </div>
 
                                                 </div>
-                                                <!-- /.product-info -->
                                                 <div class="cart clearfix animate-effect hidden">
                                                     <div class="action">
                                                         <ul class="list-unstyled">
@@ -77,14 +74,10 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <!-- /.action -->
                                                 </div>
-                                                <!-- /.cart -->
                                             </div>
-                                            <!-- /.product -->
 
                                         </div>
-                                        <!-- /.products -->
                                     </div>
                                 @endforeach
                             </div>

@@ -1,3 +1,7 @@
+@section('title', $catalog->meta_title ? $catalog->meta_title : $catalog->name)
+
+@section('description', $catalog->meta_description ? $catalog->meta_description : $catalog->description)
+
 @extends('layouts.app')
 
 @section('content')

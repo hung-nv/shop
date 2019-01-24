@@ -83,3 +83,15 @@ a {
 .product-info .quantity-container .checkout-btn {
   padding: 6px 14px;
 }
+
+.shopping-cart .cart-image img {
+  width: 100px;
+}
+
+.body-content .shopping-cart .shopping-cart-table .table-responsive table > thead > tr > th {
+  padding: 10px;
+}
+
+.table > tbody > tr > td {
+  padding: 10px;
+}

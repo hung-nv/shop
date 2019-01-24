@@ -1,3 +1,7 @@
+@section('title', !empty($option['meta_title']) ? $option['meta_title'] : '')
+
+@section('description', !empty($option['meta_description']) ? $option['meta_description'] : '')
+
 @extends('layouts.app')
 
 @section('content')
@@ -89,7 +93,7 @@
 
                     </div>
 
-                    @include('homepage.partial._bannerCatalog')
+{{--                    @include('homepage.partial._bannerCatalog')--}}
 
                     <div class="row">
                         @include('homepage.partial._hotIdeal')

@@ -30,12 +30,7 @@ class ArticleController extends Controller
 
         $this->articleServices->updateViewArticle($article->id);
 
-        $layout = 'news.page';
-        if ($this->agent->isMobile()) {
-            $layout = 'mobile.news.page';
-        }
-
-        return view($layout, [
+        return view('article.page', [
             'page' => $article
         ]);
     }

@@ -5,7 +5,9 @@
             <div class="products">
                 <div class="hot-deal-wrapper">
                     <div class="image">
-                        <img src="/img/223_223{{ $hotProduct->cover_image }}" alt="">
+                        <a href="{{ $hotProduct->url }}">
+                            <img src="/img/223_223{{ $hotProduct->cover_image }}" alt="">
+                        </a>
                     </div>
                     <div class="sale-offer-tag"><span>{{ $hotProduct->sale_off }}%<br>off</span></div>
                 </div>
@@ -31,7 +33,8 @@
                             <button class="btn btn-primary cart-btn" type="button"
                                     v-on:click="addToCard({{ $hotProduct->id }}, $event)"
                                     :data-name="'{{ $hotProduct->name }}'"
-                                    :data-thumb="'/img/46_46{{ $hotProduct->cover_image }}'"
+                                    :data-url="'{{ $hotProduct->url }}'"
+                                    :data-thumb="'{{ $hotProduct->cover_image }}'"
                                     :data-price="'{{ $hotProduct->current_price }}'">
                                 Thêm vào giỏ
                             </button>
