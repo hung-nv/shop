@@ -15,14 +15,15 @@
                             <div class="item" style="background-image: url({{ asset('images/sliders/01.jpg') }});">
                                 <div class="container-fluid">
                                     <div class="caption bg-color vertical-center text-left">
-                                        <div class="slider-header fadeInDown-1">Top Brands</div>
-                                        <div class="big-text fadeInDown-1"> New Collections</div>
-                                        <div class="excerpt fadeInDown-2 hidden-xs"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                        <div class="slider-header fadeInDown-1">Bạn có quan tâm?</div>
+                                        <div class="big-text fadeInDown-1"> SẢN PHẨM DƯỠNG DA</div>
+                                        <div class="excerpt fadeInDown-2 hidden-xs"><span>Mang lại làn da trẻ đẹp cho chị em phụ nữ.</span>
                                         </div>
-                                        <div class="button-holder fadeInDown-3"><a
-                                                    href="index6c11.html?page=single-product"
-                                                    class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop
-                                                Now</a></div>
+                                        <div class="button-holder fadeInDown-3">
+                                            <a href="/" class="btn-lg btn btn-uppercase btn-primary shop-now-button">
+                                                Mua hàng ngay
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -30,15 +31,17 @@
                             <div class="item" style="background-image: url({{ asset('images/sliders/02.jpg') }});">
                                 <div class="container-fluid">
                                     <div class="caption bg-color vertical-center text-left">
-                                        <div class="slider-header fadeInDown-1">Spring 2016</div>
-                                        <div class="big-text fadeInDown-1"> Women <span class="highlight">Fashion</span>
+                                        <div class="slider-header fadeInDown-1">Bạn bị đau dạ dày?</div>
+                                        <div class="big-text fadeInDown-1"> Thuốc chống đau dạ dày</span>
                                         </div>
-                                        <div class="excerpt fadeInDown-2 hidden-xs"><span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span>
+                                        <div class="excerpt fadeInDown-2 hidden-xs">
+                                            <span>Yên tâm mỗi khi đi nhậu với bạn bè...</span>
                                         </div>
-                                        <div class="button-holder fadeInDown-3"><a
-                                                    href="index6c11.html?page=single-product"
-                                                    class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop
-                                                Now</a></div>
+                                        <div class="button-holder fadeInDown-3">
+                                            <a href="#" class="btn-lg btn btn-uppercase btn-primary shop-now-button">
+                                                Mua ngay
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -56,10 +59,10 @@
                                     <div class="info-box">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h4 class="info-box-heading green">money back</h4>
+                                                <h4 class="info-box-heading green">Đổi hàng</h4>
                                             </div>
                                         </div>
-                                        <h6 class="text">30 Days Money Back Guarantee</h6>
+                                        <h6 class="text">30 ngày kể ngày ngày nhận hàng</h6>
                                     </div>
                                 </div>
                                 <!-- .col -->
@@ -68,10 +71,10 @@
                                     <div class="info-box">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h4 class="info-box-heading green">free shipping</h4>
+                                                <h4 class="info-box-heading green">Miễn phí vận chuyển</h4>
                                             </div>
                                         </div>
-                                        <h6 class="text">Shipping on orders over $99</h6>
+                                        <h6 class="text">Miễn phí trong nội thành</h6>
                                     </div>
                                 </div>
                                 <!-- .col -->
@@ -80,10 +83,10 @@
                                     <div class="info-box">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h4 class="info-box-heading green">Special Sale</h4>
+                                                <h4 class="info-box-heading green">Sale đặc biệt</h4>
                                             </div>
                                         </div>
-                                        <h6 class="text">Extra $5 off on all items </h6>
+                                        <h6 class="text">Giảm 5% toàn bộ sản phẩm</h6>
                                     </div>
                                 </div>
                                 <!-- .col -->
