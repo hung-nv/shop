@@ -122,17 +122,11 @@ window.vmCard = new Vue({
                 }
             }
         },
-        removeFromCart: function (productId, event) {
-            let idsProduct = _.map(this.productsInCart, 'id');
+        removeFromCart: function (index, event) {
+            this.productsInCart.splice(index, 1);
 
-            if (_.includes(idsProduct, productId)) {
-                this.productsInCart = _.remove(this.productsInCart, function (item) {
-                    return item.id === productId;
-                });
-
-                // save to cache data cart.
-                this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
-            }
+            // save to cache data cart.
+            this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
         },
         submitSearchForm: function (event) {
             if (this.textSearch !== '') {

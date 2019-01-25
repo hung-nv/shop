@@ -49,7 +49,7 @@
                                     <template v-for="(product, index) in productsInCart">
                                         <tr>
                                             <td class="romove-item">
-                                                <a v-on:click="removeFromCart(product.id, $event)" title="cancel" class="icon">
+                                                <a v-on:click="removeFromCart(index, $event)" title="cancel" class="icon">
                                                     <i class="fa fa-trash-o"></i></a>
                                             </td>
                                             <td class="cart-image">
