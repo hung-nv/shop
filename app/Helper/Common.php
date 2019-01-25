@@ -15,6 +15,29 @@ function getAllParentsCategory($data, $category_id, &$result)
     }
 }
 
+/**
+ * Check level of data multi level
+ * @param array $item
+ * @return int
+ */
+function getLevel($item)
+{
+    $level = 1;
+
+    if (!empty($item['child'])) {
+        $level = 2;
+
+        foreach ($item['child'] as $child) {
+            if (!empty($child['grand'])) {
+                $level = 3;
+                break;
+            }
+        }
+    }
+
+    return $level;
+}
+
 function renderDataWithClass($content, $class)
 {
     $content = nl2br($content);

@@ -1,5 +1,4 @@
 <header class="header-style-1" id="header">
-
     <div class="top-bar animate-dropdown">
         <div class="container">
             <div class="header-top-inner">
@@ -26,7 +25,14 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo"><a href="home.html"> <img src="{{ asset('images/logo.png') }}" alt="logo"> </a>
+                    <div class="logo">
+                        <a href="/">
+                            @if(!empty($option['company_logo']))
+                                <img src="{{ $option['company_logo'] }}" alt="logo">
+                            @else
+                                <img src="{{ asset('images/logo.png') }}" alt="logo">
+                            @endif
+                        </a>
                     </div>
                     <!-- /.logo -->
                     <!-- ============================================================= LOGO : END ============================================================= -->
@@ -35,12 +41,11 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
                     <!-- /.contact-row -->
-                    <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
                         <div class="control-group">
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="/">
                                         @{{ nameCatalog }}
                                         <b class="caret"></b>
                                     </a>
@@ -75,7 +80,6 @@
                             <a class="search-button" v-on:click="submitSearchForm"></a></div>
                     </div>
                     <!-- /.search-area -->
-                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
@@ -121,7 +125,6 @@
                                        class="btn btn-upper btn-primary btn-block m-t-20">Thanh toán</a>
                                 </div>
                                 <!-- /.cart-total-->
-
                             </li>
                         </ul>
                     </div>

@@ -562,6 +562,8 @@ class ProductServices
         $allCategory = Category::all();
 
         $this->getIdsCategoryByParent($allCategory, $idsCategory, $idCatalog);
+        
+        array_push($idsCategory, $idCatalog);
 
         // set default pageSize.
         $pageSize = 12;

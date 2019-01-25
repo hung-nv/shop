@@ -93,7 +93,7 @@ trait MultiLevel
     {
         $children = [];
 
-        if (count($dataCategory) > 0) {
+        if ($dataCategory) {
 
             foreach ($dataCategory as $key => $item) {
 
@@ -107,7 +107,7 @@ trait MultiLevel
         }
 
         // get children and execute.
-        if (isset($children) && $children) {
+        if ($children) {
 
             foreach ($children as $item) {
 

@@ -131,8 +131,9 @@ class ApiMenuController extends Controller
 
     /**
      * Reload menu by group.
-     * @param int $idGroup
+     * @param $idGroup
      * @return string
+     * @throws \Throwable
      */
     public function getTemplateMenuByGroup($idGroup)
     {
