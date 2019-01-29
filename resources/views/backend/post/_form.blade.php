@@ -10,12 +10,6 @@
     </div>
 
     <div class="form-group">
-        <label>Url Video Youtube</label>
-        <input type="text" name="url_video" class="form-control"
-               value="{{ isset($post) ? $post['url_video'] : old('url_video') }}"/>
-    </div>
-
-    <div class="form-group">
         <label>Description</label>
         <textarea name="description" class="form-control"
                   rows="4">{{ isset($post) ? $post['description'] : old('description') }}</textarea>
