@@ -5,6 +5,10 @@ const ui = {
     inputOldFavico: '#old_favico',
     inputLogo: '#company_logo',
     inputOldLogo: '#old_company_logo',
+    inputBannerImage1: '#banner_image_1',
+    inputOldBannerImage1: '#old_banner_image_1',
+    inputBannerImage2: '#banner_image_2',
+    inputOldBannerImage2: '#old_banner_image_2',
     urlDeleteFileSetting: '/api/delete-file-setting',
     inputRemoveInitPreview: '.kv-file-remove'
 };
@@ -35,6 +39,34 @@ $(function () {
             );
         } else {
             newInputImage(ui.inputLogo);
+        }
+    }
+
+    // init banner image 1.
+    if ($(ui.inputBannerImage1).length) {
+        if ($(ui.inputOldBannerImage1).length) {
+            initInputImage(
+                ui.inputOldBannerImage1,
+                ui.inputBannerImage1,
+                ui.urlDeleteFileSetting,
+                {extractName: 'banner_image_1'}
+            );
+        } else {
+            newInputImage(ui.inputBannerImage1);
+        }
+    }
+
+    // init banner image 2.
+    if ($(ui.inputBannerImage2).length) {
+        if ($(ui.inputOldBannerImage2).length) {
+            initInputImage(
+                ui.inputOldBannerImage2,
+                ui.inputBannerImage2,
+                ui.urlDeleteFileSetting,
+                {extractName: 'banner_image_2'}
+            );
+        } else {
+            newInputImage(ui.inputBannerImage2);
         }
     }
 
