@@ -11,7 +11,7 @@
                             <div class="yamm-content ">
                                 <div class="row">
                                     @foreach($itemMainMenu['child'] as $itemChild)
-                                        <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                                        <div class="col-xs-12 col-sm-6 col-md-3 col-menu">
                                             <h2 class="title">{{ $itemChild['name'] }}</h2>
                                             @if(!empty($itemChild['grand']))
                                                 <ul class="links">

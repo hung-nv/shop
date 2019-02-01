@@ -92,6 +92,9 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
         // route resource user.
         Route::resource('user', 'UserController');
 
+        // route resource coupon code.
+        Route::resource('couponCode', 'CouponCodeController');
+
         // route resource setting.
         Route::resource('setting', 'SettingController', ['only' => ['index', 'store']]);
 

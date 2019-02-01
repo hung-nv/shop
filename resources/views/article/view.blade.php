@@ -10,7 +10,7 @@
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="/">Trang chủ</a></li>
-                    <li class='active'></li>
+                    <li class='active'>{{ $article->name }}</li>
                 </ul>
             </div>
         </div>
