@@ -22118,6 +22118,8 @@ __webpack_require__(/*! ./pages/product/index_product */ "./resources/js/admin/p
 __webpack_require__(/*! ./pages/comment/index_comment */ "./resources/js/admin/pages/comment/index_comment.js");
 
 __webpack_require__(/*! ./pages/comment/create_edit_comment */ "./resources/js/admin/pages/comment/create_edit_comment.js");
+
+__webpack_require__(/*! ./pages/couponCode/create_edit_coupon_code */ "./resources/js/admin/pages/couponCode/create_edit_coupon_code.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22747,6 +22749,40 @@ if ($(ui.pageId).length) {
         bFilter: true
       });
     }
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/admin/pages/couponCode/create_edit_coupon_code.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/admin/pages/couponCode/create_edit_coupon_code.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var ui = {
+  pageId: '#create-edit-coupon-code'
+};
+
+if ($(ui.pageId).length) {
+  $(function () {
+    $('input[name="dates"]').daterangepicker({
+      minDate: moment()
+    });
+    $('#frm-coupon-code').validate({
+      rules: {
+        'value': {
+          required: true,
+          number: true,
+          min: 0,
+          max: 100
+        },
+        'dates': {
+          required: true
+        }
+      }
+    });
   });
 }
 
