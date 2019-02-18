@@ -1,14 +1,16 @@
 let ui = {
-    pageId: '#create-edit-coupon-code'
+    pageId: '#create-edit-coupon-code',
+    formCoupon: '#frm-coupon-code',
+    inputDate: 'input[name="dates"]'
 };
 
-if ($(ui.pageId).length) {
-    $(function () {
-        $('input[name="dates"]').daterangepicker({
+$(function () {
+    if ($(ui.pageId).length) {
+        $(ui.inputDate).daterangepicker({
             minDate: moment()
         });
 
-        $('#frm-coupon-code').validate({
+        $(ui.formCoupon).validate({
             rules: {
                 'value': {
                     required: true,
@@ -21,5 +23,5 @@ if ($(ui.pageId).length) {
                 }
             }
         });
-    });
-}
+    }
+});

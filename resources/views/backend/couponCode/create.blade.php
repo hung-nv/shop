@@ -1,7 +1,4 @@
-@extends('backend.layouts.app', ['viewData' => [
-    'oldName' => '',
-    'oldSlug' => ''
-]])
+@extends('backend.layouts.app')
 
 @section('title', 'Insert Coupon Code')
 
