@@ -32,6 +32,23 @@ class CouponCodeServices
     }
 
     /**
+     * Update Coupon Code.
+     * @param $dataRequest
+     * @param $couponCodeId
+     * @return string
+     */
+    public function updateCouponCode($dataRequest, $couponCodeId)
+    {
+        $couponCode = CouponCode::find($couponCodeId);
+
+        list($dataRequest['start_date'], $dataRequest['end_date']) = $this->formatDateBeforeSave($dataRequest['dates']);
+
+        $couponCode->update($dataRequest);
+
+        return 'Create successful';
+    }
+
+    /**
      * Format date before save.
      * @param string $dataRanger
      * @return array
@@ -66,5 +83,26 @@ class CouponCodeServices
         }
 
         return $randomString;
+    }
+
+    /**
+     * Find Coupon Code.
+     * @param $couponCodeId
+     * @return CouponCode|CouponCode[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function findCouponCodeById($couponCodeId)
+    {
+        return CouponCode::find($couponCodeId);
+    }
+
+    /**
+     * Delete coupon Code.
+     * @param $couponCodeId
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deleteCouponCode($couponCodeId)
+    {
+        return CouponCode::find($couponCodeId)->delete();
     }
 }

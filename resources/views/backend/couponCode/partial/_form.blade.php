@@ -9,6 +9,6 @@
 <div class="form-group last">
     <label class="control-label col-md-3">Start Time</label>
     <div class="col-md-5">
-        <input name="dates" value="" class="form-control">
+        <input name="dates" value="{{ isset($dateRanger) ? $dateRanger : '' }}" class="form-control">
     </div>
 </div>

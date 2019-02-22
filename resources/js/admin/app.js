@@ -15,6 +15,7 @@ require('./pages/product/index_product');
 require('./pages/comment/index_comment');
 require('./pages/comment/create_edit_comment');
 require('./pages/couponCode/create_edit_coupon_code');
+require('./pages/couponCode/index_coupon');
 
 /**
  * The following block of code may be used to automatically register your

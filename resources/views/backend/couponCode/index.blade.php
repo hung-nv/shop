@@ -2,7 +2,7 @@
 
 @section('title', 'Manage Coupon Code')
 
-@section('pageId', 'Coupon Code')
+@section('pageId', 'coupon-code')
 
 @section('breadcrumbs')
     <a href="{{ route('couponCode.index') }}">Coupon Code</a>

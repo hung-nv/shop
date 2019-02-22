@@ -7,7 +7,16 @@ let ui = {
 $(function () {
     if ($(ui.pageId).length) {
         $(ui.inputDate).daterangepicker({
-            minDate: moment()
+            minDate: moment(),
+            autoUpdateInput: false
+        });
+
+        $(ui.inputDate).on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $(ui.inputDate).on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
         });
 
         $(ui.formCoupon).validate({

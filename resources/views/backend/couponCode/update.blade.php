@@ -1,19 +1,16 @@
-@extends('backend.layouts.app', ['viewData' => [
-    'oldName' => $category->name,
-    'oldSlug' => $category->slug
-]])
+@extends('backend.layouts.app')
 
-@section('title', 'Update Category #'.$category->id.' ('.$category->name.')')
+@section('title', 'Update Coupon #'.$couponCode->id)
 
-@section('pageId', 'create-edit-category')
+@section('pageId', 'create-edit-coupon-code')
 
 @section('breadcrumbs')
-    <a href="{{ route('category.index') }}">Category</a>
+    <a href="{{ route('couponCode.index') }}">Coupon Code</a>
     <i class="fa fa-circle"></i>
 @endsection
 
 @section('content')
-    <h3 class="page-title"> Category
+    <h3 class="page-title"> Coupon Code
         <small>Update</small>
     </h3>
 
@@ -29,7 +26,7 @@
 
                     @include('backend.blocks.message')
 
-                    <form action="{{ route('category.update', ['category' => $category['id']]) }}"
+                    <form action="{{ route('couponCode.update', ['couponCode' => $couponCode->id]) }}"
                           class="form-horizontal form-row-seperated" role="form"
                           method="post" enctype="multipart/form-data">
 
@@ -38,7 +35,7 @@
 
                         @include('backend.blocks.errors')
 
-                        @include('backend.category._form')
+                        @include('backend.couponCode.partial._form')
 
                         @include('backend.common.actionForm')
 
@@ -53,16 +50,10 @@
 @endsection
 
 @section('style')
-    <link href="{{ asset('/libs/select2/css/select2.min.css') }}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{ asset('/libs/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{ asset('/admin/css/fileinput.min.css') }}"
-          rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 @endsection
 
 @push('script')
-    <script src="{{ asset('/libs/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/libs/fileinput.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/libs/piexif.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 @endpush

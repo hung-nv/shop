@@ -22120,6 +22120,8 @@ __webpack_require__(/*! ./pages/comment/index_comment */ "./resources/js/admin/p
 __webpack_require__(/*! ./pages/comment/create_edit_comment */ "./resources/js/admin/pages/comment/create_edit_comment.js");
 
 __webpack_require__(/*! ./pages/couponCode/create_edit_coupon_code */ "./resources/js/admin/pages/couponCode/create_edit_coupon_code.js");
+
+__webpack_require__(/*! ./pages/couponCode/index_coupon */ "./resources/js/admin/pages/couponCode/index_coupon.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22651,7 +22653,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ui = {
   pageId: '#category',
-  tableCategory: '#datatable-category',
+  tableCoupon: '#datatable-category',
   btnDelete: '#btn-delete'
 };
 $(function () {
@@ -22769,7 +22771,14 @@ var ui = {
 $(function () {
   if ($(ui.pageId).length) {
     $(ui.inputDate).daterangepicker({
-      minDate: moment()
+      minDate: moment(),
+      autoUpdateInput: false
+    });
+    $(ui.inputDate).on('apply.daterangepicker', function (ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+    $(ui.inputDate).on('cancel.daterangepicker', function (ev, picker) {
+      $(this).val('');
     });
     $(ui.formCoupon).validate({
       rules: {
@@ -22783,6 +22792,47 @@ $(function () {
           required: true
         }
       }
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/pages/couponCode/index_coupon.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/admin/pages/couponCode/index_coupon.js ***!
+  \*************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+
+var ui = {
+  pageId: '#coupon-code',
+  tableCoupon: '#datatable-coupon-code',
+  btnDelete: '#btn-delete'
+};
+
+if ($(ui.pageId).length) {
+  new Vue({
+    el: ui.pageId,
+    methods: {
+      confirmBeforeDelete: function confirmBeforeDelete(event) {
+        Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["confirmBeforeDelete"])(event.target, 'Do you want to delete this?');
+      }
+    }
+  });
+}
+
+$(function () {
+  if ($(ui.tableCoupon).length) {
+    $(ui.tableCoupon).dataTable({
+      ordering: false,
+      order: [[0, 'desc']],
+      bLengthChange: true,
+      bFilter: true
     });
   }
 });
