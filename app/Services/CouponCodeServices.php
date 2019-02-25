@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\CouponCode;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CouponCodeServices
 {
@@ -104,5 +105,22 @@ class CouponCodeServices
     public function deleteCouponCode($couponCodeId)
     {
         return CouponCode::find($couponCodeId)->delete();
+    }
+
+    /**
+     * Check coupon code.
+     * @param $couponName
+     * @return array
+     * @throws \Exception
+     */
+    public function checkCouponCode($couponName)
+    {
+        $couponCode = CouponCode::findCouponCodeByName($couponName);
+
+        if (!$couponCode) {
+            throw new \Exception('Not Found coupon code');
+        }
+
+        return $couponCode->toArray();
     }
 }

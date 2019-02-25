@@ -28836,7 +28836,8 @@ __webpack_require__.r(__webpack_exports__);
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 var ui = {
   urlGetProducts: '/api/get-products',
-  timeExpire: 1000 * 60 * 5
+  timeExpire: 1000 * 60 * 5,
+  urlCheckCouponCode: '/api/check-coupon-code'
 };
 window.vmCard = new Vue({
   el: '#mainApp',
@@ -28845,7 +28846,10 @@ window.vmCard = new Vue({
     productsInCart: [],
     textSearch: Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') ? Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') : '',
     idCatalog: -1,
-    nameCatalog: ''
+    nameCatalog: '',
+    couponCode: '',
+    couponCodeSale: 0,
+    isCoupon: true
   },
   created: function created() {
     // set name catalog.
@@ -28856,6 +28860,11 @@ window.vmCard = new Vue({
   watch: {
     productsInCart: function productsInCart(newValue) {
       this.totalMoney = this.getTotalMoney();
+    },
+    couponCode: function couponCode(newValue) {
+      if (!this.isCoupon) {
+        this.isCoupon = true;
+      }
     }
   },
   methods: {
@@ -28970,6 +28979,23 @@ window.vmCard = new Vue({
         return catalogs[idCatalog];
       } else {
         return 'All Categories';
+      }
+    },
+    checkCouponCode: function checkCouponCode(event) {
+      var _this2 = this;
+
+      if (this.couponCode !== '') {
+        $.ajax({
+          method: 'get',
+          url: ui.urlCheckCouponCode,
+          data: {
+            couponCode: this.couponCode
+          }
+        }).done(function (response) {
+          _this2.couponCodeSale = response.value;
+        }).fail(function (xhr) {
+          _this2.isCoupon = false;
+        });
       }
     },
     reFormatPrice: function reFormatPrice(price) {

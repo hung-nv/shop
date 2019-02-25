@@ -49,7 +49,8 @@
                                     <template v-for="(product, index) in productsInCart">
                                         <tr>
                                             <td class="romove-item">
-                                                <a v-on:click="removeFromCart(index, $event)" title="cancel" class="icon">
+                                                <a v-on:click="removeFromCart(index, $event)" title="cancel"
+                                                   class="icon">
                                                     <i class="fa fa-trash-o"></i></a>
                                             </td>
                                             <td class="cart-image">
@@ -139,10 +140,17 @@
                                     <td>
                                         <div class="form-group">
                                             <input type="text" class="form-control unicase-form-control text-input"
-                                                   placeholder="Mã giảm giá..">
+                                                   placeholder="Mã giảm giá.." v-model="couponCode">
                                         </div>
+                                        <template v-if="!isCoupon">
+                                            <div class="form-group">
+                                                <span class="text-danger">Mã Khuyến mại không đúng hoặc đã hết thời gian sử dụng!</span>
+                                            </div>
+                                        </template>
                                         <div class="clearfix pull-right">
-                                            <button type="button" class="btn-upper btn btn-primary">APPLY COUPON
+                                            <button type="button" class="btn-upper btn btn-primary"
+                                                    v-on:click="checkCouponCode">
+                                                APPLY COUPON
                                             </button>
                                         </div>
                                     </td>

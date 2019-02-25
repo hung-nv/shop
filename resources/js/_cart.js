@@ -5,7 +5,8 @@ window._ = require('lodash');
 
 let ui = {
     urlGetProducts: '/api/get-products',
-    timeExpire: 1000 * 60 * 5
+    timeExpire: 1000 * 60 * 5,
+    urlCheckCouponCode: '/api/check-coupon-code'
 };
 
 window.vmCard = new Vue({
@@ -15,7 +16,10 @@ window.vmCard = new Vue({
         productsInCart: [],
         textSearch: getParameterByName('search') ? getParameterByName('search') : '',
         idCatalog: -1,
-        nameCatalog: ''
+        nameCatalog: '',
+        couponCode: '',
+        couponCodeSale: 0,
+        isCoupon: true
     },
     created: function () {
         // set name catalog.
@@ -28,6 +32,11 @@ window.vmCard = new Vue({
     watch: {
         productsInCart: function (newValue) {
             this.totalMoney = this.getTotalMoney();
+        },
+        couponCode: function(newValue) {
+            if (!this.isCoupon) {
+                this.isCoupon = true;
+            }
         }
     },
     methods: {
@@ -149,6 +158,23 @@ window.vmCard = new Vue({
                 return catalogs[idCatalog];
             } else {
                 return 'All Categories';
+            }
+        },
+        checkCouponCode: function (event) {
+            if (this.couponCode !== '') {
+                $.ajax({
+                    method: 'get',
+                    url: ui.urlCheckCouponCode,
+                    data: {
+                        couponCode: this.couponCode
+                    }
+                })
+                    .done(response => {
+                        this.couponCodeSale = response.value;
+                    })
+                    .fail(xhr => {
+                        this.isCoupon = false;
+                    });
             }
         },
         reFormatPrice: function (price) {

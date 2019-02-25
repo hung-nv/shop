@@ -64,4 +64,6 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('product/remove-group', 'ApiProductController@removeGroup');
     // get products to cart.
     Route::get('get-products', 'ApiProductController@getProductsInCart');
+    // check coupon code.
+    Route::get('check-coupon-code', 'ApiCouponCodeController@checkCouponCode');
 });
