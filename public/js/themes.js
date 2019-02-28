@@ -28849,7 +28849,8 @@ window.vmCard = new Vue({
     nameCatalog: '',
     couponCode: '',
     couponCodeSale: 0,
-    isCoupon: true
+    isCoupon: true,
+    isLoading: false
   },
   created: function created() {
     // set name catalog.
@@ -28864,6 +28865,10 @@ window.vmCard = new Vue({
     couponCode: function couponCode(newValue) {
       if (!this.isCoupon) {
         this.isCoupon = true;
+      }
+
+      if (this.couponCodeSale) {
+        this.couponCodeSale = 0;
       }
     }
   },
@@ -28918,7 +28923,21 @@ window.vmCard = new Vue({
       });
 
       if (prices.length) {
-        return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(_.sum(prices), ',');
+        return _.sum(prices);
+      }
+
+      return 0;
+    },
+    getBalanceSale: function getBalanceSale(products) {
+      var totalMoney = 0;
+
+      var prices = _.map(products, function (item) {
+        return Number(item.quantity) * item.price;
+      });
+
+      if (prices.length) {
+        totalMoney = _.sum(prices);
+        return this.couponCodeSale * totalMoney / 100;
       }
 
       return 0;
@@ -29002,6 +29021,25 @@ window.vmCard = new Vue({
       return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(price);
     }
   }
+});
+$(function () {
+  $('#frm-customer').validate({
+    rules: {
+      'telephone': {
+        'validatePhone': true,
+        required: true
+      },
+      'name': {
+        required: true
+      },
+      'address': {
+        required: true
+      }
+    }
+  });
+  $.validator.addMethod('validatePhone', function (value) {
+    return /^0([0-9]{9})$/.test(value);
+  }, 'Please enter a valid telephone.');
 });
 
 /***/ }),

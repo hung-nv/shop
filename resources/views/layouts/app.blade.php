@@ -45,9 +45,15 @@
     @yield('content')
 
     @include('layouts.footer')
+
+    <template v-if="isLoading">
+        <div class="loading">Loading&#8230;</div>
+    </template>
 </div>
 
 <script src="{{ asset('/js/jquery-1.11.1.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="{{ asset('/js/messages_vi.js') }}"></script>
 <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/js/bootstrap-hover-dropdown.min.js') }}"></script>
 <script src="{{ asset('/js/owl.carousel.min.js') }}"></script>
@@ -55,7 +61,7 @@
 <script src="{{ asset('/js/jquery.easing-1.3.min.js') }}"></script>
 <script src="{{ asset('/js/bootstrap-slider.min.js') }}"></script>
 <script src="{{ asset('/js/jquery.rateit.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/js/lightbox.min.js') }}"></script>
+<script src="{{ asset('/js/lightbox.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('/js/wow.min.js') }}"></script>
 <script src="{{ asset('/js/scripts.js') }}"></script>

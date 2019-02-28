@@ -19,7 +19,8 @@ window.vmCard = new Vue({
         nameCatalog: '',
         couponCode: '',
         couponCodeSale: 0,
-        isCoupon: true
+        isCoupon: true,
+        isLoading: false
     },
     created: function () {
         // set name catalog.
@@ -36,6 +37,10 @@ window.vmCard = new Vue({
         couponCode: function(newValue) {
             if (!this.isCoupon) {
                 this.isCoupon = true;
+            }
+
+            if (this.couponCodeSale) {
+                this.couponCodeSale = 0;
             }
         }
     },
@@ -91,7 +96,22 @@ window.vmCard = new Vue({
             });
 
             if (prices.length) {
-                return number_format(_.sum(prices), ',');
+                return _.sum(prices);
+            }
+
+            return 0;
+        },
+        getBalanceSale: function(products) {
+            let totalMoney = 0;
+
+            let prices = _.map(products, function (item) {
+                return Number(item.quantity) * item.price;
+            });
+
+            if (prices.length) {
+                totalMoney = _.sum(prices);
+
+                return this.couponCodeSale * totalMoney / 100;
             }
 
             return 0;
@@ -181,4 +201,25 @@ window.vmCard = new Vue({
             return number_format(price)
         }
     }
+});
+
+$(function () {
+    $('#frm-customer').validate({
+        rules: {
+            'telephone': {
+                'validatePhone': true,
+                required: true
+            },
+            'name': {
+                required: true
+            },
+            'address': {
+                required: true
+            }
+        }
+    });
+
+    $.validator.addMethod('validatePhone', function (value) {
+        return /^0([0-9]{9})$/.test(value);
+    }, 'Please enter a valid telephone.');
 });
