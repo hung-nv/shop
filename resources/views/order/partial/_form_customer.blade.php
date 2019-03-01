@@ -12,19 +12,19 @@
             <td>
                 <div class="form-group">
                     <label class="info-title control-label">Họ tên <span>*</span></label>
-                    <input class="form-control unicase-form-control text-input" name="name"/>
+                    <input class="form-control unicase-form-control text-input" name="name" v-model="name"/>
                 </div>
                 <div class="form-group">
                     <label class="info-title control-label">Số điện thoại <span>*</span></label>
-                    <input class="form-control unicase-form-control text-input" name="telephone"/>
+                    <input class="form-control unicase-form-control text-input" name="telephone" v-model="telephone"/>
                 </div>
                 <div class="form-group">
                     <label class="info-title control-label">Địa chỉ <span>*</span></label>
-                    <input class="form-control unicase-form-control text-input" name="address" required/>
+                    <input class="form-control unicase-form-control text-input" name="address" v-model="address" required/>
                 </div>
                 <div class="form-group">
                     <label class="info-title control-label">Ghi chú</label>
-                    <textarea class="form-control unicase-form-control" name="note"></textarea>
+                    <textarea class="form-control unicase-form-control" name="note" v-model="note"></textarea>
                 </div>
             </td>
         </tr>

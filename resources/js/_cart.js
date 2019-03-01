@@ -6,7 +6,9 @@ window._ = require('lodash');
 let ui = {
     urlGetProducts: '/api/get-products',
     timeExpire: 1000 * 60 * 5,
-    urlCheckCouponCode: '/api/check-coupon-code'
+    urlCheckCouponCode: '/api/check-coupon-code',
+    urlSaveOrder: '/api/save-order',
+    formOrder: '#frm-customer'
 };
 
 window.vmCard = new Vue({
@@ -20,7 +22,11 @@ window.vmCard = new Vue({
         couponCode: '',
         couponCodeSale: 0,
         isCoupon: true,
-        isLoading: false
+        isLoading: false,
+        name: '',
+        telephone: '',
+        address: '',
+        note: ''
     },
     created: function () {
         // set name catalog.
@@ -34,7 +40,7 @@ window.vmCard = new Vue({
         productsInCart: function (newValue) {
             this.totalMoney = this.getTotalMoney();
         },
-        couponCode: function(newValue) {
+        couponCode: function (newValue) {
             if (!this.isCoupon) {
                 this.isCoupon = true;
             }
@@ -101,7 +107,7 @@ window.vmCard = new Vue({
 
             return 0;
         },
-        getBalanceSale: function(products) {
+        getBalanceSale: function (products) {
             let totalMoney = 0;
 
             let prices = _.map(products, function (item) {
@@ -197,6 +203,31 @@ window.vmCard = new Vue({
                     });
             }
         },
+        saveOrder: function (event) {
+            let valid = $(ui.formOrder).valid();
+
+            if (valid) {
+                this.isLoading = true;
+
+                $.ajax({
+                    method: 'post',
+                    url: ui.urlSaveOrder,
+                    data: {
+                        name: this.name,
+                        telephone: this.telephone,
+                        address: this.address,
+                        note: this.note,
+                        products: this.productsInCart,
+                        couponCode: this.couponCode,
+                        couponCodeSale: this.couponCodeSale
+                    }
+                }).done(response => {
+
+                }).fail(xhr => {
+
+                });
+            }
+        },
         reFormatPrice: function (price) {
             return number_format(price)
         }
@@ -204,22 +235,25 @@ window.vmCard = new Vue({
 });
 
 $(function () {
-    $('#frm-customer').validate({
+    $(ui.formOrder).validate({
         rules: {
-            'telephone': {
+            telephone: {
                 'validatePhone': true,
                 required: true
             },
-            'name': {
-                required: true
-            },
-            'address': {
-                required: true
+            name: 'required',
+            address: 'required'
+        },
+        messages: {
+            name: "Vui lòng nhập họ tên",
+            address: "Vui lòng nhập địa chỉ",
+            telephone: {
+                required: "Vui lòng nhập số điện thoại"
             }
         }
     });
 
     $.validator.addMethod('validatePhone', function (value) {
         return /^0([0-9]{9})$/.test(value);
-    }, 'Please enter a valid telephone.');
+    }, 'Vui lòng nhập chính xác số điện thoại.');
 });

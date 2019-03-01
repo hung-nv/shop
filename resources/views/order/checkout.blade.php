@@ -59,7 +59,8 @@
                                 <tr>
                                     <td>
                                         <div class="cart-checkout-btn pull-right">
-                                            <button type="submit" class="btn btn-primary checkout-btn">
+                                            <button type="button" class="btn btn-primary checkout-btn"
+                                                v-on:click="saveOrder">
                                                 ĐẶT HÀNG NGAY
                                             </button>
                                         </div>

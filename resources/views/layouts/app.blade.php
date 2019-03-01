@@ -53,7 +53,6 @@
 
 <script src="{{ asset('/js/jquery-1.11.1.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script src="{{ asset('/js/messages_vi.js') }}"></script>
 <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('/js/bootstrap-hover-dropdown.min.js') }}"></script>
 <script src="{{ asset('/js/owl.carousel.min.js') }}"></script>

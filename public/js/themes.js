@@ -28837,7 +28837,9 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 var ui = {
   urlGetProducts: '/api/get-products',
   timeExpire: 1000 * 60 * 5,
-  urlCheckCouponCode: '/api/check-coupon-code'
+  urlCheckCouponCode: '/api/check-coupon-code',
+  urlSaveOrder: '/api/save-order',
+  formOrder: '#frm-customer'
 };
 window.vmCard = new Vue({
   el: '#mainApp',
@@ -28850,7 +28852,11 @@ window.vmCard = new Vue({
     couponCode: '',
     couponCodeSale: 0,
     isCoupon: true,
-    isLoading: false
+    isLoading: false,
+    name: '',
+    telephone: '',
+    address: '',
+    note: ''
   },
   created: function created() {
     // set name catalog.
@@ -29017,29 +29023,52 @@ window.vmCard = new Vue({
         });
       }
     },
+    saveOrder: function saveOrder(event) {
+      var valid = $(ui.formOrder).valid();
+
+      if (valid) {
+        this.isLoading = true;
+        $.ajax({
+          method: 'post',
+          url: ui.urlSaveOrder,
+          data: {
+            name: this.name,
+            telephone: this.telephone,
+            address: this.address,
+            note: this.note,
+            products: this.productsInCart,
+            couponCode: this.couponCode,
+            couponCodeSale: this.couponCodeSale
+          }
+        }).done(function (response) {}).fail(function (xhr) {});
+      }
+    },
     reFormatPrice: function reFormatPrice(price) {
       return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(price);
     }
   }
 });
 $(function () {
-  $('#frm-customer').validate({
+  $(ui.formOrder).validate({
     rules: {
-      'telephone': {
+      telephone: {
         'validatePhone': true,
         required: true
       },
-      'name': {
-        required: true
-      },
-      'address': {
-        required: true
+      name: 'required',
+      address: 'required'
+    },
+    messages: {
+      name: "Vui lòng nhập họ tên",
+      address: "Vui lòng nhập địa chỉ",
+      telephone: {
+        required: "Vui lòng nhập số điện thoại"
       }
     }
   });
   $.validator.addMethod('validatePhone', function (value) {
     return /^0([0-9]{9})$/.test(value);
-  }, 'Please enter a valid telephone.');
+  }, 'Vui lòng nhập chính xác số điện thoại.');
 });
 
 /***/ }),
