@@ -3,7 +3,6 @@
 namespace App\Services;
 
 
-use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 
 class OrderServices
@@ -29,6 +28,6 @@ class OrderServices
      */
     public function saveOrderPackage($dataRequest)
     {
-        return Article::count('id');
+
     }
 }
