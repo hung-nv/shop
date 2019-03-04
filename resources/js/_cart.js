@@ -51,6 +51,9 @@ window.vmCard = new Vue({
         }
     },
     methods: {
+        removeLocalStorageCache: function (key) {
+            localStorage.removeItem(key);
+        },
         setLocalStorageCache: function (key, value, time) {
             localStorage.removeItem(key);
 
@@ -222,9 +225,11 @@ window.vmCard = new Vue({
                         couponCodeSale: this.couponCodeSale
                     }
                 }).done(response => {
+                    this.isLoading = false;
 
+                    this.removeLocalStorageCache('cart');
                 }).fail(xhr => {
-
+                    console.log(xhr);
                 });
             }
         },

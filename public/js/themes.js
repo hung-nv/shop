@@ -28879,6 +28879,9 @@ window.vmCard = new Vue({
     }
   },
   methods: {
+    removeLocalStorageCache: function removeLocalStorageCache(key) {
+      localStorage.removeItem(key);
+    },
     setLocalStorageCache: function setLocalStorageCache(key, value, time) {
       localStorage.removeItem(key);
       localStorage.setItem(key, JSON.stringify({
@@ -29024,6 +29027,8 @@ window.vmCard = new Vue({
       }
     },
     saveOrder: function saveOrder(event) {
+      var _this3 = this;
+
       var valid = $(ui.formOrder).valid();
 
       if (valid) {
@@ -29040,7 +29045,13 @@ window.vmCard = new Vue({
             couponCode: this.couponCode,
             couponCodeSale: this.couponCodeSale
           }
-        }).done(function (response) {}).fail(function (xhr) {});
+        }).done(function (response) {
+          _this3.isLoading = false;
+
+          _this3.removeLocalStorageCache('cart');
+        }).fail(function (xhr) {
+          console.log(xhr);
+        });
       }
     },
     reFormatPrice: function reFormatPrice(price) {

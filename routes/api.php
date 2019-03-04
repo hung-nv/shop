@@ -67,5 +67,5 @@ Route::group(['namespace' => 'Api'], function () {
     // check coupon code.
     Route::get('check-coupon-code', 'ApiCouponCodeController@checkCouponCode');
     // save order.
-//    Route::post('save-order', );
+    Route::post('save-order', 'ApiOrderController@saveOrder');
 });

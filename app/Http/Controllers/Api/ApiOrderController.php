@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\SaveOrderRequest;
 use App\Services\OrderServices;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ApiOrderController extends Controller
@@ -21,7 +20,7 @@ class ApiOrderController extends Controller
     public function saveOrder(SaveOrderRequest $request)
     {
         try {
-            $response = $this->orderServices->saveOrderPackage($request->all());
+            $response = $this->orderServices->customerOrder($request->all());
 
             return response()->json($response);
         } catch (\Exception $exception) {

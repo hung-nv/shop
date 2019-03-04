@@ -4,16 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Order extends \Eloquent
 {
     protected $table = 'orders';
 
-    /**
-     * Define relationship has many OrderProducts
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    protected $fillable = [
+        'total_money',
+        'first_name',
+        'last_name',
+        'address',
+        'telephone',
+        'note',
+        'status',
+        'coupon_code',
+        'coupon_code_value'
+    ];
+
     public function orderProducts()
     {
-        return $this->hasMany('App\Models\OrderProduct', 'order_id');
+        return $this->belongsToMany('App\Models\Product', 'order_products', 'order_id', 'product_id')->withTimestamps();
     }
 }
