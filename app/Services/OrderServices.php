@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
-
+use App\Abstracts\OrderInterface;
+use App\Mail\CustomerOrder;
 use App\Models\Order;
 use App\Models\Product;
 use App\Utilities\OrderTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
-class OrderServices
+class OrderServices implements OrderInterface
 {
     use OrderTrait;
 
@@ -44,7 +46,9 @@ class OrderServices
 
         $this->saveOrderProducts($order, $dataRequest['products']);
 
-        //TODO: send mail after save order
+        //send mail.
+        $mailTo = 'hungnv6933@co-well.com.vn';
+        Mail::to($mailTo)->send(new CustomerOrder($order));
 
         return $order;
     }
