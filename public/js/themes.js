@@ -28839,7 +28839,8 @@ var ui = {
   timeExpire: 1000 * 60 * 5,
   urlCheckCouponCode: '/api/check-coupon-code',
   urlSaveOrder: '/api/save-order',
-  formOrder: '#frm-customer'
+  formOrder: '#frm-customer',
+  modalSuccess: '.modal-confirm'
 };
 window.vmCard = new Vue({
   el: '#mainApp',
@@ -29049,6 +29050,8 @@ window.vmCard = new Vue({
           _this3.isLoading = false;
 
           _this3.removeLocalStorageCache('cart');
+
+          $(ui.modalSuccess).modal('show');
         }).fail(function (xhr) {
           console.log(xhr);
         });
@@ -29060,6 +29063,9 @@ window.vmCard = new Vue({
   }
 });
 $(function () {
+  $(ui.modalSuccess).on('hidden.bs.modal', function () {
+    window.location = '/';
+  });
   $(ui.formOrder).validate({
     rules: {
       telephone: {

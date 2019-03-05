@@ -60,6 +60,7 @@
                                     <td>
                                         <div class="cart-checkout-btn pull-right">
                                             <button type="button" class="btn btn-primary checkout-btn"
+                                                :disabled="!productsInCart.length"
                                                 v-on:click="saveOrder">
                                                 ĐẶT HÀNG NGAY
                                             </button>
@@ -76,4 +77,6 @@
             @include('partials._partners')
         </div>
     </div>
+
+    @include('order.partial._modal_confirm')
 @endsection

@@ -8,7 +8,8 @@ let ui = {
     timeExpire: 1000 * 60 * 5,
     urlCheckCouponCode: '/api/check-coupon-code',
     urlSaveOrder: '/api/save-order',
-    formOrder: '#frm-customer'
+    formOrder: '#frm-customer',
+    modalSuccess: '.modal-confirm'
 };
 
 window.vmCard = new Vue({
@@ -228,6 +229,8 @@ window.vmCard = new Vue({
                     this.isLoading = false;
 
                     this.removeLocalStorageCache('cart');
+
+                    $(ui.modalSuccess).modal('show');
                 }).fail(xhr => {
                     console.log(xhr);
                 });
@@ -240,6 +243,10 @@ window.vmCard = new Vue({
 });
 
 $(function () {
+    $(ui.modalSuccess).on('hidden.bs.modal', function () {
+        window.location = '/';
+    });
+
     $(ui.formOrder).validate({
         rules: {
             telephone: {
