@@ -1,4 +1,4 @@
-import {getParameterByName} from "./admin/helpers/helpers";
+import {getParameterByName, _cookie} from "./admin/helpers/helpers";
 import {number_format} from "./admin/utilities/format";
 
 window._ = require('lodash');
@@ -9,7 +9,9 @@ let ui = {
     urlCheckCouponCode: '/api/check-coupon-code',
     urlSaveOrder: '/api/save-order',
     formOrder: '#frm-customer',
-    modalSuccess: '.modal-confirm'
+    modalSuccess: '.modal-confirm',
+    modalCrawl: '.modal-crawl-information',
+    formCrawl: '#frm-crawl-information'
 };
 
 window.vmCard = new Vue({
@@ -72,20 +74,22 @@ window.vmCard = new Vue({
                 if (cacheInformation.expire - Date.now() > 0) {
                     return cacheInformation;
                 } else {
-                    $.ajax({
-                        method: 'get',
-                        dataType: 'json',
-                        url: ui.urlGetProducts,
-                        data: {
-                            idsProduct: _.map(cacheInformation.data, 'id')
-                        }
-                    }).done(response => {
-                        this.setLocalStorageCache(key, response, ui.timeExpire);
+                    if (cacheInformation.data.length) {
+                        $.ajax({
+                            method: 'get',
+                            dataType: 'json',
+                            url: ui.urlGetProducts,
+                            data: {
+                                idsProduct: _.map(cacheInformation.data, 'id')
+                            }
+                        }).done(response => {
+                            this.setLocalStorageCache(key, response, ui.timeExpire);
 
-                        this.productsInCart = response;
-                    }).fail(xhr => {
+                            this.productsInCart = response;
+                        }).fail(xhr => {
 
-                    });
+                        });
+                    }
                 }
             } else {
                 return null;
@@ -232,8 +236,16 @@ window.vmCard = new Vue({
 
                     $(ui.modalSuccess).modal('show');
                 }).fail(xhr => {
+                    //TODO: truong hop khong gui duoc email thi xu ly ntn?
                     console.log(xhr);
                 });
+            }
+        },
+        saveCustomer: function (event) {
+            let valid = $(ui.formCrawl).valid();
+
+            if (valid) {
+
             }
         },
         reFormatPrice: function (price) {
@@ -264,6 +276,36 @@ $(function () {
             }
         }
     });
+
+    $(ui.formCrawl).validate({
+        rules: {
+            mobile: {
+                'validatePhone': true,
+                required: true
+            },
+            name: 'required',
+            email: 'required'
+        },
+        messages: {
+            name: "Vui lòng nhập họ tên",
+            email: "Vui lòng nhập email",
+            mobile: {
+                required: "Vui lòng nhập số điện thoại"
+            }
+        }
+    });
+
+
+    setTimeout(function () {
+        if (!_cookie('dialog')) {
+
+            _cookie('dialog', 'dialog1', 1);
+
+            $(ui.modalCrawl).modal('show');
+        }
+
+    }, 3000); // milliseconds
+
 
     $.validator.addMethod('validatePhone', function (value) {
         return /^0([0-9]{9})$/.test(value);

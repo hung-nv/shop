@@ -22139,7 +22139,7 @@ __webpack_require__(/*! ./pages/couponCode/index_coupon */ "./resources/js/admin
 /*!***********************************************!*\
   !*** ./resources/js/admin/helpers/helpers.js ***!
   \***********************************************/
-/*! exports provided: confirmBeforeDelete, slugify, toNumber, getParameterByName, doException */
+/*! exports provided: confirmBeforeDelete, slugify, toNumber, getParameterByName, doException, _cookie */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22149,6 +22149,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNumber", function() { return toNumber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParameterByName", function() { return getParameterByName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doException", function() { return doException; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_cookie", function() { return _cookie; });
 /**
  * Alert before delete
  * @param el
@@ -22243,6 +22244,38 @@ function doException(xhr) {
       title: 'Something went wrong...',
       text: "Internal Server Error"
     });
+  }
+}
+function _cookie(_name, _value, _days) {
+  var hour = 24;
+
+  if (_value !== undefined && _name !== undefined) {
+    var _expires = '';
+
+    if (_days) {
+      var now = new Date();
+      now.setTime(now.getTime() + _days * 60 * 60 * 1000 * hour);
+      _expires = "; expires=" + now.toGMTString();
+    }
+
+    document.cookie = _name + "=" + _value + _expires + "; path=/";
+  } else if (_name !== undefined && !_value) {
+    var nameEQ = _name + "=";
+    var cookies = document.cookie.split(';');
+
+    for (var i = 0; i < cookies.length; i++) {
+      var c = cookies[i];
+
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1, c.length);
+      }
+
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+
+    return null;
+  } else if (_name !== undefined && _value === null) {
+    _cookie(_name, "", -1);
   }
 }
 

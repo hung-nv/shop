@@ -39,7 +39,7 @@ export function slugify(string) {
 
     string = string.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
 
-    string = string.replace(/[^\w ]+/g,'')
+    string = string.replace(/[^\w ]+/g, '')
         .replace(/ +/gi, "-")
         .replace(/\-\-\-\-\-/gi, '-')
         .replace(/\-\-\-\-/gi, '-')
@@ -106,5 +106,40 @@ export function doException(xhr, option = {}) {
             title: 'Something went wrong...',
             text: "Internal Server Error",
         });
+    }
+}
+
+export function _cookie(_name, _value, _days) {
+    let hour = 24;
+
+    if (_value !== undefined && _name !== undefined) {
+        let _expires = '';
+
+        if (_days) {
+            let now = new Date();
+
+            now.setTime(now.getTime() + (_days * 60 * 60 * 1000 * hour));
+
+            _expires = "; expires=" + now.toGMTString();
+        }
+
+        document.cookie = _name + "=" + _value + _expires + "; path=/";
+    } else if (_name !== undefined && !_value) {
+        let nameEQ = _name + "=";
+        let cookies = document.cookie.split(';');
+
+        for (let i = 0; i < cookies.length; i++) {
+            let c = cookies[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1, c.length);
+            }
+
+            if (c.indexOf(nameEQ) === 0)
+                return c.substring(nameEQ.length, c.length);
+        }
+
+        return null;
+    } else if (_name !== undefined && _value === null) {
+        _cookie(_name, "", -1);
     }
 }

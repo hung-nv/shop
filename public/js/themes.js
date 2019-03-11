@@ -28840,7 +28840,9 @@ var ui = {
   urlCheckCouponCode: '/api/check-coupon-code',
   urlSaveOrder: '/api/save-order',
   formOrder: '#frm-customer',
-  modalSuccess: '.modal-confirm'
+  modalSuccess: '.modal-confirm',
+  modalCrawl: '.modal-crawl-information',
+  formCrawl: '#frm-crawl-information'
 };
 window.vmCard = new Vue({
   el: '#mainApp',
@@ -28901,18 +28903,20 @@ window.vmCard = new Vue({
         if (cacheInformation.expire - Date.now() > 0) {
           return cacheInformation;
         } else {
-          $.ajax({
-            method: 'get',
-            dataType: 'json',
-            url: ui.urlGetProducts,
-            data: {
-              idsProduct: _.map(cacheInformation.data, 'id')
-            }
-          }).done(function (response) {
-            _this.setLocalStorageCache(key, response, ui.timeExpire);
+          if (cacheInformation.data.length) {
+            $.ajax({
+              method: 'get',
+              dataType: 'json',
+              url: ui.urlGetProducts,
+              data: {
+                idsProduct: _.map(cacheInformation.data, 'id')
+              }
+            }).done(function (response) {
+              _this.setLocalStorageCache(key, response, ui.timeExpire);
 
-            _this.productsInCart = response;
-          }).fail(function (xhr) {});
+              _this.productsInCart = response;
+            }).fail(function (xhr) {});
+          }
         }
       } else {
         return null;
@@ -29053,9 +29057,15 @@ window.vmCard = new Vue({
 
           $(ui.modalSuccess).modal('show');
         }).fail(function (xhr) {
+          //TODO: truong hop khong gui duoc email thi xu ly ntn?
           console.log(xhr);
         });
       }
+    },
+    saveCustomer: function saveCustomer(event) {
+      var valid = $(ui.formCrawl).valid();
+
+      if (valid) {}
     },
     reFormatPrice: function reFormatPrice(price) {
       return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(price);
@@ -29083,6 +29093,31 @@ $(function () {
       }
     }
   });
+  $(ui.formCrawl).validate({
+    rules: {
+      mobile: {
+        'validatePhone': true,
+        required: true
+      },
+      name: 'required',
+      email: 'required'
+    },
+    messages: {
+      name: "Vui lòng nhập họ tên",
+      email: "Vui lòng nhập email",
+      mobile: {
+        required: "Vui lòng nhập số điện thoại"
+      }
+    }
+  });
+  setTimeout(function () {
+    if (!Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["_cookie"])('dialog')) {
+      Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["_cookie"])('dialog', 'dialog1', 1);
+
+      $(ui.modalCrawl).modal('show');
+    }
+  }, 3000); // milliseconds
+
   $.validator.addMethod('validatePhone', function (value) {
     return /^0([0-9]{9})$/.test(value);
   }, 'Vui lòng nhập chính xác số điện thoại.');
@@ -29269,7 +29304,7 @@ if ($(ui.elementId).length) {
 /*!***********************************************!*\
   !*** ./resources/js/admin/helpers/helpers.js ***!
   \***********************************************/
-/*! exports provided: confirmBeforeDelete, slugify, toNumber, getParameterByName, doException */
+/*! exports provided: confirmBeforeDelete, slugify, toNumber, getParameterByName, doException, _cookie */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29279,6 +29314,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toNumber", function() { return toNumber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParameterByName", function() { return getParameterByName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doException", function() { return doException; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_cookie", function() { return _cookie; });
 /**
  * Alert before delete
  * @param el
@@ -29373,6 +29409,38 @@ function doException(xhr) {
       title: 'Something went wrong...',
       text: "Internal Server Error"
     });
+  }
+}
+function _cookie(_name, _value, _days) {
+  var hour = 24;
+
+  if (_value !== undefined && _name !== undefined) {
+    var _expires = '';
+
+    if (_days) {
+      var now = new Date();
+      now.setTime(now.getTime() + _days * 60 * 60 * 1000 * hour);
+      _expires = "; expires=" + now.toGMTString();
+    }
+
+    document.cookie = _name + "=" + _value + _expires + "; path=/";
+  } else if (_name !== undefined && !_value) {
+    var nameEQ = _name + "=";
+    var cookies = document.cookie.split(';');
+
+    for (var i = 0; i < cookies.length; i++) {
+      var c = cookies[i];
+
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1, c.length);
+      }
+
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+
+    return null;
+  } else if (_name !== undefined && _value === null) {
+    _cookie(_name, "", -1);
   }
 }
 

@@ -40,6 +40,8 @@
 </head>
 <body class="cnt-home">
 <div id="mainApp">
+    @include('partials._popup_customer')
+
     @include('layouts.header')
 
     @yield('content')

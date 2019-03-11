@@ -121,6 +121,11 @@ a {
   float: right;
 }
 
+#frm-crawl-information label.error {
+  font-weight: normal;
+  color: red;
+}
+
 /* Absolute Center Spinner */
 .loading {
   position: fixed;
