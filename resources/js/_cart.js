@@ -11,7 +11,9 @@ let ui = {
     formOrder: '#frm-customer',
     modalSuccess: '.modal-confirm',
     modalCrawl: '.modal-crawl-information',
-    formCrawl: '#frm-crawl-information'
+    formCrawl: '#frm-crawl-information',
+    urlCrawlInformation: '/api/crawl-information',
+    modalConfirmCrawl: '.modal-confirm-crawl'
 };
 
 window.vmCard = new Vue({
@@ -29,7 +31,8 @@ window.vmCard = new Vue({
         name: '',
         telephone: '',
         address: '',
-        note: ''
+        note: '',
+        email: ''
     },
     created: function () {
         // set name catalog.
@@ -230,22 +233,49 @@ window.vmCard = new Vue({
                         couponCodeSale: this.couponCodeSale
                     }
                 }).done(response => {
-                    this.isLoading = false;
-
                     this.removeLocalStorageCache('cart');
 
                     $(ui.modalSuccess).modal('show');
                 }).fail(xhr => {
-                    //TODO: truong hop khong gui duoc email thi xu ly ntn?
                     console.log(xhr);
+                }).always(() => {
+                    this.isLoading = false;
                 });
             }
         },
         saveCustomer: function (event) {
             let valid = $(ui.formCrawl).valid();
 
-            if (valid) {
+            if (!valid) {
+                $.ajax({
+                    method: 'post',
+                    url: ui.urlCrawlInformation,
+                    data: {
+                        name: this.name,
+                        mobile: this.telephone,
+                        email: this.email
+                    }
+                }).done(respon => {
+                    $(ui.modalCrawl).modal('toggle');
 
+                    $(ui.modalConfirmCrawl).modal('show');
+                }).fail(xhr => {
+                    let messages = '';
+                    switch (xhr.status) {
+                        case 504:
+                            messages = 'Connection timeout. Please try again later!';
+                            break;
+                        case 422:
+                            messages = typeof xhr.responseJSON === 'string' ? xhr.responseJSON : xhr.responseJSON.message;
+                            break;
+                        default:
+                            messages = 'Internal Server Error';
+                            break;
+                    }
+
+                }).always(function () {
+
+                });
             }
         },
         reFormatPrice: function (price) {

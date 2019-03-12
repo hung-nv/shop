@@ -40,13 +40,15 @@
 </head>
 <body class="cnt-home">
 <div id="mainApp">
-    @include('partials._popup_customer')
-
     @include('layouts.header')
 
     @yield('content')
 
     @include('layouts.footer')
+
+    @include('partials._popup_customer')
+
+    @include('partials._modal_confirm_crawl')
 
     <template v-if="isLoading">
         <div class="loading">Loading&#8230;</div>

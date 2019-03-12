@@ -28842,7 +28842,9 @@ var ui = {
   formOrder: '#frm-customer',
   modalSuccess: '.modal-confirm',
   modalCrawl: '.modal-crawl-information',
-  formCrawl: '#frm-crawl-information'
+  formCrawl: '#frm-crawl-information',
+  urlCrawlInformation: '/api/crawl-information',
+  modalConfirmCrawl: '.modal-confirm-crawl'
 };
 window.vmCard = new Vue({
   el: '#mainApp',
@@ -28859,7 +28861,8 @@ window.vmCard = new Vue({
     name: '',
     telephone: '',
     address: '',
-    note: ''
+    note: '',
+    email: ''
   },
   created: function created() {
     // set name catalog.
@@ -29051,21 +29054,49 @@ window.vmCard = new Vue({
             couponCodeSale: this.couponCodeSale
           }
         }).done(function (response) {
-          _this3.isLoading = false;
-
           _this3.removeLocalStorageCache('cart');
 
           $(ui.modalSuccess).modal('show');
         }).fail(function (xhr) {
-          //TODO: truong hop khong gui duoc email thi xu ly ntn?
           console.log(xhr);
+        }).always(function () {
+          _this3.isLoading = false;
         });
       }
     },
     saveCustomer: function saveCustomer(event) {
       var valid = $(ui.formCrawl).valid();
 
-      if (valid) {}
+      if (!valid) {
+        $.ajax({
+          method: 'post',
+          url: ui.urlCrawlInformation,
+          data: {
+            name: this.name,
+            mobile: this.telephone,
+            email: this.email
+          }
+        }).done(function (respon) {
+          $(ui.modalCrawl).modal('toggle');
+          $(ui.modalConfirmCrawl).modal('show');
+        }).fail(function (xhr) {
+          var messages = '';
+
+          switch (xhr.status) {
+            case 504:
+              messages = 'Connection timeout. Please try again later!';
+              break;
+
+            case 422:
+              messages = typeof xhr.responseJSON === 'string' ? xhr.responseJSON : xhr.responseJSON.message;
+              break;
+
+            default:
+              messages = 'Internal Server Error';
+              break;
+          }
+        }).always(function () {});
+      }
     },
     reFormatPrice: function reFormatPrice(price) {
       return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(price);

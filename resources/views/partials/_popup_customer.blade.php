@@ -10,15 +10,15 @@
                 <form id="frm-crawl-information" role="form" method="post">
                     <div class="form-group">
                         <label class="control-label">Họ tên:</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" v-model="name">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Email:</label>
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" v-model="email">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Số điện thoại:</label>
-                        <input type="text" class="form-control" name="mobile">
+                        <input type="text" class="form-control" name="mobile" v-model="telephone">
                     </div>
                 </form>
             </div>

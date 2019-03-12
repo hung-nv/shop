@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Abstracts\OrderInterface;
 use App\Mail\CustomerOrder;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
 use App\Utilities\OrderTrait;
@@ -95,5 +96,15 @@ class OrderServices implements OrderInterface
                 ]);
             }
         }
+    }
+
+    /**
+     * Save customer information.
+     * @param array $dataRequest
+     * @return Customer|\Illuminate\Database\Eloquent\Model
+     */
+    public function saveCustomer($dataRequest)
+    {
+        return Customer::create($dataRequest);
     }
 }
