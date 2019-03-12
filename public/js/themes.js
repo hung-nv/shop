@@ -28862,7 +28862,9 @@ window.vmCard = new Vue({
     telephone: '',
     address: '',
     note: '',
-    email: ''
+    email: '',
+    errorMessage: '',
+    showError: true
   },
   created: function created() {
     // set name catalog.
@@ -29065,9 +29067,11 @@ window.vmCard = new Vue({
       }
     },
     saveCustomer: function saveCustomer(event) {
+      var _this4 = this;
+
       var valid = $(ui.formCrawl).valid();
 
-      if (!valid) {
+      if (valid) {
         $.ajax({
           method: 'post',
           url: ui.urlCrawlInformation,
@@ -29080,21 +29084,33 @@ window.vmCard = new Vue({
           $(ui.modalCrawl).modal('toggle');
           $(ui.modalConfirmCrawl).modal('show');
         }).fail(function (xhr) {
-          var messages = '';
-
           switch (xhr.status) {
             case 504:
-              messages = 'Connection timeout. Please try again later!';
+              _this4.errorMessage = 'Connection timeout. Please try again later!';
               break;
 
             case 422:
-              messages = typeof xhr.responseJSON === 'string' ? xhr.responseJSON : xhr.responseJSON.message;
+              var errors = [];
+
+              if (typeof xhr.responseJSON === 'string') {
+                errors.push(xhr.responseJSON);
+              } else {
+                _.forEach(xhr.responseJSON.errors, function (error) {
+                  errors.push(error.join(', '));
+                });
+              }
+
+              _this4.errorMessage = errors.join(', ');
               break;
 
             default:
-              messages = 'Internal Server Error';
+              _this4.errorMessage = 'Internal Server Error';
               break;
           }
+
+          setTimeout(function () {
+            _this4.errorMessage = '';
+          }, 5000);
         }).always(function () {});
       }
     },

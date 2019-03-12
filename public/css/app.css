@@ -124,6 +124,48 @@ a {
 #frm-crawl-information label.error {
   font-weight: normal;
   color: red;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+p.text-danger {
+  font-size: 14px;
+}
+
+.modal-crawl-information .modal-dialog {
+  max-width: 450px;
+}
+.modal-crawl-information .modal-header {
+  padding: 10px;
+  background: #fdd922;
+  color: #000;
+  border-bottom: 1px solid #fff;
+}
+.modal-crawl-information .modal-header .modal-title {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.modal-crawl-information .modal-body {
+  background: #fdd922;
+  padding: 15px 15px 1px 15px;
+}
+.modal-crawl-information .modal-body p {
+  color: #000;
+  font-size: 14px;
+}
+.modal-crawl-information .modal-body .form-group label {
+  color: #000;
+}
+.modal-crawl-information .modal-body .form-group .form-control {
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  -webkit-box-shadow: none;
+}
+.modal-crawl-information .modal-footer {
+  background: #fdd922;
+  border-top: none;
+  padding-top: 0;
 }
 
 /* Absolute Center Spinner */

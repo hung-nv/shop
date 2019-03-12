@@ -21,9 +21,12 @@
                         <input type="text" class="form-control" name="mobile" v-model="telephone">
                     </div>
                 </form>
+                <template v-if="errorMessage">
+                    <p class="text-danger">@{{ errorMessage }}</p>
+                </template>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn" data-dismiss="modal">GỬI SAU</button>
                 <button type="button" class="btn btn-primary" v-on:click="saveCustomer">GỬI THÔNG TIN</button>
             </div>
         </div>

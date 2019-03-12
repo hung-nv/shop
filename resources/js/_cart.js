@@ -32,7 +32,9 @@ window.vmCard = new Vue({
         telephone: '',
         address: '',
         note: '',
-        email: ''
+        email: '',
+        errorMessage: '',
+        showError: true
     },
     created: function () {
         // set name catalog.
@@ -246,7 +248,7 @@ window.vmCard = new Vue({
         saveCustomer: function (event) {
             let valid = $(ui.formCrawl).valid();
 
-            if (!valid) {
+            if (valid) {
                 $.ajax({
                     method: 'post',
                     url: ui.urlCrawlInformation,
@@ -260,19 +262,32 @@ window.vmCard = new Vue({
 
                     $(ui.modalConfirmCrawl).modal('show');
                 }).fail(xhr => {
-                    let messages = '';
                     switch (xhr.status) {
                         case 504:
-                            messages = 'Connection timeout. Please try again later!';
+                            this.errorMessage = 'Connection timeout. Please try again later!';
                             break;
                         case 422:
-                            messages = typeof xhr.responseJSON === 'string' ? xhr.responseJSON : xhr.responseJSON.message;
+                            let errors = [];
+
+                            if (typeof xhr.responseJSON === 'string') {
+                                errors.push(xhr.responseJSON);
+                            } else {
+                                _.forEach(xhr.responseJSON.errors, error => {
+                                    errors.push(error.join(', '));
+                                });
+                            }
+
+                            this.errorMessage = errors.join(', ');
+
                             break;
                         default:
-                            messages = 'Internal Server Error';
+                            this.errorMessage = 'Internal Server Error';
                             break;
                     }
 
+                    setTimeout(() => {
+                        this.errorMessage = '';
+                    }, 5000)
                 }).always(function () {
 
                 });

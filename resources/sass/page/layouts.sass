@@ -1,3 +1,5 @@
+$color-error: red
+
 .clearfix
   clear: both
 a
@@ -97,7 +99,7 @@ a
     text-align: left
 
 .shopping-cart .estimate-ship-tax table tbody tr td .form-group label.error
-  color: red
+  color: $color-error
 
 .inner-left-md
   padding: 0
@@ -107,4 +109,9 @@ a
 #frm-crawl-information
   label.error
     font-weight: normal
-    color: red
+    color: $color-error
+    margin-bottom: 0
+    margin-top: 5px
+
+p.text-danger
+  font-size: 14px
