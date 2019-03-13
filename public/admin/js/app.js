@@ -22122,6 +22122,8 @@ __webpack_require__(/*! ./pages/comment/create_edit_comment */ "./resources/js/a
 __webpack_require__(/*! ./pages/couponCode/create_edit_coupon_code */ "./resources/js/admin/pages/couponCode/create_edit_coupon_code.js");
 
 __webpack_require__(/*! ./pages/couponCode/index_coupon */ "./resources/js/admin/pages/couponCode/index_coupon.js");
+
+__webpack_require__(/*! ./pages/customer/index_customer */ "./resources/js/admin/pages/customer/index_customer.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22861,6 +22863,84 @@ if ($(ui.pageId).length) {
 
 $(function () {
   if ($(ui.tableCoupon).length) {
+    $(ui.tableCoupon).dataTable({
+      ordering: false,
+      order: [[0, 'desc']],
+      bLengthChange: true,
+      bFilter: true
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/pages/customer/index_customer.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/admin/pages/customer/index_customer.js ***!
+  \*************************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
+
+var ui = {
+  pageId: '#customer',
+  tableCoupon: '#datatable-customer',
+  btnDelete: '#btn-delete',
+  modalSendMail: '#modal-send-mail',
+  formSendMail: '#frmSendMail',
+  urlSendMail: 'api/send-promotion'
+};
+$(function () {
+  if ($(ui.pageId).length) {
+    window.vmCustomer = new Vue({
+      el: ui.pageId,
+      data: {
+        idsCustomer: [],
+        mailSubject: '',
+        mailContent: ''
+      },
+      methods: {
+        selectAllCustomer: function selectAllCustomer(event) {
+          this.idsCustomer = [];
+
+          if ($(event.target).prop('checked')) {
+            this.idsCustomer = viewData.ids_customer;
+          }
+        },
+        openPopupMail: function openPopupMail() {
+          if (this.idsCustomer.length) {
+            $(ui.modalSendMail).modal('show');
+          }
+        },
+        sendMail: function sendMail() {
+          var valid = $(ui.formSendMail).valid();
+
+          if (valid) {
+            $.ajax({
+              method: 'post',
+              url: '',
+              data: {
+                ids_customer: this.idsCustomer,
+                mail_subject: this.mailSubject,
+                mail_content: this.mailContent
+              }
+            }).done(function (response) {}).fail(function (xhr) {}).always(function () {});
+          }
+        },
+        confirmBeforeDelete: function confirmBeforeDelete(event) {
+          Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["confirmBeforeDelete"])(event.target, 'Do you want to delete this?');
+        }
+      }
+    });
+    $(ui.formSendMail).validate({
+      rules: {
+        mail_subject: 'required',
+        mail_content: 'required'
+      }
+    });
     $(ui.tableCoupon).dataTable({
       ordering: false,
       order: [[0, 'desc']],

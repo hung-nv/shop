@@ -13,4 +13,9 @@ class Customer extends \Eloquent
         'name',
         'mobile'
     ];
+
+    public static function getCustomersByIds($idsCustomer)
+    {
+        return self::whereIn('id', $idsCustomer)->get()->toArray();
+    }
 }

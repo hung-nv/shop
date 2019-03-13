@@ -8,7 +8,7 @@ class MailContent extends \Eloquent
 {
     protected $table = 'email_contents';
 
-    protected $fillable = ['content'];
+    protected $fillable = ['content', 'subject'];
 
     public function customers()
     {

@@ -1,4 +1,6 @@
-@extends('backend.layouts.app')
+@extends('backend.layouts.app', ['viewData' => [
+    'ids_customer' => $customers->pluck('id')
+]])
 
 @section('title', 'Manage Customer')
 
@@ -31,9 +33,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a class="btn sbold green" href="#"> Send Mail
+                                    <button class="btn sbold green" v-on:click="openPopupMail"> Send Mail
                                         <i class="fa fa-plus"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -45,6 +47,8 @@
             </div>
         </div>
     </div>
+
+    @include('backend.customer.partial._modal_send_mail')
 @endsection
 
 @section('style')

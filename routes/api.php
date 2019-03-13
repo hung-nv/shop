@@ -70,4 +70,6 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('save-order', 'ApiOrderController@saveOrder');
     // crawl customer information.
     Route::post('crawl-information', 'ApiOrderController@saveCustomer');
+    // send promotion.
+//    Route::post('send-promotion')
 });

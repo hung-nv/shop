@@ -2,6 +2,12 @@
        id="datatable-customer">
     <thead>
     <tr>
+        <th>
+            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                <input type="checkbox" class="group-checkable" v-on:click="selectAllCustomer" />
+                <span></span>
+            </label>
+        </th>
         <th> ID</th>
         <th> Email</th>
         <th> Name</th>
@@ -15,6 +21,12 @@
         @foreach($customers as $i)
 
             <tr class="odd gradeX">
+                <td>
+                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                        <input type="checkbox" class="checkboxes" v-model="idsCustomer" value="{{ $i->id }}" />
+                        <span></span>
+                    </label>
+                </td>
                 <td> {{ $i->id }}</td>
                 <td>{{ $i->email }}</td>
                 <td>{{ $i->name }}</td>
