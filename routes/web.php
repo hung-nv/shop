@@ -75,6 +75,9 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
         // route for comment.
         Route::resource('comment', 'CommentController', ['except' => ['show']]);
 
+        // route customer.
+        Route::resource('customer', 'CustomerController', ['only' => ['index', 'destroy']]);
+
         // route copy product.
         Route::get('product/copy/{id}', ['as' => 'product.copy', 'uses' => 'ProductController@copy']);
 
