@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Abstracts\OrderInterface;
 use App\Mail\CustomerOrder;
+use App\Mail\TestMail;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Mail;
 class OrderServices implements OrderInterface
 {
     use OrderTrait;
+
+    public function testSendMail($dataRequest)
+    {
+        //send mail.
+        $mailTo = 'hungnv6933@co-well.com.vn';
+        return Mail::to($mailTo)->send(new TestMail());
+    }
 
     /**
      * Customer order.
