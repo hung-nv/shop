@@ -2,26 +2,23 @@
 
 namespace App\Mail;
 
-use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class CustomerOrder extends Mailable
+class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
-
-    private $order;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct()
     {
-        $this->order = $order;
+        //
     }
 
     /**
@@ -31,10 +28,6 @@ class CustomerOrder extends Mailable
      */
     public function build()
     {
-        return $this->subject('Đơn hàng online')
-            ->markdown('emails.orders._customer_order')
-            ->with([
-                'order' => $this->order
-            ]);
+        return $this->markdown('emails.orders.shipped');
     }
 }
