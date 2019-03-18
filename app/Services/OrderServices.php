@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Abstracts\OrderInterface;
 use App\Mail\CustomerOrder;
-use App\Mail\TestMail;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
@@ -16,25 +15,19 @@ class OrderServices implements OrderInterface
 {
     use OrderTrait;
 
-    public function testSendMail($dataRequest)
-    {
-        //send mail.
-        $mailTo = 'hungnv6933@co-well.com.vn';
-        return Mail::to($mailTo)->send(new TestMail());
-    }
-
     /**
      * Customer order.
-     * @param $dataRequest
+     * @param array $dataRequest
+     * @param array $option
      * @return Order|\Illuminate\Database\Eloquent\Model
      * @throws \Exception
      */
-    public function customerOrder($dataRequest)
+    public function customerOrder($dataRequest, $option)
     {
         try {
             DB::beginTransaction();
 
-            $response = $this->saveOrderPackage($dataRequest);
+            $response = $this->saveOrderPackage($dataRequest, $option);
 
             DB::commit();
 
@@ -47,17 +40,21 @@ class OrderServices implements OrderInterface
     /**
      * Save order package
      * @param array $dataRequest
+     * @param array $option
      * @return Order|\Illuminate\Database\Eloquent\Model
      */
-    public function saveOrderPackage($dataRequest)
+    public function saveOrderPackage($dataRequest, $option)
     {
         $order = $this->saveOrder($dataRequest);
 
         $this->saveOrderProducts($order, $dataRequest['products']);
 
         //send mail.
-        $mailTo = 'hungnv6933@co-well.com.vn';
-        Mail::to($mailTo)->send(new CustomerOrder($order));
+        if (!empty($option['email'])) {
+            $option['email'] = 'hungnv234@outlook.com';
+        }
+
+        Mail::to($option['email'])->send(new CustomerOrder($order));
 
         return $order;
     }
