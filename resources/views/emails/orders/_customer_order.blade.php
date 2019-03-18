@@ -9,6 +9,9 @@
     Thời gian đặt hàng: {{ $order->created_at }}
 @endcomponent
 
+<br>
+<br/>
+
 @component('mail::table')
     | Tên sản phẩm | Số lượng | Đơn giá | Thành tiền |
     | ------------ | -------- | ------- | ---------- |
@@ -17,9 +20,12 @@
     @endforeach
 @endcomponent
 
-@component('mail::panel')
+<br>
+<br/>
+
+<p>
     Tiền trước KM: {{ number_format($order->total_money) }}VNĐ
     Mã Giảm giá:  {{ $order->coupon_code }} ({{ $order->coupon_code_value }} %)
     Tiền phải trả: {{ number_format($order->total_money - ($order->total_money * $order->coupon_code_value)/100) }} VNĐ
     Thanks,
-@endcomponent
+</p>
