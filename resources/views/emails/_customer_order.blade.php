@@ -26,11 +26,11 @@
     @if (!empty($orderProducts))
         @foreach($orderProducts as $product)
             <tr>
-                <td><img src="{{ $message->embed($product->product_image) }}" width="90px"/></td>
-                <td>{{ $product->product_name }} ({{ $product->product_sku }})</td>
-                <td>{{ $product->quantities }}</td>
-                <td>{{ number_format($product->price) }}</td>
-                <td>{{ number_format($product->price * $product->quantities) }}</td>
+                <td><img src="{{ $message->embed($product['product_image']) }}" width="90px"/></td>
+                <td>{{ $product['product_name'] }} ({{ $product['product_sku'] }})</td>
+                <td>{{ $product['quantities'] }}</td>
+                <td>{{ number_format($product['price']) }}</td>
+                <td>{{ number_format($product['price'] * $product['quantities']) }}</td>
             </tr>
         @endforeach
     @endif
