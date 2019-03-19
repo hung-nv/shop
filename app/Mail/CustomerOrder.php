@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Services\OrderServices;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -14,8 +15,6 @@ class CustomerOrder extends Mailable
     use Queueable, SerializesModels;
 
     protected $order;
-
-    protected $orderServices;
 
     /**
      * Create a new message instance.
@@ -34,11 +33,13 @@ class CustomerOrder extends Mailable
      */
     public function build()
     {
+        $orderProducts = OrderProduct::getOrderProducts($this->order->id);
 
         return $this->subject('Đơn hàng online')
             ->view('emails._customer_order')
             ->with([
-                'order' => $this->order
+                'order' => $this->order,
+                'orderProducts' => $orderProducts
             ]);
     }
 }

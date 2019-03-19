@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderProduct extends Model
+class OrderProduct extends \Eloquent
 {
     protected $table = 'order_products';
 
@@ -15,4 +15,14 @@ class OrderProduct extends Model
         'product_sku',
         'product_image'
     ];
+
+    /**
+     * Get order products.
+     * @param $oderId
+     * @return array
+     */
+    public static function getOrderProducts($oderId)
+    {
+        return self::where('order_id', $oderId)->get()->toArray();
+    }
 }

@@ -23,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($order->orderProducts as $product)
+    @foreach($orderProducts as $product)
         <tr>
             <td><img src="{{ $message->embed($product->product_image) }}" width="90px" /></td>
             <td>{{ $product->product_name }} ({{ $product->product_sku }})</td>

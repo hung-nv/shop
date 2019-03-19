@@ -6,6 +6,7 @@ use App\Abstracts\OrderInterface;
 use App\Mail\CustomerOrder;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Utilities\OrderTrait;
 use Illuminate\Support\Facades\DB;
