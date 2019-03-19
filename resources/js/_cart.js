@@ -91,9 +91,13 @@ window.vmCard = new Vue({
                             this.setLocalStorageCache(key, response, ui.timeExpire);
 
                             this.productsInCart = response;
+
+                            //TODO: return data after refresh.
                         }).fail(xhr => {
 
                         });
+                    } else {
+                        return null;
                     }
                 }
             } else {
@@ -136,7 +140,7 @@ window.vmCard = new Vue({
             return 0;
         },
         addToCard: function (productId, event) {
-            let storeProduct = this.getLocalStorageCache('cart');
+            let localStoreProduct = this.getLocalStorageCache('cart');
 
             let newProduct = {
                 id: productId,
@@ -147,7 +151,7 @@ window.vmCard = new Vue({
                 url: $(event.target).data('url')
             };
 
-            if (storeProduct === null) {
+            if (localStoreProduct === null) {
                 // add to products in cart.
                 this.productsInCart.push(newProduct);
 
@@ -155,7 +159,7 @@ window.vmCard = new Vue({
                 this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
             } else {
                 // get current products in cart.
-                storeProduct = storeProduct.data;
+                let storeProduct = localStoreProduct.data;
 
                 // get id products in cart.
                 let idsProduct = _.map(storeProduct, 'id');
@@ -235,9 +239,13 @@ window.vmCard = new Vue({
                         couponCodeSale: this.couponCodeSale
                     }
                 }).done(response => {
-                    this.removeLocalStorageCache('cart');
+                    if (response) {
+                        this.removeLocalStorageCache('cart');
 
-                    $(ui.modalSuccess).modal('show');
+                        $(ui.modalSuccess).modal('show');
+                    } else {
+                        alert('Something errors');
+                    }
                 }).fail(xhr => {
                     console.log(xhr);
                 }).always(() => {

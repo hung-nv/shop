@@ -28919,8 +28919,10 @@ window.vmCard = new Vue({
             }).done(function (response) {
               _this.setLocalStorageCache(key, response, ui.timeExpire);
 
-              _this.productsInCart = response;
+              _this.productsInCart = response; //TODO: return data after refresh.
             }).fail(function (xhr) {});
+          } else {
+            return null;
           }
         }
       } else {
@@ -28962,7 +28964,7 @@ window.vmCard = new Vue({
       return 0;
     },
     addToCard: function addToCard(productId, event) {
-      var storeProduct = this.getLocalStorageCache('cart');
+      var localStoreProduct = this.getLocalStorageCache('cart');
       var newProduct = {
         id: productId,
         quantity: 1,
@@ -28972,14 +28974,14 @@ window.vmCard = new Vue({
         url: $(event.target).data('url')
       };
 
-      if (storeProduct === null) {
+      if (localStoreProduct === null) {
         // add to products in cart.
         this.productsInCart.push(newProduct); // save to cache data cart.
 
         this.setLocalStorageCache('cart', this.productsInCart, ui.timeExpire);
       } else {
         // get current products in cart.
-        storeProduct = storeProduct.data; // get id products in cart.
+        var storeProduct = localStoreProduct.data; // get id products in cart.
 
         var idsProduct = _.map(storeProduct, 'id'); // check exist product in cart.
 
@@ -29056,9 +29058,13 @@ window.vmCard = new Vue({
             couponCodeSale: this.couponCodeSale
           }
         }).done(function (response) {
-          _this3.removeLocalStorageCache('cart');
+          if (response) {
+            _this3.removeLocalStorageCache('cart');
 
-          $(ui.modalSuccess).modal('show');
+            $(ui.modalSuccess).modal('show');
+          } else {
+            alert('Something errors');
+          }
         }).fail(function (xhr) {
           console.log(xhr);
         }).always(function () {
