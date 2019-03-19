@@ -15,7 +15,6 @@
 <table border="1" cellpadding="0" cellspacing="0" bordercolor="#ccc">
     <thead>
     <tr>
-        {{--<th>Ảnh sản phẩm</th>--}}
         <th>Tên sản phẩm</th>
         <th>Số lượng</th>
         <th>Đơn giá</th>
@@ -26,7 +25,6 @@
     @if (!empty($orderProducts))
         @foreach($orderProducts as $product)
             <tr>
-{{--                <td><img src="{{ $message->embed($product['product_image']) }}" width="90px"/></td>--}}
                 <td>{{ $product['product_name'] }} ({{ $product['product_sku'] }})</td>
                 <td>{{ $product['quantities'] }}</td>
                 <td>{{ number_format($product['price']) }}</td>
