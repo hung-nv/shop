@@ -12,7 +12,7 @@ class CustomerOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $order;
+    protected $order;
 
     /**
      * Create a new message instance.
@@ -32,7 +32,7 @@ class CustomerOrder extends Mailable
     public function build()
     {
         return $this->subject('Đơn hàng online')
-            ->markdown('emails.orders._customer_order')
+            ->view('emails._customer_order')
             ->with([
                 'order' => $this->order
             ]);
