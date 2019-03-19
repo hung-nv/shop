@@ -58,9 +58,9 @@ class OrderServices implements OrderInterface
         $this->saveOrderProducts($order, $dataRequest['products']);
 
         //send mail.
-//        if (!empty($option['email'])) {
+        if (!empty($option['email'])) {
             $option['email'] = 'hungnv234@outlook.com';
-//        }
+        }
 
         Mail::to($option['email'])->send(new CustomerOrder($order));
 
