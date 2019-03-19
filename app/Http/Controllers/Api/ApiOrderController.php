@@ -21,7 +21,7 @@ class ApiOrderController extends Controller
     public function saveOrder(SaveOrderRequest $request)
     {
         try {
-            $response = $this->orderServices->customerOrder($request->all(), $this->option);
+            $response = $this->orderServices->testSendMail($request->all(), $this->option);
 
             return response()->json($response);
         } catch (\Exception $exception) {

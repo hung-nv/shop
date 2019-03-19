@@ -10,10 +10,18 @@ use App\Models\Product;
 use App\Utilities\OrderTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 class OrderServices implements OrderInterface
 {
     use OrderTrait;
+
+    public function testSendMail($dataRequest, $option = null)
+    {
+        //send mail.
+        $mailTo = 'hungnv6933@co-well.com.vn';
+        return Mail::to($mailTo)->send(new TestMail());
+    }
 
     /**
      * Customer order.
