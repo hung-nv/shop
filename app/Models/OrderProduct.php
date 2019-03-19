@@ -23,6 +23,6 @@ class OrderProduct extends \Eloquent
      */
     public static function getOrderProducts($oderId)
     {
-        return self::where('order_id', $oderId)->get()->toArray();
+        return self::where('order_id', $oderId)->get();
     }
 }

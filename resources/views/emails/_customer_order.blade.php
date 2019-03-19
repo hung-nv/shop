@@ -23,15 +23,17 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($orderProducts as $product)
-        <tr>
-            <td><img src="{{ $message->embed($product->product_image) }}" width="90px" /></td>
-            <td>{{ $product->product_name }} ({{ $product->product_sku }})</td>
-            <td>{{ $product->quantities }}</td>
-            <td>{{ number_format($product->price) }}</td>
-            <td>{{ number_format($product->price * $product->quantities) }}</td>
-        </tr>
-    @endforeach
+    @if (!empty($orderProducts))
+        @foreach($orderProducts as $product)
+            <tr>
+                <td><img src="{{ $message->embed($product->product_image) }}" width="90px"/></td>
+                <td>{{ $product->product_name }} ({{ $product->product_sku }})</td>
+                <td>{{ $product->quantities }}</td>
+                <td>{{ number_format($product->price) }}</td>
+                <td>{{ number_format($product->price * $product->quantities) }}</td>
+            </tr>
+        @endforeach
+    @endif
     </tbody>
 </table>
 
@@ -46,7 +48,8 @@
     </p>
     <p>
         <b>Tiền phải trả:</b>
-        <span style="color: red">{{ number_format($order->total_money - ($order->total_money * $order->coupon_code_value)/100) }}</span> VNĐ
+        <span style="color: red">{{ number_format($order->total_money - ($order->total_money * $order->coupon_code_value)/100) }}</span>
+        VNĐ
     </p>
 </div>
 
