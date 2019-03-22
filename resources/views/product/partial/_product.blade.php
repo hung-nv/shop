@@ -39,7 +39,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-offset-6 hidden">
                                 <div class="favorite-button m-t-10">
                                     <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
                                        title="Wishlist" href="#">

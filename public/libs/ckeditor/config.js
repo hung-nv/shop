@@ -12,7 +12,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     config.toolbar = [
         {name: 'basicstyles', groups: ['basicstyles', 'cleanup'], items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat']},
-        {name: 'styles', items: ['Format', 'Font']},
+        {name: 'styles', items: ['Format', 'Font', 'FontSize']},
         {name: 'colors', items: ['TextColor']},
         {name: 'links', items: ['Link', 'Unlink']},
         {name: 'paragraph', groups: ['list', 'blocks', 'align'], items: ['NumberedList', 'BulletedList', '-', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
