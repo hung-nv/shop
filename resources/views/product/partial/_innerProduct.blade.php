@@ -21,10 +21,10 @@
                                     <div class="description"></div>
                                     <div class="product-price">
                                         @if($product->new_price)
-                                            <span class="price"> {{ number_format($product->new_price) }} VNĐ</span>
-                                            <span class="price-before-discount">{{ number_format($product->price) }} VNĐ</span>
+                                            <span class="price"> {{ number_format($product->new_price) }} Đ</span>
+                                            <span class="price-before-discount">{{ number_format($product->price) }} Đ</span>
                                         @else
-                                            <span class="price"> {{ number_format($product->price) }} VNĐ</span>
+                                            <span class="price"> {{ number_format($product->price) }} Đ</span>
                                         @endif
                                     </div>
                                 </div>

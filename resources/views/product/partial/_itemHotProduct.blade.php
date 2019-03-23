@@ -16,10 +16,10 @@
                     <h3 class="name"><a href="{{ $hotProduct->url }}">{{ $hotProduct->name }}</a></h3>
                     <div class="product-price">
                         @if($hotProduct->new_price)
-                            <span class="price">{{ number_format($hotProduct->new_price) }} VNĐ</span>
-                            <span class="price-before-discount">{{ number_format($hotProduct->price) }}</span>
+                            <span class="price">{{ number_format($hotProduct->new_price) }} Đ</span>
+                            <span class="price-before-discount">{{ number_format($hotProduct->price) }} Đ</span>
                         @else
-                            <span class="price">{{ number_format($hotProduct->price) }} VNĐ</span>
+                            <span class="price">{{ number_format($hotProduct->price) }} Đ</span>
                         @endif
                     </div>
                 </div>

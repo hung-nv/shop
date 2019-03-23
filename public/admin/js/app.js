@@ -22973,7 +22973,8 @@ var ui = {
   modalAttribute: '#modalAttribute',
   urlAddAttribute: '/api/add-attribute',
   blockUpdateAttribute: '#multi-append-',
-  urlUpdateBladeAttribute: '/api/get-attribute/'
+  urlUpdateBladeAttribute: '/api/get-attribute/',
+  formProduct: '#frm-product'
 };
 
 if ($(ui.pageId).length) {
@@ -22987,6 +22988,15 @@ if ($(ui.pageId).length) {
       productName: function productName(newValue, oldValue) {
         this.productSlug = Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_1__["slugify"])(newValue);
       }
+    },
+    methods: {
+      saveProduct: function saveProduct() {
+        var valid = $(ui.formProduct).valid();
+
+        if (valid) {
+          $(ui.formProduct).submit();
+        }
+      }
     }
   });
   $(function () {
@@ -22999,6 +23009,40 @@ if ($(ui.pageId).length) {
         Object(_utilities_images_image__WEBPACK_IMPORTED_MODULE_0__["newInputMultiImage"])(ui.inputImage);
       }
     }
+
+    $(ui.formProduct).validate({
+      ignore: [],
+      errorPlacement: function errorPlacement(error, element) {
+        if (element.attr("name") == "parent[]") {
+          $('.mt-checkbox').closest('.form-control').addClass('error');
+        }
+      },
+      success: function success(label, element) {
+        if ($(element).attr("name") == "parent[]") {
+          $('.mt-checkbox').closest('.form-control').removeClass('error');
+        }
+      },
+      invalidHandler: function invalidHandler() {
+        setTimeout(function () {
+          $('.nav-tabs a small.text-danger').remove();
+          $('.tab-content .tab-pane:has(.error)').each(function () {
+            var id = $(this).attr('id');
+            $('.nav-tabs').find('a[href^="#' + id + '"]').append(' <small class="text-danger">***</small>');
+          });
+        });
+      },
+      rules: {
+        name: 'required',
+        sku: 'required',
+        price: 'required',
+        'parent[]': {
+          required: true,
+          minlength: 1
+        },
+        description: 'required',
+        content: 'required'
+      }
+    });
   });
 }
 
@@ -23725,9 +23769,9 @@ function initInputMultiImage(oldImage, newInputImage, urlDelete) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\www\shop\resources\js\admin\app.js */"./resources/js/admin/app.js");
-__webpack_require__(/*! D:\www\shop\resources\sass\admin.sass */"./resources/sass/admin.sass");
-module.exports = __webpack_require__(/*! D:\www\shop\resources\sass\app.sass */"./resources/sass/app.sass");
+__webpack_require__(/*! /Users/hungnv/Documents/www/shop/resources/js/admin/app.js */"./resources/js/admin/app.js");
+__webpack_require__(/*! /Users/hungnv/Documents/www/shop/resources/sass/admin.sass */"./resources/sass/admin.sass");
+module.exports = __webpack_require__(/*! /Users/hungnv/Documents/www/shop/resources/sass/app.sass */"./resources/sass/app.sass");
 
 
 /***/ })

@@ -28,13 +28,13 @@
 
                     <div class="price-container info-container m-t-20">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="price-box">
                                     @if($product->new_price)
-                                        <span class="price">{{ number_format($product->new_price) }} VNĐ</span>
-                                        <span class="price-strike">{{ number_format($product->price) }}</span>
+                                        <span class="price">{{ number_format($product->new_price) }} Đ</span>
+                                        <span class="price-strike">{{ number_format($product->price) }} Đ</span>
                                     @else
-                                        <span class="price">{{ number_format($product->price) }} VNĐ</span>
+                                        <span class="price">{{ number_format($product->price) }} Đ</span>
                                     @endif
                                 </div>
                             </div>

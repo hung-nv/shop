@@ -21,11 +21,11 @@
                                         {{ $product->name }}
                                     </a>
                                 </h3>
-                                <div class="rating rateit-small"></div>
+                                <div class="rating rateit-small hidden"></div>
                                 <div class="description"></div>
                                 <div class="product-price">
-                                    <span class="price"> {{ number_format($product->new_price) }} VNĐ </span>
-                                    <span class="price-before-discount">{{ number_format($product->price) }}</span>
+                                    <span class="price"> {{ number_format($product->new_price) }} Đ </span>
+                                    <span class="price-before-discount">{{ number_format($product->price) }} Đ</span>
                                 </div>
 
                             </div>

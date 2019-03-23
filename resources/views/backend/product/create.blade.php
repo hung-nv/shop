@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-12">
             <form action="{{ route('product.store') }}" class="form-horizontal form-row-seperated" role="form"
-                  method="post" enctype="multipart/form-data">
+                  method="post" enctype="multipart/form-data" id="frm-product">
                 {{ csrf_field() }}
 
                 @include('backend.blocks.errors')
@@ -37,7 +37,7 @@
                             <button class="btn btn-secondary-outline" type="reset">
                                 <i class="fa fa-reply"></i> Reset
                             </button>
-                            <button class="btn btn-success" type="submit">
+                            <button class="btn btn-success" type="button" v-on:click="saveProduct">
                                 <i class="fa fa-check"></i> Save
                             </button>
                             <button class="btn btn-success">

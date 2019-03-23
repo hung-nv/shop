@@ -1,5 +1,5 @@
 <div class="form-body">
-    <div class="form-group">
+    <div class="form-group hidden">
         <label class="col-md-2 control-label">
             Special
         </label>

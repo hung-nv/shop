@@ -36,34 +36,19 @@
                                                     <h3 class="name">
                                                         <a href="/{{ config('const.prefix.product') }}/{{ $product->slug }}">{{ $product->name }}</a>
                                                     </h3>
-                                                    <div class="rating rateit-small"></div>
+                                                    <div class="rating rateit-small hidden"></div>
                                                     <div class="description"></div>
                                                     <div class="product-price">
                                                         @if($product->new_price)
                                                             <span class="price"> {{ number_format($product->new_price) }}
-                                                                VNĐ </span>
+                                                                Đ </span>
                                                             <span class="price-before-discount">{{ number_format($product->price) }}
-                                                                VNĐ</span>
+                                                                Đ</span>
                                                         @else
                                                             <span class="price"> {{ number_format($product->price) }} </span>
                                                         @endif
                                                     </div>
 
-                                                </div>
-                                                <div class="cart clearfix animate-effect">
-                                                    <div class="action">
-                                                        <ul class="list-unstyled">
-                                                            <li class="add-cart-button btn-group">
-                                                                <button data-toggle="tooltip"
-                                                                        class="btn btn-primary icon" type="button">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </button>
-                                                                <button class="btn btn-primary cart-btn" type="button">
-                                                                    Add to cart
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
                                                 </div>
                                             </div>
 

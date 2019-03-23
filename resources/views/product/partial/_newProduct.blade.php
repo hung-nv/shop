@@ -15,15 +15,15 @@
 
                             <div class="product-info text-left">
                                 <h3 class="name"><a href="{{ $newProduct->url }}">{{ $newProduct->name }}</a></h3>
-                                <div class="rating rateit-small"></div>
+                                <div class="rating rateit-small hidden"></div>
                                 <div class="description"></div>
 
                                 <div class="product-price">
                                     @if($newProduct->new_price)
-                                        <span class="price">{{ number_format($newProduct->new_price) }} VNĐ</span>
-                                        <span class="price-before-discount">{{ number_format($newProduct->price) }}</span>
+                                        <span class="price">{{ number_format($newProduct->new_price) }} Đ</span>
+                                        <span class="price-before-discount">{{ number_format($newProduct->price) }} Đ</span>
                                     @else
-                                        <span class="price">{{ number_format($newProduct->price) }} VNĐ</span>
+                                        <span class="price">{{ number_format($newProduct->price) }} Đ</span>
                                     @endif
                                 </div>
                             </div>

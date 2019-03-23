@@ -29609,7 +29609,7 @@ __webpack_require__(/*! ./_cart */ "./resources/js/_cart.js");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\www\shop\resources\js\themes.js */"./resources/js/themes.js");
+module.exports = __webpack_require__(/*! /Users/hungnv/Documents/www/shop/resources/js/themes.js */"./resources/js/themes.js");
 
 
 /***/ })
