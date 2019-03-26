@@ -23039,8 +23039,7 @@ if ($(ui.pageId).length) {
           required: true,
           minlength: 1
         },
-        description: 'required',
-        content: 'required'
+        description: 'required'
       }
     });
   });
@@ -23769,9 +23768,9 @@ function initInputMultiImage(oldImage, newInputImage, urlDelete) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/hungnv/Documents/www/shop/resources/js/admin/app.js */"./resources/js/admin/app.js");
-__webpack_require__(/*! /Users/hungnv/Documents/www/shop/resources/sass/admin.sass */"./resources/sass/admin.sass");
-module.exports = __webpack_require__(/*! /Users/hungnv/Documents/www/shop/resources/sass/app.sass */"./resources/sass/app.sass");
+__webpack_require__(/*! D:\www\shop\resources\js\admin\app.js */"./resources/js/admin/app.js");
+__webpack_require__(/*! D:\www\shop\resources\sass\admin.sass */"./resources/sass/admin.sass");
+module.exports = __webpack_require__(/*! D:\www\shop\resources\sass\app.sass */"./resources/sass/app.sass");
 
 
 /***/ })

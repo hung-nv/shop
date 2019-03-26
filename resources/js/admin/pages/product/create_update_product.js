@@ -75,8 +75,7 @@ if ($(ui.pageId).length) {
                 sku: 'required',
                 price: 'required',
                 'parent[]': { required: true, minlength: 1 },
-                description: 'required',
-                content: 'required'
+                description: 'required'
             }
         });
     });
