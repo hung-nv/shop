@@ -10,7 +10,7 @@
                             <div class="product-image">
                                 <div class="image">
                                     <a href="{{ route('product.show', ['slug' => $product->slug]) }}">
-                                        <img src="{{ $product->cover_image }}" alt="">
+                                        <img src="/img/380_420{{ $product->cover_image }}" alt="">
                                     </a>
                                 </div>
                             </div>
