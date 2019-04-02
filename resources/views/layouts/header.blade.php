@@ -46,13 +46,14 @@
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="/">
-                                        @{{ nameCatalog }}
+                                        <template>@{{ nameCatalog }}</template>
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li class="menu-header">
-                                            <a data-id="-1" data-name="All" v-on:click="onClickSelectCatalog">All
-                                                Categories</a>
+                                            <a data-id="-1" data-name="All" v-on:click="onClickSelectCatalog">
+                                                All Categories
+                                            </a>
                                         </li>
                                         @if(!empty($menuCatalogs))
                                             @foreach($menuCatalogs as $itemCatalog)
@@ -77,7 +78,8 @@
                                 </li>
                             </ul>
                             <input class="search-field" placeholder="Tìm kiếm..." v-model="textSearch"/>
-                            <a class="search-button" v-on:click="submitSearchForm"></a></div>
+                            <a class="search-button" v-on:click="submitSearchForm"></a>
+                        </div>
                     </div>
                     <!-- /.search-area -->
                 </div>

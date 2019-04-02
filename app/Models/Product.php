@@ -230,6 +230,71 @@ class Product extends \Eloquent
     }
 
     /**
+     * @param string $name
+     * @param int $pageSize
+     * @param array $filters
+     * @param array $idsCategory
+     * @return Product|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function paginateSearchProduct($name, $pageSize, $filters, $idsCategory)
+    {
+        $model = self::select([
+            'products.id',
+            'products.name',
+            'products.slug',
+            'products.cover_image',
+            'products.price',
+            'products.new_price',
+            'products.created_at'
+        ])
+            ->join('product_category', function ($join) {
+                $join->on('products.id', '=', 'product_category.product_id');
+            })
+            ->where('products.name', 'LIKE', '%' . $name . '%')
+            ->where('products.status', 1)
+            ->groupBy('products.id');
+
+        if ($idsCategory) {
+            $model->where(function ($query) use ($idsCategory) {
+                foreach ($idsCategory as $id) {
+                    $query->orWhere('product_category.category_id', '=', $id);
+                }
+            });
+        }
+
+        if (!empty($filters['sort'])) {
+            switch ($filters['sort']) {
+                case 1:
+                    $model->orderByDesc('products.updated_at');
+                    break;
+                case 2:
+                    $model->orderBy('products.price');
+                    break;
+                case 3:
+                    $model->orderByDesc('products.price');
+                    break;
+                case 4:
+                    $model->orderBy('products.name');
+                    break;
+                default:
+                    $model->orderByDesc('products.updated_at');
+            }
+        }
+
+        if (isset($filters['min']) and $filters['min'] !== '') {
+            $model->where('products.price', '>=', $filters['min']);
+        }
+
+        if (isset($filters['max']) and $filters['max'] !== '') {
+            $model->where('products.price', '<=', $filters['max']);
+        }
+
+        $model = $model->paginate($pageSize);
+
+        return $model;
+    }
+
+    /**
      * Find product by slug.
      * @param string $slug
      * @return Product|Model|object|null

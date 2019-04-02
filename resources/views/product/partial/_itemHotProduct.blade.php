@@ -6,7 +6,7 @@
                 <div class="hot-deal-wrapper">
                     <div class="image">
                         <a href="{{ $hotProduct->url }}">
-                            <img src="/img/223_223{{ $hotProduct->cover_image }}" alt="">
+                            <img src="/img/380_380{{ $hotProduct->cover_image }}" alt="">
                         </a>
                     </div>
                     <div class="sale-offer-tag"><span>{{ $hotProduct->sale_off }}%<br>off</span></div>

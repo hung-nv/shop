@@ -51,4 +51,21 @@ class ProductController extends Controller
 
         return view('product.show', compact('product', 'newProducts', 'comments', 'hotProducts'));
     }
+
+    public function search(Request $request)
+    {
+        $verifyFilter = $this->productServices->verifyFilters($request->all());
+
+        if ($verifyFilter) {
+            return redirect('/');
+        }
+
+        $products = $this->productServices->searchProducts($request->all());
+
+        $menuActive = [];
+
+        $name = $request->name;
+
+        return view('product.search', compact('products', 'name', 'menuActive'));
+    }
 }

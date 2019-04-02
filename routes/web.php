@@ -8,7 +8,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     // route checkout cart.
     Route::get('checkout', ['as' => 'checkout', 'uses' => 'OrderController@checkout']);
     // route search articles.
-    Route::get('search', ['as' => 'article.search', 'uses' => 'ArticleController@search']);
+    Route::get('search', ['as' => 'article.search', 'uses' => 'ProductController@search']);
     // route homepage.
     Route::get('/', ['as' => 'homepage', 'uses' => 'HomepageController@index']);
     // route post details.

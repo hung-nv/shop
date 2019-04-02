@@ -25,7 +25,7 @@
                                                 <div class="product-image">
                                                     <div class="image">
                                                         <a href="/{{ config('const.prefix.product') }}/{{ $product->slug }}">
-                                                            <img src="/img/258_258{{ $product->cover_image }}" alt="">
+                                                            <img src="/img/380_380{{ $product->cover_image }}" alt="">
                                                         </a>
                                                     </div>
 

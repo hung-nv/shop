@@ -75,7 +75,14 @@ if ($(ui.pageId).length) {
                 sku: 'required',
                 price: 'required',
                 'parent[]': { required: true, minlength: 1 },
-                description: 'required'
+                description: 'required',
+                content: {
+                    required: function(textarea) {
+                        CKEDITOR.instances.content.updateElement(); // update textarea
+                        let editorContent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+                        return editorContent.length === 0;
+                    }
+                }
             }
         });
     });

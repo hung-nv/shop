@@ -550,6 +550,39 @@ class ProductServices
     }
 
     /**
+     * Search product.
+     * @param $filters
+     * @return Product|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function searchProducts($filters)
+    {
+        $idCatalog = ($filters['catalog'] && $filters['catalog'] != '-1') ? $filters['catalog'] : null;
+
+        $idsCategory = [];
+
+        if ($idCatalog) {
+            $allCategory = Category::all();
+
+            $this->getIdsCategoryByParent($allCategory, $idsCategory, $idCatalog);
+
+            array_push($idsCategory, $idCatalog);
+        }
+
+        $name = $filters['name'];
+
+        // set default pageSize.
+        $pageSize = 12;
+
+        if (!empty($filters['pageSize'])) {
+            $pageSize = $filters['pageSize'];
+        }
+
+        $products = Product::paginateSearchProduct($name, $pageSize, $filters, $idsCategory);
+
+        return $products;
+    }
+
+    /**
      * Get all products by parent catalog.
      * @param $idCatalog
      * @param $filters
@@ -562,7 +595,7 @@ class ProductServices
         $allCategory = Category::all();
 
         $this->getIdsCategoryByParent($allCategory, $idsCategory, $idCatalog);
-        
+
         array_push($idsCategory, $idCatalog);
 
         // set default pageSize.

@@ -23039,7 +23039,16 @@ if ($(ui.pageId).length) {
           required: true,
           minlength: 1
         },
-        description: 'required'
+        description: 'required',
+        content: {
+          required: function required(textarea) {
+            CKEDITOR.instances.content.updateElement(); // update textarea
+
+            var editorContent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+
+            return editorContent.length === 0;
+          }
+        }
       }
     });
   });

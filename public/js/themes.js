@@ -28844,33 +28844,42 @@ var ui = {
   modalCrawl: '.modal-crawl-information',
   formCrawl: '#frm-crawl-information',
   urlCrawlInformation: '/api/crawl-information',
-  modalConfirmCrawl: '.modal-confirm-crawl'
+  modalConfirmCrawl: '.modal-confirm-crawl',
+  inputRange: '.price-slider'
 };
 window.vmCard = new Vue({
   el: '#mainApp',
-  data: {
-    totalMoney: 0,
-    productsInCart: [],
-    textSearch: Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') ? Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('search') : '',
-    idCatalog: -1,
-    nameCatalog: '',
-    couponCode: '',
-    couponCodeSale: 0,
-    isCoupon: true,
-    isLoading: false,
-    name: '',
-    telephone: '',
-    address: '',
-    note: '',
-    email: '',
-    errorMessage: '',
-    showError: true
+  data: function data() {
+    return {
+      totalMoney: 0,
+      productsInCart: [],
+      textSearch: Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('name') ? Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('name') : '',
+      idCatalog: -1,
+      nameCatalog: '',
+      couponCode: '',
+      couponCodeSale: 0,
+      isCoupon: true,
+      isLoading: false,
+      name: '',
+      telephone: '',
+      address: '',
+      note: '',
+      email: '',
+      errorMessage: '',
+      showError: true,
+      pageSize: this.getDefaultPageSize(),
+      sortType: this.getDefaultSortType(),
+      labelSortType: null,
+      minPrice: this.getMinRangePrice(),
+      maxPrice: this.getMaxRangePrice()
+    };
   },
   created: function created() {
     // set name catalog.
     this.nameCatalog = this.setNameCatalog();
     this.productsInCart = this.getDefaultCart();
     this.totalMoney = this.getTotalMoney(this.productsInCart);
+    this.labelSortType = this.setLabelSortType(this.sortType);
   },
   watch: {
     productsInCart: function productsInCart(newValue) {
@@ -28883,6 +28892,19 @@ window.vmCard = new Vue({
 
       if (this.couponCodeSale) {
         this.couponCodeSale = 0;
+      }
+    },
+    sortType: function sortType(newValue, oldValue) {
+      this.labelSortType = this.setLabelSortType(newValue); // check if change value.
+
+      if (newValue !== oldValue) {
+        this.initSearch();
+      }
+    },
+    pageSize: function pageSize(newValue, oldValue) {
+      // check if change value.
+      if (newValue !== oldValue) {
+        this.initSearch();
       }
     }
   },
@@ -29005,7 +29027,7 @@ window.vmCard = new Vue({
           return false;
         }
 
-        window.location = '?search=' + this.textSearch + '&catalog=' + this.idCatalog;
+        window.location = location.protocol + '//' + location.host + '/search?name=' + this.textSearch + '&catalog=' + this.idCatalog;
       }
     },
     onClickSelectCatalog: function onClickSelectCatalog(event) {
@@ -29015,7 +29037,7 @@ window.vmCard = new Vue({
     setNameCatalog: function setNameCatalog() {
       var idCatalog = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('catalog');
 
-      if (idCatalog) {
+      if (idCatalog && idCatalog !== '-1') {
         return catalogs[idCatalog];
       } else {
         return 'All Categories';
@@ -29122,6 +29144,118 @@ window.vmCard = new Vue({
     },
     reFormatPrice: function reFormatPrice(price) {
       return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(price);
+    },
+    initSearch: function initSearch() {
+      var isSearchPrice = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var params = {};
+      var page = 1;
+
+      if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('page')) {
+        page = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('page');
+      } // set param page.
+
+
+      params['page'] = page;
+      params['sort'] = this.sortType;
+      params['pageSize'] = this.pageSize;
+
+      if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min')) {
+        params['min'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min');
+      }
+
+      if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max')) {
+        params['max'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max');
+      }
+
+      if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('name')) {
+        params['name'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('name');
+      }
+
+      if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('catalog')) {
+        params['catalog'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('catalog');
+      }
+
+      if (isSearchPrice) {
+        var rangePrice = $(ui.inputRange).slider('getValue');
+        params['min'] = rangePrice[0];
+        params['max'] = rangePrice[1];
+      }
+
+      var currentURL = location.protocol + '//' + location.host + location.pathname;
+      window.location = currentURL + '?' + $.param(params);
+    },
+    getMinRangePrice: function getMinRangePrice() {
+      var minPrice = 200000;
+
+      if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min')) {
+        minPrice = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min');
+      }
+
+      return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(minPrice);
+    },
+    getMaxRangePrice: function getMaxRangePrice() {
+      var maxPrice = 500000;
+
+      if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max')) {
+        maxPrice = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max');
+      }
+
+      return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(maxPrice);
+    },
+    getDefaultSortType: function getDefaultSortType() {
+      var sortType = 1;
+      var defaultType = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('sort');
+
+      if (defaultType) {
+        sortType = defaultType;
+      }
+
+      return sortType;
+    },
+    getDefaultPageSize: function getDefaultPageSize() {
+      var pageSize = 12;
+      var defaultPageSize = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('pageSize');
+
+      if (defaultPageSize && !isNaN(pageSize)) {
+        pageSize = defaultPageSize;
+      }
+
+      return pageSize;
+    },
+    setPageSize: function setPageSize(numeric, event) {
+      this.pageSize = numeric;
+    },
+    setLabelSortType: function setLabelSortType(sortType) {
+      var label = '';
+
+      switch (sortType) {
+        case '1':
+          label = 'Mới nhất';
+          break;
+
+        case '2':
+          label = 'Giá: thấp - cao';
+          break;
+
+        case '3':
+          label = 'Giá: cao - thấp';
+          break;
+
+        case '4':
+          label = 'Tên sản phẩm: A - Z';
+          break;
+
+        default:
+          label = 'Mới nhất';
+      }
+
+      return label;
+    },
+    setSortType: function setSortType(type) {
+      this.sortType = type;
+    },
+    onClickSearchWithPrice: function onClickSearchWithPrice(event) {
+      this.initSearch(true);
     }
   }
 });
@@ -29173,183 +29307,22 @@ $(function () {
 
   $.validator.addMethod('validatePhone', function (value) {
     return /^0([0-9]{9})$/.test(value);
-  }, 'Vui lòng nhập chính xác số điện thoại.');
+  }, 'Vui lòng nhập chính xác số điện thoại.'); // Price Slider
+
+  if ($(ui.inputRange).length) {
+    $(ui.inputRange).slider({
+      range: false,
+      min: 100000,
+      max: 600000,
+      step: 50000,
+      value: [Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["toNumber"])(vmCard.minPrice), Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["toNumber"])(vmCard.maxPrice)],
+      handle: "square"
+    }).on('slide', function (event) {
+      $('.price-range-holder .min-max .pull-left').text(Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(event.value[0]));
+      $('.price-range-holder .min-max .pull-right').text(Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(event.value[1]));
+    });
+  }
 });
-
-/***/ }),
-
-/***/ "./resources/js/_filter_product.js":
-/*!*****************************************!*\
-  !*** ./resources/js/_filter_product.js ***!
-  \*****************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/helpers/helpers */ "./resources/js/admin/helpers/helpers.js");
-/* harmony import */ var _admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/utilities/format */ "./resources/js/admin/utilities/format.js");
-
-
-var ui = {
-  elementId: '#list-products',
-  inputRange: '.price-slider'
-};
-
-if ($(ui.elementId).length) {
-  var vmFilter = new Vue({
-    el: ui.elementId,
-    data: function data() {
-      return {
-        pageSize: this.getDefaultPageSize(),
-        sortType: this.getDefaultSortType(),
-        labelSortType: null,
-        minPrice: this.getMinRangePrice(),
-        maxPrice: this.getMaxRangePrice()
-      };
-    },
-    watch: {
-      sortType: function sortType(newValue, oldValue) {
-        this.labelSortType = this.setLabelSortType(newValue); // check if change value.
-
-        if (newValue !== oldValue) {
-          this.initSearch();
-        }
-      },
-      pageSize: function pageSize(newValue, oldValue) {
-        // check if change value.
-        if (newValue !== oldValue) {
-          this.initSearch();
-        }
-      }
-    },
-    created: function created() {
-      this.labelSortType = this.setLabelSortType(this.sortType);
-    },
-    methods: {
-      initSearch: function initSearch() {
-        var isSearchPrice = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-        var params = {};
-        var page = 1;
-
-        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('page')) {
-          page = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('page');
-        } // set param page.
-
-
-        params['page'] = page;
-        params['sort'] = this.sortType;
-        params['pageSize'] = this.pageSize;
-
-        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min')) {
-          params['min'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min');
-        }
-
-        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max')) {
-          params['max'] = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max');
-        }
-
-        if (isSearchPrice) {
-          var rangePrice = $(ui.inputRange).slider('getValue');
-          params['min'] = rangePrice[0];
-          params['max'] = rangePrice[1];
-        }
-
-        var currentURL = location.protocol + '//' + location.host + location.pathname;
-        window.location = currentURL + '?' + $.param(params);
-      },
-      getMinRangePrice: function getMinRangePrice() {
-        var minPrice = 200000;
-
-        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min')) {
-          minPrice = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('min');
-        }
-
-        return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(minPrice);
-      },
-      getMaxRangePrice: function getMaxRangePrice() {
-        var maxPrice = 500000;
-
-        if (Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max')) {
-          maxPrice = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('max');
-        }
-
-        return Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(maxPrice);
-      },
-      getDefaultSortType: function getDefaultSortType() {
-        var sortType = 1;
-        var defaultType = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('sort');
-
-        if (defaultType) {
-          sortType = defaultType;
-        }
-
-        return sortType;
-      },
-      getDefaultPageSize: function getDefaultPageSize() {
-        var pageSize = 12;
-        var defaultPageSize = Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["getParameterByName"])('pageSize');
-
-        if (defaultPageSize && !isNaN(pageSize)) {
-          pageSize = defaultPageSize;
-        }
-
-        return pageSize;
-      },
-      setPageSize: function setPageSize(numeric, event) {
-        this.pageSize = numeric;
-      },
-      setLabelSortType: function setLabelSortType(sortType) {
-        var label = '';
-
-        switch (sortType) {
-          case '1':
-            label = 'Mới nhất';
-            break;
-
-          case '2':
-            label = 'Giá: thấp - cao';
-            break;
-
-          case '3':
-            label = 'Giá: cao - thấp';
-            break;
-
-          case '4':
-            label = 'Tên sản phẩm: A - Z';
-            break;
-
-          default:
-            label = 'Mới nhất';
-        }
-
-        return label;
-      },
-      setSortType: function setSortType(type) {
-        this.sortType = type;
-      },
-      onClickSearchWithPrice: function onClickSearchWithPrice(event) {
-        this.initSearch(true);
-      }
-    }
-  });
-  $(function () {
-    // Price Slider
-    if ($(ui.inputRange).length > 0) {
-      $(ui.inputRange).slider({
-        range: false,
-        min: 100000,
-        max: 600000,
-        step: 50000,
-        value: [Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["toNumber"])(vmFilter.minPrice), Object(_admin_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__["toNumber"])(vmFilter.maxPrice)],
-        handle: "square"
-      }).on('slide', function (event) {
-        $('.price-range-holder .min-max .pull-left').text(Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(event.value[0]));
-        $('.price-range-holder .min-max .pull-right').text(Object(_admin_utilities_format__WEBPACK_IMPORTED_MODULE_1__["number_format"])(event.value[1]));
-      });
-    }
-  });
-}
 
 /***/ }),
 
@@ -29595,8 +29568,6 @@ function is_number_format(string) {
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-
-__webpack_require__(/*! ./_filter_product */ "./resources/js/_filter_product.js");
 
 __webpack_require__(/*! ./_cart */ "./resources/js/_cart.js");
 
