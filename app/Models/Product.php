@@ -15,7 +15,7 @@ class Product extends \Eloquent
     public $table = 'products';
 
     protected $fillable = ['name', 'sku', 'slug', 'special', 'description', 'content', 'price', 'new_price',
-        'cover_image', 'user_id', 'meta_title', 'meta_description', 'meta_keywords'];
+        'cover_image', 'user_id', 'meta_title', 'meta_description', 'meta_keywords', 'status'];
 
     protected $appends = ['url', 'sale_off', 'current_price'];
 
