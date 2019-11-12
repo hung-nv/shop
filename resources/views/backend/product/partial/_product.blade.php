@@ -101,7 +101,7 @@
                     </p>
                 </td>
                 <td>
-                    @if($i->status === 1)
+                    @if($i->status == 1)
                         <span class="label label-sm label-success"> Approved </span>
                     @else
                         <span class="label label-sm label-warning"> No </span>
