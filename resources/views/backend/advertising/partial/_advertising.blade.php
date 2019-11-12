@@ -16,7 +16,13 @@
             <tr class="odd gradeX">
                 <td>{{ $i->id }}</td>
                 <td>{{ $i->name }}</td>
-                <td>{{ $i->content }}</td>
+                <td>
+                    @if($i->type == 2)
+                        <img src="/img/150{{ $i->content }}" class="responsive" />
+                    @else
+                        {{ $i->content }}
+                    @endif
+                </td>
                 <td>
                     <form action="{{ route('advertising.destroy', $i->id) }}" method="POST">
                         {{ method_field('DELETE') }}
