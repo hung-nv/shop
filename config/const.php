@@ -10,7 +10,8 @@ return [
     ],
     // set partner group.
     'advertising_group' => [
-        'partner' => 1
+        'partner' => 1,
+        'homepage_middle' => 2
     ],
     // set group hot article, products.
     'groups' => [

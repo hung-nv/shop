@@ -39,11 +39,13 @@
         </div>
     </div>
 
+    <?php $group = isset($data) ? $data['group'] : old('group') ?>
     <div class="form-group" v-show="adType == '2'">
         <label class="control-label col-md-3">Group</label>
         <div class="col-md-4">
             <select class="form-control" name="group">
-                <option value="{{ config('const.advertising_group.partner') }}">Partners</option>
+                <option @if($group == config('const.advertising_group.partner')) selected @endif value="{{ config('const.advertising_group.partner') }}">Đối tác</option>
+                <option @if($group == config('const.advertising_group.homepage_middle')) selected @endif value="{{ config('const.advertising_group.homepage_middle') }}">Quảng cáo giữa trang chủ</option>
             </select>
         </div>
     </div>

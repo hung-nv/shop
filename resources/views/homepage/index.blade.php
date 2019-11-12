@@ -18,26 +18,23 @@
                         @include('homepage.partial._selectedCatalog')
                     </div>
 
-                    <div class="wide-banners wow fadeInUp outer-bottom-xs">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="wide-banner cnt-strip">
-                                    <div class="image">
-                                        <img class="img-responsive" src="{{ asset('images/banners/home-banner1.jpg') }}" alt="">
-                                    </div>
-                                </div>
+                    @if(!empty($middleIndex))
+                        <div class="wide-banners wow fadeInUp outer-bottom-xs">
+                            <div class="row">
+                                @foreach($middleIndex as $itemAdvertising)
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="wide-banner cnt-strip">
+                                            <div class="image">
+                                                <img class="img-responsive"
+                                                     src="{{ asset($itemAdvertising->content) }}" alt="">
+                                            </div>
+                                        </div>
 
-                            </div>
-
-                            <div class="col-md-6 col-sm-6">
-                                <div class="wide-banner cnt-strip">
-                                    <div class="image">
-                                        <img class="img-responsive" src="{{ asset('images/banners/home-banner2.jpg') }}" alt="">
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     @if($widgetCatalogs)
                         @include('homepage.partial._widgetCatalog')

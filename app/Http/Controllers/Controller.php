@@ -49,7 +49,7 @@ class Controller extends BaseController
 
         $this->getGeneralArticle();
 
-        $this->getAdvertising();
+//        $this->getAdvertising();
 
         $this->getPartners();
     }
@@ -62,6 +62,10 @@ class Controller extends BaseController
         $partners = Advertising::getAdvertisingByGroup(config('const.advertising_group.partner'));
 
         View::share('partners', $partners);
+
+        $middleIndex = Advertising::getAdvertisingByGroup(config('const.advertising_group.homepage_middle'));
+
+        View::share('middleIndex', $middleIndex);
     }
 
     /**
