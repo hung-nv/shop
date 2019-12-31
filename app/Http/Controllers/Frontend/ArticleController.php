@@ -65,19 +65,8 @@ class ArticleController extends Controller
 
         $articles = $this->articleServices->getAllPostsByParentCategory($category->id, $this->articleType);
 
-        return view('news.category', [
+        return view('article.index', [
             'category' => $category,
-            'articles' => $articles
-        ]);
-    }
-
-    public function search(Request $request)
-    {
-        $search = $request->txtSearch;
-        $articles = $this->articleServices->getAllArticlesByName($search);
-
-        return view('news.search', [
-            'search' => $search,
             'articles' => $articles
         ]);
     }

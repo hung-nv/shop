@@ -2,10 +2,7 @@
     <div class="sidebar-module-container">
         <div class="sidebar-filter">
             <div class="sidebar-widget sidebar-menu wow fadeInUp">
-                <h3 class="section-title">shop by</h3>
-                <div class="widget-header">
-                    <h4 class="widget-title">Category</h4>
-                </div>
+                <h3 class="section-title">Danh mục sản phẩm</h3>
                 <div class="sidebar-widget-body">
                     @if(!empty($mainMenu))
                         <div class="accordion">
@@ -85,7 +82,7 @@
                         <input type="text" class="price-slider" value="">
                     </div>
                     <!-- /.price-range-holder -->
-                    <a href="#" class="lnk btn btn-primary" v-on:click="onClickSearchWithPrice">Show Now</a></div>
+                    <a href="#" class="lnk btn btn-primary" v-on:click="onClickSearchWithPrice">Tìm ngay</a></div>
                 <!-- /.sidebar-widget-body -->
             </div>
             <!-- /.sidebar-widget -->

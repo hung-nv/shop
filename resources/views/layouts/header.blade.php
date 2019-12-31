@@ -52,7 +52,7 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li class="menu-header">
                                             <a data-id="-1" data-name="All" v-on:click="onClickSelectCatalog">
-                                                All Categories
+                                                Tất cả
                                             </a>
                                         </li>
                                         @if(!empty($menuCatalogs))

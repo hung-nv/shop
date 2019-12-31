@@ -224,7 +224,7 @@ window.vmCard = new Vue({
             if (idCatalog && idCatalog !== '-1') {
                 return catalogs[idCatalog];
             } else {
-                return 'All Categories';
+                return 'Tất cả';
             }
         },
         checkCouponCode: function (event) {
