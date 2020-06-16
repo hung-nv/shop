@@ -23,7 +23,7 @@
             {{ method_field('DELETE') }}
             {{ csrf_field() }}
             <a href="{{ route('category.edit', ['category' => $item->id]) }}" class="btn red btn-sm">Update</a>
-            <button type="button" class="btn red btn-sm" id="btn-delete">Delete</button>
+            <button type="button" class="btn red btn-sm btn-delete">Delete</button>
         </form>
     </td>
 </tr>

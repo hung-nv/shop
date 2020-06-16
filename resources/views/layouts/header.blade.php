@@ -39,7 +39,7 @@
                 </div>
                 <!-- /.logo-holder -->
 
-                <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
+                <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder hidden-xs">
                     <!-- /.contact-row -->
                     <div class="search-area">
                         <div class="control-group">

@@ -71,7 +71,7 @@
                                     Thêm vào giỏ
                                 </a>
 
-                                <a class="btn btn-primary checkout-btn">
+                                <a class="btn btn-primary checkout-btn" href="{{ route('checkout') }}">
                                     Thanh toán
                                 </a>
                             </div>

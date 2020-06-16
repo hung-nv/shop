@@ -2,8 +2,8 @@ import {confirmBeforeDelete} from "../../helpers/helpers";
 
 const ui = {
     pageId: '#category',
-    tableCoupon: '#datatable-category',
-    btnDelete: '#btn-delete'
+    tableCategory: '#datatable-category',
+    btnDelete: '.btn-delete'
 };
 
 $(function () {

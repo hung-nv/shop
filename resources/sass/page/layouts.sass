@@ -7,6 +7,10 @@ a
 
 .main-header
   padding-top: 0
+  .logo-holder
+    .logo
+      img
+        max-height: 40px
   .top-search-holder .search-area
     .search-button
       cursor: pointer
@@ -126,3 +130,11 @@ p.text-danger
 .latest-blog
   .section-title
     font-weight: normal
+
+@media (max-width: 767px)
+  .main-header .logo-holder
+    margin-bottom: 5px
+    margin-top: 5px
+
+  .top-bar .header-top-inner .cnt-account li
+    margin-bottom: 0

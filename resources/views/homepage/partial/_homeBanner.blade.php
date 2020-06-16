@@ -62,57 +62,59 @@
     </div>
 </div>
 
-<div class="info-boxes wow fadeInUp">
-    <div class="info-boxes-inner">
-        <div class="row">
-            <div class="col-md-6 col-sm-4 col-lg-4">
-                <div class="info-box">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h4 class="info-box-heading green">
-                                {{ isset($option['special_1_line_1']) ? $option['special_1_line_1'] : '' }}
-                            </h4>
+@if(!empty($option['special_1_line_1']) || !empty($option['special_2_line_1']) || !empty($option['special_3_line_1']))
+    <div class="info-boxes wow fadeInUp">
+        <div class="info-boxes-inner">
+            <div class="row">
+                <div class="col-md-6 col-sm-4 col-lg-4">
+                    <div class="info-box">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4 class="info-box-heading green">
+                                    {{ isset($option['special_1_line_1']) ? $option['special_1_line_1'] : '' }}
+                                </h4>
+                            </div>
                         </div>
+                        <h6 class="text">
+                            {{ isset($option['special_1_line_2']) ? $option['special_1_line_2'] : '' }}
+                        </h6>
                     </div>
-                    <h6 class="text">
-                        {{ isset($option['special_1_line_2']) ? $option['special_1_line_2'] : '' }}
-                    </h6>
                 </div>
-            </div>
-            <!-- .col -->
+                <!-- .col -->
 
-            <div class="hidden-md col-sm-4 col-lg-4">
-                <div class="info-box">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h4 class="info-box-heading green">
-                                {{ isset($option['special_2_line_1']) ? $option['special_2_line_1'] : '' }}
-                            </h4>
+                <div class="hidden-md col-sm-4 col-lg-4">
+                    <div class="info-box">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4 class="info-box-heading green">
+                                    {{ isset($option['special_2_line_1']) ? $option['special_2_line_1'] : '' }}
+                                </h4>
+                            </div>
                         </div>
+                        <h6 class="text">
+                            {{ isset($option['special_2_line_2']) ? $option['special_2_line_2'] : '' }}
+                        </h6>
                     </div>
-                    <h6 class="text">
-                        {{ isset($option['special_2_line_2']) ? $option['special_2_line_2'] : '' }}
-                    </h6>
                 </div>
-            </div>
-            <!-- .col -->
+                <!-- .col -->
 
-            <div class="col-md-6 col-sm-4 col-lg-4">
-                <div class="info-box">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h4 class="info-box-heading green">
-                                {{ isset($option['special_3_line_1']) ? $option['special_3_line_1'] : '' }}
-                            </h4>
+                <div class="col-md-6 col-sm-4 col-lg-4">
+                    <div class="info-box">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4 class="info-box-heading green">
+                                    {{ isset($option['special_3_line_1']) ? $option['special_3_line_1'] : '' }}
+                                </h4>
+                            </div>
                         </div>
+                        <h6 class="text">
+                            {{ isset($option['special_3_line_2']) ? $option['special_3_line_2'] : '' }}
+                        </h6>
                     </div>
-                    <h6 class="text">
-                        {{ isset($option['special_3_line_2']) ? $option['special_3_line_2'] : '' }}
-                    </h6>
                 </div>
+                <!-- .col -->
             </div>
-            <!-- .col -->
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
     </div>
-</div>
+@endif
