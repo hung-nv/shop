@@ -2,13 +2,15 @@
     @if(!empty($selectedCatalogs))
         <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
             <div class="more-info-tab clearfix ">
-                <h3 class="new-product-title pull-left">New Products</h3>
+                <h3 class="new-product-title pull-left">Sản phẩm mới</h3>
                 <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
                     @foreach($selectedCatalogs as $selectedCatalog)
-                        <li @if($loop->first) class="active" @endif>
-                            <a data-transition-type="backSlide" href="#{{ $selectedCatalog['catalog']->slug }}"
-                               data-toggle="tab">{{ $selectedCatalog['catalog']->name }}</a>
-                        </li>
+                        @if($loop->index < 5)
+                            <li @if($loop->first) class="active" @endif>
+                                <a data-transition-type="backSlide" href="#{{ $selectedCatalog['catalog']->slug }}"
+                                   data-toggle="tab">{{ $selectedCatalog['catalog']->name }}</a>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
